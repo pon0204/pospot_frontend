@@ -1,8 +1,8 @@
 import React from 'react'
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
-import { selectUserToken,setToken } from "../slices/userToken";
-import { useAppSelector,useAppDispatch } from "../app/hooks";
+import { selectUserToken,setToken } from "../../slices/userToken";
+import { useAppSelector,useAppDispatch } from "../../app/hooks";
 
 const UserInfo = () => {
 // const { getAccessTokenSilently } = useAuth0();
