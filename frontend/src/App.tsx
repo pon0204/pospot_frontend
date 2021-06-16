@@ -4,10 +4,9 @@ import { VFC,useEffect} from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
-import LoginButton from './components/LoginButton';
-import LogoutButton from './components/LogoutButton';
-import Profile from './components/Profile';
-import UserInfo from './components/UserInfo';
+
+import Header from './components/Header'
+
 import { useAppSelector,useAppDispatch } from "./app/hooks";
 import { setToken } from "./slices/userToken";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -20,9 +19,6 @@ const queryClient = new QueryClient({
     },
   },
 })
-
-
-
 
 const App: VFC = () => {
   const dispatch = useAppDispatch()
@@ -47,12 +43,21 @@ const App: VFC = () => {
     
     <>
     <QueryClientProvider client={queryClient}>
-    
-    <LoginButton/>
-    <br/>
-    <LogoutButton/>
-    <UserInfo/>
-    {/* <Profile/> */}
+    <Header/>
+    <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {/* <MainTask/> */}
+          </Route>
+          <Route exact path="/posts">
+            {/* <MainTag/> */}
+          </Route>
+          <Route exact path="/profile">
+            {/* <MainTag/> */}
+          </Route>
+        </Switch>
+        </BrowserRouter>
+
     <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
     </>
