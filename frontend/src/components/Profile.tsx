@@ -2,47 +2,42 @@ import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import { access } from "fs";
+import { useQueryClient, useMutation } from 'react-query'
+import { User } from '../types/types'
+import { useQueryChirps } from '../hooks/useQueryChirps'
+import { selectUserToken,setToken } from "../slices/userToken";
+import { useAppSelector,useAppDispatch } from "../app/hooks";
 
 const Profile = () => {
   const { user, isAuthenticated, getAccessTokenSilently }:any = useAuth0();
-  const [userMetadata, setUserMetadata] = useState(null);
 
-  const hgge = async () => {
-    const domain = 'pon-product.jp.auth0.com'
-    try{
-      const accessToken = await getAccessTokenSilently({
-      });
-      console.log(accessToken)
-    }
-    catch(e){
-      console.log(e.message)
-  } 
-}
+  const dispatch = useAppDispatch()
+  const token = useAppSelector(selectUserToken)
+  console.log(token)
 
-  hgge()
+  const queryClient = useQueryClient()
+  const { status, data } = useQueryChirps()
+  
+  const tokenSave = () => {
+    dispatch(setToken('さようなら'))    
+  }
 
-  useEffect(() => {
-    const getUserMetadata = async () => {
-      const domain = 'pon-product.jp.auth0.com'
-      try {
-        const accessToken = await getAccessTokenSilently({
-        });
-        
-        // console.log(accessToken)
-        // const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
-        // const metadataResponse = await fetch(userDetailsByIdUrl, {
-        //   headers: {
-        //     Authorization: `Bearer ${accessToken}`,
-        //   },
-        // });  
-        // const { user_metadata } = await metadataResponse.json();
-        // setUserMetadata(user_metadata);
-      } catch (e) {
-        console.log(e.message);
-      }
-    };
-    getUserMetadata();
-  }, [user]);
+//   const hgge = async () => {
+
+//     try{
+//       const accessToken = await getAccessTokenSilently({
+//       });
+//       console.log(accessToken)
+//     }
+//     catch(e){
+//       console.log(e.message)
+//   } 
+// }
+
+//   hgge()
+
+  const chirps =  queryClient.getQueryData('Chirps')
+  console.log(chirps)
   
 
   return (
@@ -56,6 +51,7 @@ const Profile = () => {
         <pre className="col-12 text-light bg-dark p-4">
           {JSON.stringify(user, null, 2)}
         </pre>
+        <button onClick={tokenSave}>トークンセーブ</button>
       </div>
     )
   );
