@@ -6,12 +6,25 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 
+import { Auth0Provider } from '@auth0/auth0-react';
+
+const domain:any = process.env.REACT_APP_AUTH0_DOMAIN;
+const clientId:any = process.env.REACT_APP_AUTH0_CLIENT_ID;
+const audience:any = process.env.REACT_APP_AUTH0_AUDIENCE;
+console.log(audience);
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Auth0Provider
+  domain={domain}
+  clientId={clientId}
+  redirectUri={window.location.origin}
+  audience={audience}
+  >
+
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>,
+  </Auth0Provider>,
   document.getElementById('root')
 );
 
