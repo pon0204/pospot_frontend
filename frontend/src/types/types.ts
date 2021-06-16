@@ -9,3 +9,23 @@ export interface User {
   email_verified: string
   sub: string
 }
+
+export interface Post {
+  id: number
+  user_id: number
+  title: string
+  caption: string | null
+  with: string | null
+  genre: string | null  
+  created_at: string
+  updated_at: string
+}
+
+
+export interface EditPost {
+  id: number
+  title: string
+  caption: string | null
+  with: string | null
+  genre: string | null  
+}

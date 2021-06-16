@@ -11,10 +11,12 @@ import {PostCard} from './PostCard';
 
 const Post: VFC = () => {    
   const { status, data } = useQueryPosts()
+
     if (status === 'loading') return <div>{'Loading...'}</div>
     if (status === 'error') return <div>{'Error'}</div>
     console.log(data)
     console.log(status)
+    
   return (
     <div className="flex flex-wrap justify-center">
       {data?.map((item:any) => (

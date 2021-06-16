@@ -14,9 +14,20 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import {useMutatePost} from '../../hooks/useMutatePost'
+import { Button } from '@material-ui/core';
+
+const options = [
+  'Edit',
+  'Delete',
+];
+
 const useStyles = makeStyles((theme: Theme) =>
+
   createStyles({
     root: {
       maxWidth: 345,
@@ -42,12 +53,36 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const PostCard = (item:any) => {
+  const { deletePostMutation } = useMutatePost()
+
+  
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
+  
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  // menu用
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const deleteClick = (id: number) => {
+    deletePostMutation.mutate(id);
+    setAnchorEl(null);
+  }
+  
+  // if (deletePostMutation.isLoading){
+  //   return <p></p>
+  // }
 
   return (
     <Card className={classes.root}>
@@ -58,13 +93,42 @@ export const PostCard = (item:any) => {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          <>
+          <IconButton
+          aria-label="more"
+          aria-controls="long-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          <MoreVertIcon />
+        </IconButton>
+        <Menu
+          id="long-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={open}
+          onClose={handleClose}
+          PaperProps={{
+  
+          }}
+        >
+          {/* <Button>Edit</Button>
+          <Button>Delete</Button> */}
+
+            <MenuItem key="1" onClick={handleClose}>
+              Edit
+            </MenuItem>
+            <MenuItem key="2" onClick={
+              () => {deleteClick(item.item.id)}}>
+              Delete
+            </MenuItem>
+        </Menu>
+        </>
         }
         title={item.item.title}
         subheader="September 14, 2016"
       />
+
       <CardMedia
         className={classes.media}
         image="/static/images/cards/paella.jpg"

@@ -15,7 +15,6 @@ const initialState:any = {
   token: 'ありがとう'
   }
 
-
 // export const userTokenSlice = createSlice({
 //   name:'userToken',
 

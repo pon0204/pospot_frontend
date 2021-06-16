@@ -24,7 +24,7 @@ export const useQueryPosts = () => {
     }
 
     const { data } = await axios.get(
-      `http://localhost:3000/api/v1/posts`)
+      `${process.env.REACT_APP_REST_URL}/posts`)
       return data.posts
   }
 
