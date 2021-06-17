@@ -6,6 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { useAuth0 } from "@auth0/auth0-react";
+
+import {  Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,8 +24,11 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+
+
 export default function Header() {
   const classes = useStyles();
+  const {isAuthenticated,loginWithRedirect,logout } = useAuth0();
 
   return (
     <div className={classes.root}>
@@ -31,10 +37,20 @@ export default function Header() {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
+          <Link to="/posts">
+            投稿一覧
+          </Link>
+          <Link to="/posts/new">
+            投稿作成
+          </Link>
+          {isAuthenticated ?
+          (
+            <Button color="inherit" onClick={() => logout({ returnTo: window.location.origin })}>Logout</Button>
+          ):(
+            <Button color="inherit" onClick={loginWithRedirect}>Login</Button>
+          )
+          }
+          
         </Toolbar>
       </AppBar>
     </div>

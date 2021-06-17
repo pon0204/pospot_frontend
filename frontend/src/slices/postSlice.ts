@@ -8,25 +8,28 @@ export interface PostState {
   // editedTag: Tag
 }
 
-const initialState: PostState = {
+const initialState: any = {
   editedPost: {
-    id: 0,
+    post: {
     title: '',
     caption: '',
     with: '',
     genre: ''
   }
 }
+}
+
+
 
 export const postSlice = createSlice({
   name: 'post',
   initialState,
   reducers: {
     setEditedPost: (state, action: PayloadAction<EditPost>) => {
-      state.editedPost = action.payload
+      state.editedPost.post = action.payload
     },
     resetEditedPost: (state) => {
-      state.editedPost = initialState.editedPost
+      state.editedPost.post = initialState.editedPost
     },
   },
 })

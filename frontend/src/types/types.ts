@@ -23,7 +23,6 @@ export interface Post {
 
 
 export interface EditPost {
-  id: number
   title: string
   caption: string | null
   with: string | null

@@ -1,5 +1,5 @@
 class Api::V1::PostsController < SecuredController
-  skip_before_action :authorize_request, only: [:index,:show,:create,:destroy]
+  skip_before_action :authorize_request, only: [:index,:show]
 
   def index
     posts = Post.all
@@ -16,7 +16,8 @@ class Api::V1::PostsController < SecuredController
   end
 
   def create
-    post = User.first.posts.build(post_params)
+    post = @current_user.posts.build(post_params)
+    
     if post.save
       render json: post
     else
