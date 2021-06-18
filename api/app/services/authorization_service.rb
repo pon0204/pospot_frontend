@@ -5,13 +5,12 @@ class AuthorizationService
   end
 
   def current_user
-    @user
+    @auth_payload, @auth_header = verify_token
+    @user = User.from_token_payload(@auth_payload)
   end
 
 
   def authenticate_request!
-    @auth_payload, @auth_header = verify_token
-    @user = User.from_token_payload(@auth_payload)
     verify_token
   end
   

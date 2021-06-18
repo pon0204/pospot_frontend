@@ -11,6 +11,9 @@ import { useAppSelector,useAppDispatch } from "./app/hooks";
 import { setToken } from "./slices/userToken";
 import { useAuth0 } from "@auth0/auth0-react";
 
+import Post from './components/posts/Post';
+import PostForm from './components/posts/PostForm';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -43,14 +46,19 @@ const App: VFC = () => {
     
     <>
     <QueryClientProvider client={queryClient}>
-    <Header/>
     <BrowserRouter>
+    <Header/>
         <Switch>
           <Route exact path="/">
             {/* <MainTask/> */}
           </Route>
           <Route exact path="/posts">
             {/* <MainTag/> */}
+            <Post/>
+          </Route>
+          <Route exact path="/posts/new">
+            {/* <MainTag/> */}
+            <PostForm/>
           </Route>
           <Route exact path="/profile">
             {/* <MainTag/> */}
