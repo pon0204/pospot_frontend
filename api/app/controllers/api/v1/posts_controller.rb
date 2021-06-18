@@ -5,21 +5,25 @@ class Api::V1::PostsController < SecuredController
     posts = Post.all
     render json: {
       posts: posts
-    }, status: :ok
+    }, 
+    methods: [:image_url],
+    status: :ok
   end
 
   def show
     posts = Post.find(params[:id])
     render json: {
       posts: posts
-    }, status: :ok
+    },
+    methods: [:image_url],
+    status: :ok
   end
 
   def create
     post = @current_user.posts.build(post_params)
     
     if post.save
-      render json: post
+      render json: post, methods: [:image_url]
     else
       render json: post.errors, status: 422
     end
@@ -36,7 +40,7 @@ class Api::V1::PostsController < SecuredController
   private
 
   def post_params
-    params.require(:post).permit(:title, :caption,:with,:genre)
+    params.permit(:title, :caption,:with,:genre,:eyecatch)
   end
 
 end

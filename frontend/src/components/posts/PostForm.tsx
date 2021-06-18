@@ -6,12 +6,14 @@ import { useMutatePost } from '../../hooks/useMutatePost'
 import FormButton from './FormAsset/FormButton'
 import { FormRadio } from './FormAsset/FormRadio'
 import { FormAutoComp } from './FormAsset/FormAutoComp'
+import FormFile from './FormAsset/FormFile'
 
 const PostForm: VFC = () => {
   // const editedPost = useAppSelector(selectPost)
   console.log('レンダリングしました')
   return (
-    <div className="text-center">
+    <div className="text-center w-2/6 mx-auto">
+    <FormFile/>
     <InputForm/>
     <FormRadio/>
     <FormAutoComp/>

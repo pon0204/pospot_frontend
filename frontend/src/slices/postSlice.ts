@@ -14,7 +14,8 @@ const initialState: any = {
     title: '',
     caption: '',
     with: '1人',
-    genre: ''
+    genre: '',
+    eyecatch: null
   }
 }
 }

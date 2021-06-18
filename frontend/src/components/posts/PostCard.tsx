@@ -54,7 +54,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const PostCard = (item:any) => {
   const { deletePostMutation } = useMutatePost()
-
   
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -131,7 +130,7 @@ export const PostCard = (item:any) => {
 
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
+        image={item.item.image_url}
         title="Paella dish"
       />
       <CardContent>

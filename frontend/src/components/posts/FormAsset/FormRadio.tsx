@@ -11,7 +11,6 @@ import { useMutatePost } from '../../../hooks/useMutatePost'
 export const FormRadio = () => {
   const editedPost = useAppSelector(selectPost)
   const dispatch = useAppDispatch()
-  console.log(editedPost)
 
   return (
     <div>

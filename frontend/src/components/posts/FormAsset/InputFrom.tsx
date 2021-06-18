@@ -51,8 +51,6 @@ const useStyles = makeStyles((theme) => ({
 export default function InputForm() {
   const classes = useStyles();
   const editedPost = useAppSelector(selectPost)
-  console.log({...editedPost.post, title: 'タイトル変えまーす'})
-  console.log(editedPost.post.title)
   const dispatch = useAppDispatch()
 
   return (

@@ -21,7 +21,7 @@ export const useMutatePost = () => {
     }
 
   const createPostMutation = useMutation(
-    (post) =>
+    (post) => 
       axios.post(`${process.env.REACT_APP_REST_URL}/posts/`, post,headers),
     {
       onSuccess: (res) => {
