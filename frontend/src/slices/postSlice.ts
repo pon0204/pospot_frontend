@@ -13,8 +13,8 @@ const initialState: any = {
     post: {
     title: '',
     caption: '',
-    with: '1人',
-    genre: '',
+    with: null,
+    genre: null,
     eyecatch: null
   }
 }

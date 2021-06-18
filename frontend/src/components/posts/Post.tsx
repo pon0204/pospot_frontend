@@ -41,7 +41,7 @@ const Post: VFC = () => {
   return (
     <div className="flex flex-wrap justify-center">
       {data?.map((item:any) => (
-        <div className="m-5 w-2/8">
+        <div className="m-2 w-96">
           <PostCard item={item}/>
         </div>
       ))}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -20,6 +20,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import {useMutatePost} from '../../hooks/useMutatePost'
 import { Button } from '@material-ui/core';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const options = [
   'Edit',
@@ -30,7 +31,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
   createStyles({
     root: {
-      maxWidth: 345,
+      // maxWidth: 345,
+      height: 450
+    },
+    genre: {
+      fontSize: '16px'
     },
     media: {
       height: 0,
@@ -54,9 +59,19 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const PostCard = (item:any) => {
   const { deletePostMutation } = useMutatePost()
-  
+  const { user, isAuthenticated, getAccessTokenSilently }:any = useAuth0();
+
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState<any>(null);
+  
+
+  let genres = item.item.genre
+
+  if(genres){
+    genres = genres.split(',')
+  }
+  console.log(genres)
+
   
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -78,7 +93,6 @@ export const PostCard = (item:any) => {
     deletePostMutation.mutate(id);
     setAnchorEl(null);
   }
-  
   // if (deletePostMutation.isLoading){
   //   return <p></p>
   // }
@@ -92,6 +106,7 @@ export const PostCard = (item:any) => {
           </Avatar>
         }
         action={
+        isAuthenticated && (
           <>
           <IconButton
           aria-label="more"
@@ -123,18 +138,31 @@ export const PostCard = (item:any) => {
             </MenuItem>
         </Menu>
         </>
+        )
         }
         title={item.item.title}
-        subheader="September 14, 2016"
-      />
 
+        // Y-M-Dのみに変換
+        subheader={item.item.created_at.substring(0,item.item.created_at.indexOf("T"))}
+      />
       <CardMedia
         className={classes.media}
         image={item.item.image_url}
         title="Paella dish"
       />
+      <div className="flex mt-4">
+        {genres?.map((genre:any) => (
+        <div className="bg-green-200 mx-4 rounded-md p-1">
+          {genre}
+        </div>
+      ))}
+      </div>
+        <div className="bg-red-200 mx-4 rounded-md p-1 w-10 text-center m-1">
+        {item.item.with}
+        </div>
+        
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="body2" component="p">
         {item.item.caption}
         </Typography>
       </CardContent>
