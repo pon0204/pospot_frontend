@@ -32,10 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       // maxWidth: 345,
-      height: 450
-    },
-    genre: {
-      fontSize: '16px'
+      height: 500
     },
     media: {
       height: 0,
@@ -69,6 +66,7 @@ export const PostCard = (item:any) => {
 
   if(genres){
     genres = genres.split(',')
+    genres = genres.slice(0,3)
   }
   console.log(genres)
 
@@ -152,19 +150,20 @@ export const PostCard = (item:any) => {
       />
       <div className="flex mt-4">
         {genres?.map((genre:any) => (
-        <div className="bg-green-200 mx-4 rounded-md p-1">
+        <div className="bg-green-200 mx-4 rounded-md p-1 text-sm">
           {genre}
         </div>
       ))}
       </div>
-        <div className="bg-red-200 mx-4 rounded-md p-1 w-10 text-center m-1">
+        <div className="bg-red-200  rounded-md p-1 inline-block text-sm text-center m-4 mb-0">
         {item.item.with}
         </div>
         
       <CardContent>
-        <Typography variant="body2" component="p">
+          <p>
         {item.item.caption}
-        </Typography>
+          </p>
+
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
