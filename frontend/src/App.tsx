@@ -13,6 +13,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import Post from './components/posts/Post';
 import PostForm from './components/posts/PostForm';
+import Test from './components/test'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,9 +50,6 @@ const App: VFC = () => {
     <BrowserRouter>
     <Header/>
         <Switch>
-          <Route exact path="/">
-            {/* <MainTask/> */}
-          </Route>
           <Route exact path="/posts">
             {/* <MainTag/> */}
             <Post/>
@@ -63,9 +61,11 @@ const App: VFC = () => {
           <Route exact path="/profile">
             {/* <MainTag/> */}
           </Route>
+          <Route exact path="/test">
+            <Test/>
+          </Route>
         </Switch>
         </BrowserRouter>
-
     <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
     </>

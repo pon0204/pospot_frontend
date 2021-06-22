@@ -2,14 +2,19 @@ import axios from 'axios'
 import { useAppDispatch } from '../app/hooks'
 // import { resetEditedTask } from '../slices/todoSlice'
 import { useQueryClient, useMutation } from 'react-query'
+import { selectSpot } from '../slices/spotSlice'
 
+import { useMutateSpot } from './useMutateSpot'
 import { useAppSelector } from "../app/hooks";
 import { selectUserToken } from "../slices/userToken";
 
 
 export const useMutatePost = () => {
+
   const queryClient = useQueryClient()
   const token = useAppSelector(selectUserToken)
+  const editedSpot = useAppSelector(selectSpot)
+  const { createSpotMutation } = useMutateSpot()
 
     let headers = 
     {
@@ -25,6 +30,7 @@ export const useMutatePost = () => {
       axios.post(`${process.env.REACT_APP_REST_URL}/posts/`, post,headers),
     {
       onSuccess: (res) => {
+        createSpotMutation.mutate({...editedSpot ,id: res.data.id})
         const previousPosts = queryClient.getQueryData<any>('posts')
         if (previousPosts) {
           queryClient.setQueryData('posts', [

@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import userTokenReducer from '../slices/userToken'
 import postReducer from '../slices/postSlice'
+import spotReducer from '../slices/spotSlice'
 
 export const store = configureStore({
   reducer: {
     token: userTokenReducer,
-    post: postReducer
+    post: postReducer,
+    spot: spotReducer
   },
 
 

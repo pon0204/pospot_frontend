@@ -8,6 +8,8 @@ import axios from 'axios';
 import {PostCard} from './PostCard';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { makeStyles } from '@material-ui/core/styles';
+// import axiosJsonpAdapter from 'axios-jsonp'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Post: VFC = () => {    
+
   const classes = useStyles();
   const { status, data } = useQueryPosts()
 
@@ -38,8 +41,10 @@ const Post: VFC = () => {
     )
     if (status === 'error') return <div>{'Error'}</div>
     
+    
   return (
     <div className="flex flex-wrap justify-center">
+
       {data?.map((item:any) => (
         <div className="m-2 w-96">
           <PostCard item={item}/>
