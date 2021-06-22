@@ -116,55 +116,56 @@ export const FormSpot:VFC = () =>  {
   }, [value, inputValue, fetch]);
 
   return (
-    <Autocomplete
-      id="google-map-demo"
-      style={{ width: 300 }}
-      getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}
-      filterOptions={(x) => x}
-      options={options}
-      autoComplete
-      includeInputInList
-      filterSelectedOptions
-      value={value}
-      onChange={(event: any, newValue: any) => {
-        setOptions(newValue ? [newValue, ...options] : options);
-        setValue(newValue);
-        if(newValue){
-          fetchSpotMutation.mutate(newValue.place_id)
-        }
-      }}
-      //place_id "ChIJ1SFv4dV2A2AR3hKmVbI2pdA"
-      onInputChange={(event, newInputValue) => {
-        setInputValue(newInputValue);
-      }}
-      renderInput={(params) => (
-        <TextField {...params} label="スポットを追加" variant="outlined" fullWidth />
-      )}
-      renderOption={(option) => {
-        const matches = option.structured_formatting.main_text_matched_substrings;
-        const parts = parse(
-          option.structured_formatting.main_text,
-          matches.map((match: any) => [match.offset, match.offset + match.length]),
-        );
-
-        return (
-          <Grid container alignItems="center">
-            <Grid item>
-              <LocationOnIcon className={classes.icon} />
+    <div className='full-width'>
+      <Autocomplete
+        id="google-map-demo"
+        getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}
+        filterOptions={(x) => x}
+        options={options}
+        autoComplete
+        includeInputInList
+        filterSelectedOptions
+        value={value}
+        onChange={(event: any, newValue: any) => {
+          setOptions(newValue ? [newValue, ...options] : options);
+          setValue(newValue);
+          if(newValue){
+            fetchSpotMutation.mutate(newValue.place_id)
+          }
+        }}
+        //place_id "ChIJ1SFv4dV2A2AR3hKmVbI2pdA"
+        onInputChange={(event, newInputValue) => {
+          setInputValue(newInputValue);
+        }}
+        renderInput={(params) => (
+          <TextField {...params} label="スポットを追加" variant="outlined" fullWidth />
+        )}
+        renderOption={(option) => {
+          const matches = option.structured_formatting.main_text_matched_substrings;
+          const parts = parse(
+            option.structured_formatting.main_text,
+            matches.map((match: any) => [match.offset, match.offset + match.length]),
+          );
+  
+          return (
+            <Grid container alignItems="center">
+              <Grid item>
+                <LocationOnIcon className={classes.icon} />
+              </Grid>
+              <Grid item xs>
+                {parts.map((part, index) => (
+                  <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
+                    {part.text}
+                  </span>
+                ))}
+                <Typography variant="body2" color="textSecondary">
+                  {option.structured_formatting.secondary_text}
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs>
-              {parts.map((part, index) => (
-                <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
-                  {part.text}
-                </span>
-              ))}
-              <Typography variant="body2" color="textSecondary">
-                {option.structured_formatting.secondary_text}
-              </Typography>
-            </Grid>
-          </Grid>
-        );
-      }}
-    />
+          );
+        }}
+      />
+    </div>
   );
 }

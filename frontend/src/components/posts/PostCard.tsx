@@ -60,13 +60,27 @@ export const PostCard = (item:any) => {
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState<any>(null);
+
   
-  let genres = item.item.genre
+  let withData = item.item.with
+  
+  if(withData == ''){
+    withData = null
+  }
+
+  console.log(withData)
+
+  let genres = item.item.genre  
 
   if(genres){
     genres = genres.split(',')
     genres = genres.slice(0,3)
+  }else {
+    genres = null
   }
+
+
+
   console.log(genres)
 
   
@@ -154,10 +168,12 @@ export const PostCard = (item:any) => {
         </div>
       ))}
       </div>
+      { withData && (
         <div className="bg-red-200  rounded-md p-1 inline-block text-sm text-center m-4 mb-0">
-        {item.item.with}
+        {withData}
         </div>
-        
+        )
+      }  
       <CardContent>
           <p>
         {item.item.caption}

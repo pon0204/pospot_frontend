@@ -24,10 +24,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   textField: {
-    width: '50ch',
+    width: '100%',
   },
   title: {
-    width: '50ch'
+    width: '100%'
   },
   inputLabel:{
     display: 'block',

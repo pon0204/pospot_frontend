@@ -34,7 +34,7 @@ export const FormAutoComp:VFC = () => {
   }
   
   return (
-    <div className={classes.root}>
+    <div className='full-width'>
 
       <Autocomplete
         multiple

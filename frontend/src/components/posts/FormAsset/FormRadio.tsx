@@ -13,7 +13,7 @@ export const FormRadio = () => {
   const dispatch = useAppDispatch()
 
   return (
-    <div>
+    <div className='full-width mt-4'>
     <FormControl component="fieldset">
       <FormLabel component="legend">誰と</FormLabel>
       <RadioGroup row aria-label="with" name="with" value={editedPost.with} onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

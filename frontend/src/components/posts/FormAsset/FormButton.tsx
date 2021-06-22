@@ -22,11 +22,15 @@ const FormButton:VFC = () => {
 
     createPostMutation.mutate(data)
   }
+  console.log(editedSpot)
   
-  return (
-    <button className="bg-red-500 rounded text-lg font-bold mx-auto w-2/6 p-4 block text-white"
+  if(editedSpot.spot.name != '') return (
+    <button className="bg-red-500 mt-3 rounded text-lg font-bold mx-auto w-2/6 p-4 block text-white"
     onClick={postCreateClick}
     >投稿</button>
+  )
+  return (
+    <div></div>
   )
 }
 

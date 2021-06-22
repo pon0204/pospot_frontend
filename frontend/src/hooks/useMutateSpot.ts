@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useAppDispatch } from '../app/hooks'
-import { setEditedSpot } from '../slices/spotSlice'
+import { setEditedSpot,resetEditedSpot } from '../slices/spotSlice'
 import { useQueryClient, useMutation } from 'react-query'
 
 import { useAppSelector } from "../app/hooks";
@@ -29,6 +29,7 @@ export const useMutateSpot = () => {
         console.log(res.data)
         dispatch(setEditedSpot(res.data))
       },
+
     }
   )
 
@@ -46,7 +47,7 @@ export const useMutateSpot = () => {
         //     res.data,
         //   ])
         // }
-        // dispatch(resetEditedTask())
+        dispatch(resetEditedSpot())
       },
     }
   )

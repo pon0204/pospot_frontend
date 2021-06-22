@@ -17,8 +17,8 @@ const PostForm: VFC = () => {
     <div className="text-center w-2/6 mx-auto">
     <FormFile/>
     <InputForm/>
-    <FormRadio/>
     <FormAutoComp/>
+    <FormRadio/>
     <FormSpot/>
     <FormSpots/>
     <FormButton/>

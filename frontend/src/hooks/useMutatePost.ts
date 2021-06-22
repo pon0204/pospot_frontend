@@ -1,17 +1,18 @@
 import { EditPost, PostData } from '../types/types'
 import axios from 'axios'
-import { useAppDispatch } from '../app/hooks'
+import {useAppSelector, useAppDispatch } from '../app/hooks'
 // import { resetEditedTask } from '../slices/todoSlice'
 import { useQueryClient, useMutation } from 'react-query'
 import { selectSpot } from '../slices/spotSlice'
+import { resetEditedPost } from '../slices/postSlice'
 
 import { useMutateSpot } from './useMutateSpot'
-import { useAppSelector } from "../app/hooks";
+
 import { selectUserToken } from "../slices/userToken";
 
 
 export const useMutatePost = () => {
-
+  const dispatch = useAppDispatch()
   const queryClient = useQueryClient()
   const token = useAppSelector(selectUserToken)
   const editedSpot = useAppSelector(selectSpot)
@@ -39,7 +40,7 @@ export const useMutatePost = () => {
             res.data,
           ])
         }
-        // dispatch(resetEditedTask())
+        dispatch(resetEditedPost())
       },
     }
   )
