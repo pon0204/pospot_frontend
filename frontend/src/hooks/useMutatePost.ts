@@ -1,3 +1,4 @@
+import { EditPost, PostData } from '../types/types'
 import axios from 'axios'
 import { useAppDispatch } from '../app/hooks'
 // import { resetEditedTask } from '../slices/todoSlice'
@@ -26,14 +27,14 @@ export const useMutatePost = () => {
     }
 
   const createPostMutation = useMutation(
-    (post) => 
-      axios.post(`${process.env.REACT_APP_REST_URL}/posts/`, post,headers),
+    (post: EditPost) => 
+      axios.post<PostData>(`${process.env.REACT_APP_REST_URL}/posts/`, post,headers),
     {
       onSuccess: (res) => {
         createSpotMutation.mutate({...editedSpot ,id: res.data.id})
-        const previousPosts = queryClient.getQueryData<any>('posts')
+        const previousPosts = queryClient.getQueryData<PostData[]>('posts')
         if (previousPosts) {
-          queryClient.setQueryData('posts', [
+          queryClient.setQueryData<PostData[]>('posts', [
             ...previousPosts,
             res.data,
           ])
@@ -44,15 +45,15 @@ export const useMutatePost = () => {
   )
 
   const deletePostMutation = useMutation(
-    (id: any) => 
+    (id: number) => 
     axios.delete(`${process.env.REACT_APP_REST_URL}/posts/${id}`,headers),
     {
       onSuccess: (res,variables) => {
-        const previousPosts = queryClient.getQueryData<any>('posts')
+        const previousPosts = queryClient.getQueryData<PostData[]>('posts')
         if (previousPosts) {
           queryClient.setQueryData(
             'posts',
-            previousPosts.filter((post:any) => post.id !== variables)    
+            previousPosts.filter((post:PostData) => post.id !== variables)    
           )
         }
       }

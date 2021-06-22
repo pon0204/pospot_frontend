@@ -68,7 +68,7 @@ const FormFile:VFC = () => {
     const image = event.target.files[0];
     const imageUrl:any = URL.createObjectURL(image);
     setFileUrl(imageUrl)
-    dispatch(setEditedPost({ ...editedPost.post, eyecatch: image}))
+    dispatch(setEditedPost({ ...editedPost, eyecatch: image}))
   }
 
   return (

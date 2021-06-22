@@ -16,8 +16,8 @@ export const FormRadio = () => {
     <div>
     <FormControl component="fieldset">
       <FormLabel component="legend">誰と</FormLabel>
-      <RadioGroup row aria-label="with" name="with" value={editedPost.post.with} onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-      dispatch(setEditedPost({...editedPost.post, with: e.target.value}))
+      <RadioGroup row aria-label="with" name="with" value={editedPost.with} onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+      dispatch(setEditedPost({...editedPost, with: e.target.value}))
       }>
         <FormControlLabel value="1人" control={<Radio />} label="1人" />
         <FormControlLabel value="カップル" control={<Radio />} label="カップル" />

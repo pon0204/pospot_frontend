@@ -8,6 +8,7 @@ import axios from 'axios';
 import {PostCard} from './PostCard';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { makeStyles } from '@material-ui/core/styles';
+import { PostData } from '../../types/types';
 // import axiosJsonpAdapter from 'axios-jsonp'
 
 
@@ -28,14 +29,12 @@ const Post: VFC = () => {
 
     if (status === 'loading') return (
       <div className="flex justify-center flex-wrap">
-        <Skeleton className={classes.margin} variant="rect" width={300} height={350} />
-        <Skeleton className={classes.margin} variant="rect" width={300} height={350} />
-        <Skeleton className={classes.margin} variant="rect" width={300} height={350} />
-        <Skeleton className={classes.margin} variant="rect" width={300} height={350} />
-        <Skeleton className={classes.margin} variant="rect" width={300} height={350} />
-        <Skeleton className={classes.margin} variant="rect" width={300} height={350} />
-        <Skeleton className={classes.margin} variant="rect" width={300} height={350} />
-        <Skeleton className={classes.margin} variant="rect" width={300} height={350} />
+        <Skeleton className={classes.margin} variant="rect" width={385} height={500} />
+        <Skeleton className={classes.margin} variant="rect" width={385} height={500} />
+        <Skeleton className={classes.margin} variant="rect" width={385} height={500} />
+        <Skeleton className={classes.margin} variant="rect" width={385} height={500} />
+        <Skeleton className={classes.margin} variant="rect" width={385} height={500} />
+        <Skeleton className={classes.margin} variant="rect" width={385} height={500} />
       </div>
       
     )
@@ -45,7 +44,7 @@ const Post: VFC = () => {
   return (
     <div className="flex flex-wrap justify-center">
 
-      {data?.map((item:any) => (
+      {data?.map((item:PostData) => (
         <div className="m-2 w-96">
           <PostCard item={item}/>
         </div>

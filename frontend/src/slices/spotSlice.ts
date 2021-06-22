@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
-import { Post,EditPost} from '../types/types'
+import { PostData,EditSpot} from '../types/types'
 
 
-export interface PostState {
-  editedPost: EditPost
+export interface SpotState {
+  editedSpot: EditSpot
+  
   // editedTag: Tag
 }
 
-const initialState: any = {
+const initialState: SpotState = {
   editedSpot: {
     spot: {
     name: '',
@@ -16,7 +17,8 @@ const initialState: any = {
     map_url: '',
     place: '',
     place_id: '',
-    }
+    },
+    id: null
   }
 }
 
@@ -24,7 +26,7 @@ export const spotSlice = createSlice({
   name: 'spot',
   initialState,
   reducers: {
-    setEditedSpot: (state, action: PayloadAction<any>) => {
+    setEditedSpot: (state, action: PayloadAction<EditSpot>) => {
       state.editedSpot.spot = action.payload.spot
     },
     resetEditedSpot: (state) => {

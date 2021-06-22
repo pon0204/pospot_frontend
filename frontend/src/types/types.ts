@@ -10,7 +10,7 @@ export interface User {
   sub: string
 }
 
-export interface Post {
+export interface PostData {
   id: number
   user_id: number
   title: string
@@ -21,10 +21,34 @@ export interface Post {
   updated_at: string
 }
 
+export interface SpotData {
+  id: number
+  post_id: number
+  name: string
+  web_url: string
+  map_url: string
+  place: string
+  place_id: string
+  created_at: string
+  updated_at: string
+}
 
 export interface EditPost {
   title: string
   caption: string | null
   with: string | null
   genre: string | null  
+  eyecatch: string | null  
 }
+
+export interface EditSpot {
+  spot:{
+  name: string
+  web_url: string
+  map_url: string
+  place: string
+  place_id: string
+  }
+  id: number | null
+}
+

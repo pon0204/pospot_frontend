@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from 'react-query'
 import axios from 'axios'
-import { User } from '../types/types'
+import { PostData, User } from '../types/types'
 import { useAuth0 } from "@auth0/auth0-react";
 import { useAppSelector } from "../app/hooks";
 import { Auth0Provider } from '@auth0/auth0-react';
@@ -28,7 +28,7 @@ export const useQueryPosts = () => {
       return data.posts
   }
 
-  return useQuery({
+  return useQuery<PostData[],Error>({
     queryKey: 'posts',
     queryFn: getPosts,
     staleTime: 0,

@@ -61,7 +61,6 @@ export const PostCard = (item:any) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState<any>(null);
   
-
   let genres = item.item.genre
 
   if(genres){
@@ -149,7 +148,7 @@ export const PostCard = (item:any) => {
         title="Paella dish"
       />
       <div className="flex mt-4">
-        {genres?.map((genre:any) => (
+        {genres?.map((genre:string) => (
         <div className="bg-green-200 mx-4 rounded-md p-1 text-sm">
           {genre}
         </div>

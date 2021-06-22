@@ -14,11 +14,11 @@ const FormButton:VFC = () => {
 
   const postCreateClick = () => {
     const data: any = new FormData()
-    data.append('title',editedPost.post.title)
-    data.append('caption',editedPost.post.caption)
-    data.append('with',editedPost.post.with)
-    data.append('genre',editedPost.post.genre)
-    data.append('eyecatch',editedPost.post.eyecatch)
+    data.append('title',editedPost.title)
+    data.append('caption',editedPost.caption)
+    data.append('with',editedPost.with)
+    data.append('genre',editedPost.genre)
+    data.append('eyecatch',editedPost.eyecatch)
 
     createPostMutation.mutate(data)
   }

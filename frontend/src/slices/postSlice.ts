@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
-import { Post,EditPost} from '../types/types'
+import { PostData,EditPost} from '../types/types'
 
 
 export interface PostState {
@@ -8,15 +8,14 @@ export interface PostState {
   // editedTag: Tag
 }
 
-const initialState: any = {
+const initialState: PostState = {
   editedPost: {
-    post: {
     title: '',
     caption: '',
     with: null,
     genre: null,
     eyecatch: null
-  }
+
 }
 }
 
@@ -27,10 +26,10 @@ export const postSlice = createSlice({
   initialState,
   reducers: {
     setEditedPost: (state, action: PayloadAction<EditPost>) => {
-      state.editedPost.post = action.payload
+      state.editedPost = action.payload
     },
     resetEditedPost: (state) => {
-      state.editedPost.post = initialState.editedPost
+      state.editedPost = initialState.editedPost
     },
   },
 })

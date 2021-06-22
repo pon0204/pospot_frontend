@@ -5,6 +5,7 @@ import { useQueryClient, useMutation } from 'react-query'
 
 import { useAppSelector } from "../app/hooks";
 import { selectUserToken } from "../slices/userToken";
+import { EditSpot,SpotData } from '../types/types';
 
 
 export const useMutateSpot = () => {
@@ -33,8 +34,8 @@ export const useMutateSpot = () => {
 
 
   const createSpotMutation = useMutation(
-    (spot) => 
-      axios.post(`${process.env.REACT_APP_REST_URL}/spots/`, spot,headers),
+    (spot:EditSpot) => 
+      axios.post<SpotData>(`${process.env.REACT_APP_REST_URL}/spots/`, spot,headers),
     {
       onSuccess: (res) => {
         console.log(res)

@@ -57,18 +57,18 @@ export default function InputForm() {
     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
     <InputLabel>タイトル</InputLabel>
     <OutlinedInput
-      value={editedPost.post.title}
+      value={editedPost.title}
       onChange={(e) => 
-        dispatch(setEditedPost({ ...editedPost.post, title: e.target.value}))
+        dispatch(setEditedPost({ ...editedPost, title: e.target.value}))
       }
       labelWidth={70}
     />     
     <FormControl className={clsx(classes.margin,classes.textField)} variant="outlined">
     <InputLabel>説明</InputLabel>
     <OutlinedInput
-      value={editedPost.post.caption}
+      value={editedPost.caption}
       onChange={(e) => 
-        dispatch(setEditedPost({ ...editedPost.post, caption: e.target.value}))
+        dispatch(setEditedPost({ ...editedPost, caption: e.target.value}))
       }
       multiline
       rows={5}
