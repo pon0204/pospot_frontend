@@ -20,10 +20,19 @@ class Api::V1::PostsController < SecuredController
   end
 
   def create
-    post = @current_user.posts.build(post_params)
+
+    post_data = post_params
+    
+    # 画像がnullか確認
+    if post_data['eyecatch'] == '' then
+      post_data.delete('eyecatch')
+    end
+
+    post = @current_user.posts.build(post_data)
     
     if post.save
-      render json: post, methods: [:image_url]
+      render json: post,
+      methods: [:image_url]
     else
       render json: post.errors, status: 422
     end
@@ -38,7 +47,6 @@ class Api::V1::PostsController < SecuredController
   end
 
   private
-
   def post_params
     params.permit(:title, :caption,:with,:genre,:eyecatch)
   end

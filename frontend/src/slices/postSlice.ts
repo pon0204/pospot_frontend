@@ -12,9 +12,9 @@ const initialState: PostState = {
   editedPost: {
     title: '',
     caption: '',
-    with: null,
-    genre: null,
-    eyecatch: null
+    with: '',
+    genre: '',
+    eyecatch: '',
 
 }
 }
