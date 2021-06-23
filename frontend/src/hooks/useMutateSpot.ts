@@ -4,22 +4,15 @@ import { setEditedSpot,resetEditedSpot } from '../slices/spotSlice'
 import { useQueryClient, useMutation } from 'react-query'
 
 import { useAppSelector } from "../app/hooks";
-import { selectUserToken } from "../slices/userToken";
+import { selectHeaders } from "../slices/headersSlice";
 import { EditSpot,SpotData } from '../types/types';
 
 
 export const useMutateSpot = () => {
   const queryClient = useQueryClient()
-  const token = useAppSelector(selectUserToken)
+  const headers = useAppSelector(selectHeaders)
   const dispatch = useAppDispatch()
 
-    let headers = 
-    {
-    headers: {
-      "Authorization": `Bearer ${token}`,
-      "Content-Type": 'application/json',
-    }
-    }
 
   const fetchSpotMutation = useMutation(
     (placeId) =>

@@ -11,11 +11,17 @@ class Api::V1::PostsController < SecuredController
   end
 
   def show
-    posts = Post.find(params[:id])
+    # postとspotと画像のurlを返す
+    post = Post.find(params[:id])
+    image = post.image_url
+    spot = post.spot
+
     render json: {
-      posts: posts
+      post: post,
+      image_url: image,
+      spot: spot,
     },
-    methods: [:image_url],
+
     status: :ok
   end
 

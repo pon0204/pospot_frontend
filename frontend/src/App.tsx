@@ -8,10 +8,11 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import Header from './components/Header'
 
 import { useAppSelector,useAppDispatch } from "./app/hooks";
-import { setToken } from "./slices/userToken";
+import { setHeaders } from "./slices/headersSlice";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import Post from './components/posts/Post';
+import PostShow from './components/posts/PostShow';
 import PostForm from './components/posts/PostForm';
 import Test from './components/test'
 
@@ -34,7 +35,7 @@ const App: VFC = () => {
     try{
       const accessToken = await getAccessTokenSilently({
       });
-      dispatch(setToken(accessToken))    
+      dispatch(setHeaders(accessToken))    
     }
     catch(e){
       console.log(e.message)
@@ -58,6 +59,14 @@ const App: VFC = () => {
             {/* <MainTag/> */}
             <PostForm/>
           </Route>
+          <Route
+          exact path="/posts/:postId"
+          render={({ match }:any) =>
+          <PostShow
+          match={match}
+          />
+          }
+          />
           <Route exact path="/profile">
             {/* <MainTag/> */}
           </Route>

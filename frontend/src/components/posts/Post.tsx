@@ -1,7 +1,7 @@
 import React, {VFC} from 'react'
 import { useQueryClient, useMutation } from 'react-query'
 import { useQueryPosts } from '../../hooks/useQueryPosts'
-import { selectUserToken,setToken } from "../../slices/userToken";
+
 import { useAppSelector,useAppDispatch } from "../../app/hooks";
 import { useEffect } from 'react';
 import axios from 'axios';

@@ -19,6 +19,7 @@ export const FormRadio = () => {
       <RadioGroup row aria-label="with" name="with" value={editedPost.with} onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
       dispatch(setEditedPost({...editedPost, with: e.target.value}))
       }>
+        <FormControlLabel value="誰でも" control={<Radio />} label="誰でも" />
         <FormControlLabel value="1人" control={<Radio />} label="1人" />
         <FormControlLabel value="カップル" control={<Radio />} label="カップル" />
         <FormControlLabel value="友達" control={<Radio />} label="友達" />

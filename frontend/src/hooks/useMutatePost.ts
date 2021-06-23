@@ -4,29 +4,21 @@ import {useAppSelector, useAppDispatch } from '../app/hooks'
 // import { resetEditedTask } from '../slices/todoSlice'
 import { useQueryClient, useMutation } from 'react-query'
 import { selectSpot } from '../slices/spotSlice'
-import { resetEditedPost } from '../slices/postSlice'
+import { setEditedPost,resetEditedPost, setShowPost } from '../slices/postSlice'
 
 import { useMutateSpot } from './useMutateSpot'
 
-import { selectUserToken } from "../slices/userToken";
+import { selectHeaders } from "../slices/headersSlice";
 
 
 export const useMutatePost = () => {
   const dispatch = useAppDispatch()
   const queryClient = useQueryClient()
-  const token = useAppSelector(selectUserToken)
+  const headers = useAppSelector(selectHeaders)
+  
   const editedSpot = useAppSelector(selectSpot)
   const { createSpotMutation } = useMutateSpot()
-
-    let headers = 
-    {
-    headers: {
-      "Authorization": `Bearer ${token}`,
-      "Content-Type": 'application/json',
-      // "sub": 'google-oauth2|106160814069089305764'
-    }
-    }
-
+  
   const createPostMutation = useMutation(
     (post: EditPost) => 
       axios.post<PostData>(`${process.env.REACT_APP_REST_URL}/posts/`, post,headers),
@@ -60,7 +52,7 @@ export const useMutatePost = () => {
       }
     }
   )
-  return { createPostMutation ,deletePostMutation }
+  return { createPostMutation ,deletePostMutation}
 }
 
 
