@@ -30,11 +30,11 @@ export const FormAutoComp:VFC = () => {
     // setGenre(genres)
     const genre = genres.join(',')
     dispatch(setEditedPost(
-      { ...editedPost.post, genre: genre}))
+      { ...editedPost, genre: genre}))
   }
   
   return (
-    <div className={classes.root}>
+    <div className='full-width'>
 
       <Autocomplete
         multiple
@@ -53,7 +53,7 @@ export const FormAutoComp:VFC = () => {
         }
         
         renderInput={(params) => (
-          <TextField {...params} variant="outlined" label="ジャンル" placeholder="Favorites" />
+          <TextField {...params} variant="outlined" label="ジャンル" placeholder="ジャンル" />
         )
         
       }

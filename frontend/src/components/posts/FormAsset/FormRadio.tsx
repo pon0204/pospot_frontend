@@ -13,12 +13,13 @@ export const FormRadio = () => {
   const dispatch = useAppDispatch()
 
   return (
-    <div>
+    <div className='full-width mt-4'>
     <FormControl component="fieldset">
       <FormLabel component="legend">誰と</FormLabel>
-      <RadioGroup row aria-label="with" name="with" value={editedPost.post.with} onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-      dispatch(setEditedPost({...editedPost.post, with: e.target.value}))
+      <RadioGroup row aria-label="with" name="with" value={editedPost.with} onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+      dispatch(setEditedPost({...editedPost, with: e.target.value}))
       }>
+        <FormControlLabel value="誰でも" control={<Radio />} label="誰でも" />
         <FormControlLabel value="1人" control={<Radio />} label="1人" />
         <FormControlLabel value="カップル" control={<Radio />} label="カップル" />
         <FormControlLabel value="友達" control={<Radio />} label="友達" />

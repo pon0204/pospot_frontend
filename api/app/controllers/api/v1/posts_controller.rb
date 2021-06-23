@@ -1,5 +1,5 @@
 class Api::V1::PostsController < SecuredController
-  skip_before_action :authorize_request, only: [:index,:show]
+  skip_before_action :authorize_request, only: [:index,:show,:spot,:update]
 
   def index
     posts = Post.all
@@ -11,22 +11,50 @@ class Api::V1::PostsController < SecuredController
   end
 
   def show
-    posts = Post.find(params[:id])
+    # postとspotと画像のurlを返す
+    post = Post.find(params[:id])
+    image = post.image_url
+    spot = post.spot
+
     render json: {
-      posts: posts
+      post: post,
+      image_url: image,
+      spot: spot,
     },
-    methods: [:image_url],
+
     status: :ok
   end
 
   def create
-    post = @current_user.posts.build(post_params)
+
+    post_data = post_params
+    
+    # 画像がnullか確認
+    if post_data['eyecatch'] == '' then
+      post_data.delete('eyecatch')
+    end
+
+    post = @current_user.posts.build(post_data)
     
     if post.save
-      render json: post, methods: [:image_url]
+      render json: post,
+      methods: [:image_url]
     else
       render json: post.errors, status: 422
     end
+  end
+
+  def update
+
+    post_data = post_params
+    
+    # 画像がnullか確認
+    if post_data['eyecatch'] == '' then
+      post_data.delete('eyecatch')
+    end
+
+    post = Post.find(params[:id])
+    post.update(post_data)
   end
 
   def destroy
@@ -38,7 +66,6 @@ class Api::V1::PostsController < SecuredController
   end
 
   private
-
   def post_params
     params.permit(:title, :caption,:with,:genre,:eyecatch)
   end

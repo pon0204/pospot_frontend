@@ -24,10 +24,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   textField: {
-    width: '50ch',
+    width: '100%',
   },
   title: {
-    width: '50ch'
+    width: '100%'
   },
   inputLabel:{
     display: 'block',
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function InputForm() {
+export const InputForm = () => {
   const classes = useStyles();
   const editedPost = useAppSelector(selectPost)
   const dispatch = useAppDispatch()
@@ -57,18 +57,18 @@ export default function InputForm() {
     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
     <InputLabel>タイトル</InputLabel>
     <OutlinedInput
-      value={editedPost.post.title}
+      value={editedPost.title}
       onChange={(e) => 
-        dispatch(setEditedPost({ ...editedPost.post, title: e.target.value}))
+        dispatch(setEditedPost({ ...editedPost, title: e.target.value}))
       }
       labelWidth={70}
     />     
     <FormControl className={clsx(classes.margin,classes.textField)} variant="outlined">
     <InputLabel>説明</InputLabel>
     <OutlinedInput
-      value={editedPost.post.caption}
+      value={editedPost.caption}
       onChange={(e) => 
-        dispatch(setEditedPost({ ...editedPost.post, caption: e.target.value}))
+        dispatch(setEditedPost({ ...editedPost, caption: e.target.value}))
       }
       multiline
       rows={5}
@@ -79,3 +79,5 @@ export default function InputForm() {
   </FormControl>
   );
 }
+
+export default InputForm

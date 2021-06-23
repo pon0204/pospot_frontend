@@ -1,193 +1,103 @@
 import React ,{useState} from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-
+import { Link } from "react-router-dom";
 import {useMutatePost} from '../../hooks/useMutatePost'
-import { Button } from '@material-ui/core';
 import { useAuth0 } from "@auth0/auth0-react";
+import zIndex from '@material-ui/core/styles/zIndex';
+
+const useStyles = makeStyles((theme: Theme) =>
+
+  createStyles({
+    card:{
+      margin: 10,
+      width: 400,
+      height: 450,
+      position: 'relative',
+    }
+  }),
+);
+
 
 const options = [
   'Edit',
   'Delete',
 ];
 
-const useStyles = makeStyles((theme: Theme) =>
-
-  createStyles({
-    root: {
-      // maxWidth: 345,
-      height: 500
-    },
-    media: {
-      height: 0,
-      paddingTop: '56.25%', // 16:9
-    },
-    expand: {
-      transform: 'rotate(0deg)',
-      marginLeft: 'auto',
-      transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-      }),
-    },
-    expandOpen: {
-      transform: 'rotate(180deg)',
-    },
-    avatar: {
-      backgroundColor: red[500],
-    },
-  }),
-);
 
 export const PostCard = (item:any) => {
+
+  const [heart,setHeart] = useState(false)
+
+  const classes = useStyles();
   const { deletePostMutation } = useMutatePost()
   const { user, isAuthenticated, getAccessTokenSilently }:any = useAuth0();
 
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState<any>(null);
+  const Click = () =>{
+    setHeart((prev) => !prev)  
+  }
+  
+  let title = item.item.title
+  let withData = item.item.with
+  let genres = item.item.genre  
+  let caption = item.item.caption
+
+  if(title.length > 14){
+    title = title.substr(0,14) + '...'
+  }
+
+  if(caption.length > 64){
+    caption = caption.substr(0,64) + '...'
+  }
   
 
-  let genres = item.item.genre
+  if(withData == ''){
+    withData = null
+  }
+
 
   if(genres){
     genres = genres.split(',')
     genres = genres.slice(0,3)
+  }else {
+    genres = null
   }
-  console.log(genres)
-
-  
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
-  // menu用
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const deleteClick = (id: number) => {
-    deletePostMutation.mutate(id);
-    setAnchorEl(null);
-  }
-  // if (deletePostMutation.isLoading){
-  //   return <p></p>
-  // }
 
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
-          </Avatar>
-        }
-        action={
-        isAuthenticated && (
-          <>
-          <IconButton
-          aria-label="more"
-          aria-controls="long-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
-        >
-          <MoreVertIcon />
-        </IconButton>
-        <Menu
-          id="long-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={open}
-          onClose={handleClose}
-          PaperProps={{
-  
-          }}
-        >
-          {/* <Button>Edit</Button>
-          <Button>Delete</Button> */}
-
-            <MenuItem key="1" onClick={handleClose}>
-              Edit
-            </MenuItem>
-            <MenuItem key="2" onClick={
-              () => {deleteClick(item.item.id)}}>
-              Delete
-            </MenuItem>
-        </Menu>
-        </>
-        )
-        }
-        title={item.item.title}
-
-        // Y-M-Dのみに変換
-        subheader={item.item.created_at.substring(0,item.item.created_at.indexOf("T"))}
-      />
-      <CardMedia
-        className={classes.media}
-        image={item.item.image_url}
-        title="Paella dish"
-      />
-      <div className="flex mt-4">
-        {genres?.map((genre:any) => (
-        <div className="bg-green-200 mx-4 rounded-md p-1 text-sm">
+    <div className={classes.card}>
+      <Link to={`/posts/${item.item.id}`}>
+        <div className='w-full h-full border z-0 relative'>
+          <div className='flex pt-4 pl-4'>
+            <div className='bg-blue-300 w-16 h-16 rounded-full'></div>
+            <div className='ml-4 py-2'>
+            <h3 className='font-bold'>{title}</h3>
+            <p className='text-gray-600'>{item.item.created_at.substring(0,item.item.created_at.indexOf('T'))}</p>
+            </div>
+          </div>
+          <div className="flex my-4">
+          {genres?.map((genre:string) => (
+          <div className="bg-green-200 mx-2 rounded-md p-1 text-sm">
           {genre}
+          </div>
+          ))} 
+          { withData && (
+            <div className="bg-red-200  rounded-md p-1 text-sm text-center mx-2">
+          {withData}
+          </div>
+          )} 
+          </div>
+        <img  className='block w-full object-cover h-48' src={item.item.image_url} alt="" />
+        <p className='p-2 text-'>{caption}</p>
         </div>
-      ))}
-      </div>
-        <div className="bg-red-200  rounded-md p-1 inline-block text-sm text-center m-4 mb-0">
-        {item.item.with}
-        </div>
-        
-      <CardContent>
-          <p>
-        {item.item.caption}
-          </p>
-
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-        </CardContent>
-      </Collapse>
-    </Card>
+      </Link>
+        <button onClick={Click} className='absolute right-2 bottom-2 z-10'>
+          { heart ? 
+          <FavoriteIcon color='secondary' style={{ fontSize: 32 }}/>
+          : 
+          <FavoriteBorderIcon color='secondary' style={{ fontSize: 32 }}/>
+          }
+        </button>
+    </div>
   );
 }
