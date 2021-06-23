@@ -1,5 +1,5 @@
 class Api::V1::SpotsController < SecuredController
-  skip_before_action :authorize_request, only: [:index,:show,:spot_detail,:create]
+  skip_before_action :authorize_request, only: [:index,:show,:spot_detail]
 
   def create
     # 投稿IDを取得
