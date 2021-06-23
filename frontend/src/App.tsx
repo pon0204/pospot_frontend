@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { VFC,useEffect} from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
@@ -15,6 +15,7 @@ import Post from './components/posts/Post';
 import PostShow from './components/posts/PostShow';
 import PostForm from './components/posts/PostForm';
 import Test from './components/test'
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,7 +47,7 @@ const App: VFC = () => {
   
   return (
     
-    <>
+    <div className='relative h-screen'>
     <QueryClientProvider client={queryClient}>
     <BrowserRouter>
     <Header/>
@@ -85,7 +86,7 @@ const App: VFC = () => {
         </BrowserRouter>
     <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
-    </>
+    </div>
 
   );
 }

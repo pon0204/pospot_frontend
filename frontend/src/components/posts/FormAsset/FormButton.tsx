@@ -29,7 +29,9 @@ const FormButton:VFC = () => {
     >投稿</button>
   )
   return (
-    <div></div>
+    <button disabled className="cursor-default bg-red-300 mt-3 rounded text-lg font-bold mx-auto w-2/6 p-4 block text-white"
+    onClick={postCreateClick}
+    >投稿</button>
   )
 }
 

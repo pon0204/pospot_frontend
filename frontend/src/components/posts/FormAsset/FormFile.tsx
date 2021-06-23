@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     width: '50%',
     margin: '30px auto 0px auto',
     cursor: 'pointer',
+    textAlign: 'center',
     '&:hover':{
       backgroundColor: '#004db1'
     },
@@ -73,7 +74,7 @@ const FormFile:VFC = () => {
 
   return (
     <div>
-    <label htmlFor='file' className={classes.inputLabel}>アイキャッチ</label>
+    <label htmlFor='file' className={classes.inputLabel}>アイキャッチ画像</label>
         <input className={classes.inputFile} onChange={imageChange} type="file" id="file" name="file" accept="image/png,image/jpg"/>
       {
       fileUrl && (

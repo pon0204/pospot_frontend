@@ -1,7 +1,7 @@
 import React, {VFC} from 'react'
 import { useQueryClient, useMutation } from 'react-query'
 import { useQueryPosts } from '../../hooks/useQueryPosts'
-
+import { Link } from 'react-router-dom';
 import { useAppSelector,useAppDispatch } from "../../app/hooks";
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -9,7 +9,7 @@ import {PostCard} from './PostCard';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { makeStyles } from '@material-ui/core/styles';
 import { PostData } from '../../types/types';
-// import axiosJsonpAdapter from 'axios-jsonp'
+import CreateIcon from '@material-ui/icons/Create';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,14 +42,20 @@ const Post: VFC = () => {
     
     
   return (
+    <>
     <div className="flex flex-wrap justify-center">
-
       {data?.map((item:PostData) => (
-        <div className="m-2 w-96">
           <PostCard item={item}/>
-        </div>
       ))}
     </div>
+    <Link to='posts/new' className='fixed p-4 bg-gray-400 bg-opacity-30 rounded-full' 
+    style={{
+      right: '5%',
+      bottom: '5%'
+    }}>
+    <CreateIcon style={{fontSize: 52}} color='primary'/>
+    </Link>
+    </>
   )
 }
 

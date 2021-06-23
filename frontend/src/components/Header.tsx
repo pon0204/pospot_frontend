@@ -33,25 +33,18 @@ export default function Header() {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
+        <div className='h-14 p-4 flex justify-between'>
           <Link to="/posts">
             投稿一覧
           </Link>
-          <Link to="/posts/new">
-            投稿作成
-          </Link>
           {isAuthenticated ?
           (
-            <Button color="inherit" onClick={() => logout({ returnTo: window.location.origin })}>Logout</Button>
+            <button className='text-right' color="inherit" onClick={() => logout({ returnTo: window.location.origin })}>ログアウト</button>
           ):(
-            <Button color="inherit" onClick={loginWithRedirect}>Login</Button>
+            <button className='text-right' color="inherit" onClick={loginWithRedirect}>ログイン</button>
           )
           }
-          
-        </Toolbar>
+        </div>
       </AppBar>
     </div>
   );

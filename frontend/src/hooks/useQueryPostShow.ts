@@ -12,10 +12,7 @@ export const useQueryPostShow = (id:number) => {
 
   const headers = useAppSelector(selectHeaders)
 
-
   const getPostShow = async () => {
-
-    
     const { data } = await axios.get(
       `${process.env.REACT_APP_REST_URL}/posts/${id}`)
       return data
@@ -25,9 +22,8 @@ export const useQueryPostShow = (id:number) => {
     queryKey: 'postShow',
     queryFn: getPostShow,
     staleTime: 0,
+    cacheTime: 0,
     // refetchOnWindowFocus: true,
-    //cacheTime: 5000,
-    // refetchInterval: 5000,
   })
 }
 

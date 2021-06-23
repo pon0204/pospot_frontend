@@ -48,12 +48,11 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export const InputForm = (data:any) => {
+export const InputForm = () => {
   const classes = useStyles();
   const editedPost = useAppSelector(selectPost)
   const dispatch = useAppDispatch()
 
-  console.log(data)
   return (
     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
     <InputLabel>タイトル</InputLabel>

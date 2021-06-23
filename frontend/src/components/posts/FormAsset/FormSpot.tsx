@@ -116,7 +116,7 @@ export const FormSpot:VFC = () =>  {
   }, [value, inputValue, fetch]);
 
   return (
-    <div className='full-width'>
+    <div className='full-width mt-4'>
       <Autocomplete
         id="google-map-demo"
         getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}

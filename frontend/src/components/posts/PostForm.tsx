@@ -13,39 +13,32 @@ import { useQueryPostShow } from '../../hooks/useQueryPostShow'
 
 const PostForm: VFC<any> = ({match}:any) => {
   const id = match?.params.postId
-  const { status, data } = useQueryPostShow(id)
   const editedPost = useAppSelector(selectPost)
   const dispatch = useAppDispatch()
   
-  useEffect(() => {
-    if(data){
-    const post = data.post
-    dispatch(setEditedPost({
-      ...editedPost,
-      title: post.title,
-      caption: post.caption,
-      with: post.with,
-      genre: post.genre
-    }))
-    }
-    return ()=>{
-      dispatch(resetEditedPost())
-    }
-  }, [data])
-console.log(editedPost)
-  // if(status == 'success'){
-  //   const post = data.post.title
-  //   dispatch(setEditedPost({...editedPost,title: post}))
-  // }
-  // console.log(editedPost)
+  // const { status, data } = useQueryPostShow(id)
+//   useEffect(() => {
+//     if(data){
+//     const post = data.post
+//     dispatch(setEditedPost({
+//       ...editedPost,
+//       title: post.title,
+//       caption: post.caption,
+//       with: post.with,
+//       genre: post.genre
+//     }))
+//     }
+//     return ()=>{
+//       dispatch(resetEditedPost())
+//     }
+//   }, [data])
+// console.log(editedPost)
     
-
-
   // const editedPost = useAppSelector(selectPost)
   return (
-    <div className="text-center w-2/6 mx-auto">
+    <div className="w-full pl-2 md:w-1/2 md:mx-auto py-4">
     <FormFile/>
-    <InputForm data={data}/>
+    <InputForm/>
     <FormAutoComp/>
     <FormRadio/>
     <FormSpot/>
