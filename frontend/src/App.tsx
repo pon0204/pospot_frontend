@@ -67,6 +67,14 @@ const App: VFC = () => {
           />
           }
           />
+          <Route
+          exact path="/posts/edit/:postId"
+          render={({ match }:any) =>
+          <PostForm
+          match={match}
+          />
+          }
+          />
           <Route exact path="/profile">
             {/* <MainTag/> */}
           </Route>

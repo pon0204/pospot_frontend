@@ -10,6 +10,7 @@ import { PostData } from '../../types/types'
 
 
 const PostShow: VFC<any> = ({match}) => {
+  console.log(match)
   const id = match.params.postId
 
   const { status, data } = useQueryPostShow(id)
@@ -17,6 +18,8 @@ const PostShow: VFC<any> = ({match}) => {
   const post = data?.post
   const spot = data?.spot
   
+  
+
   let map_url = ''
   if(status == 'success'){
   map_url = `https://maps.google.co.jp/maps?output=embed&t=m&hl=ja&z=17&q=${spot.name} ${spot.place}`

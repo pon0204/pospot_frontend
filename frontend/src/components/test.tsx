@@ -4,11 +4,13 @@ import axios from 'axios'
 import { useMutateSpot } from '../hooks/useMutateSpot'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { selectSpot } from '../slices/spotSlice'
+import { selectPost } from '../slices/postSlice'
 
 const Test: VFC = () => {
 
   const { fetchSpotMutation } = useMutateSpot()
-  const post = useAppSelector(selectSpot)
+  const spot = useAppSelector(selectSpot)
+  const post = useAppSelector(selectPost)
   console.log(post)
 
   const Click = () =>{ 
@@ -21,10 +23,18 @@ const Test: VFC = () => {
 
   }
 
+  const updateClick = () => {
+    axios.put(`${process.env.REACT_APP_REST_URL}/posts/160`,post)
+    .then(res =>{
+      console.log(res)
+    })
+  }
 
   return (
     <div>
       <button onClick={Click}>ゲット</button>
+      <br/>
+      <button onClick={updateClick}>アップデート</button>
     </div>
   )
 }

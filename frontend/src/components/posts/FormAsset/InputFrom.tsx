@@ -48,11 +48,12 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function InputForm() {
+export const InputForm = (data:any) => {
   const classes = useStyles();
   const editedPost = useAppSelector(selectPost)
   const dispatch = useAppDispatch()
 
+  console.log(data)
   return (
     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
     <InputLabel>タイトル</InputLabel>
@@ -79,3 +80,5 @@ export default function InputForm() {
   </FormControl>
   );
 }
+
+export default InputForm

@@ -53,7 +53,7 @@ export const FormAutoComp:VFC = () => {
         }
         
         renderInput={(params) => (
-          <TextField {...params} variant="outlined" label="ジャンル" placeholder="Favorites" />
+          <TextField {...params} variant="outlined" label="ジャンル" placeholder="ジャンル" />
         )
         
       }

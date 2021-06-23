@@ -5,9 +5,7 @@ import { setEditedSpot, selectSpot } from '../../../slices/spotSlice'
 
 const FormSpots = () => {
   const editedSpot = useAppSelector(selectSpot)
-  console.log(editedSpot)
   const map_url = `https://maps.google.co.jp/maps?output=embed&t=m&hl=ja&z=17&q=${editedSpot.spot.name} ${editedSpot.spot.place}`
-  console.log(map_url)
   return (
     <div>
       <p>{editedSpot.spot.name}</p>
