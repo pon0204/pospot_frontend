@@ -6,4 +6,7 @@ class User < ApplicationRecord
     find_by(sub: payload['sub']) || create!(sub: payload['sub'])
   end
 
+
+
+
 end

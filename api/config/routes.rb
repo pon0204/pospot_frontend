@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :posts
       resources :spots
+      resources :profiles
       get '/spot/:place_id', to: 'spots#spot_detail'
     end
   end

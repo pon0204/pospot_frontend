@@ -1,8 +1,8 @@
-class Api::V1::profilesController < SecuredController
-  skip_before_action :authorize_request, only: [:index,:show,:spot,:update]
+class Api::V1::ProfilesController < SecuredController
+  skip_before_action :authorize_request, only: [:index,:show,:spot]
 
   def index
-    profile = Profile.all
+    profiles = Profile.all
     render json: {
       profiles: profiles
     }, 
@@ -22,34 +22,24 @@ class Api::V1::profilesController < SecuredController
     status: :ok
   end
 
-  def create
+  def update
+
     profile_data = profile_params    
     # 画像がnullか確認
     if profile_data['avatar'] == '' then
       profile_data.delete('avatar')
     end
-
-    profile = @current_user.build_profile(profile_data)
     
+    profile = @current_user.profile || @current_user.build_profile
+    
+    profile.assign_attributes(profile_data)    
+      
     if profile.save
       render json: profile,
       methods: [:image_url]
     else
       render json: profile.errors, status: 422
     end
-  end
-
-  def update
-
-    profile_data = profile_params
-
-    # 画像がnullか確認
-    if profile_data['avatar'] == '' then
-      profile_data.delete('avatar')
-    end
-
-    profile = profile.find(params[:id])
-    profile.update(profile_data)
   end
 
   def destroy
@@ -63,6 +53,10 @@ class Api::V1::profilesController < SecuredController
   private
   def profile_params
     params.permit(:nickname, :gender,:introduction,:twitter_url,:instagram_url,:avatar)
+  end
+
+  def prepare_profile
+    profile || build_profile #もしカレントユーザーのプロフィールがあったら取得 ||はオアーの分岐
   end
 
 end

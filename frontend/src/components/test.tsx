@@ -5,26 +5,30 @@ import { useMutateSpot } from '../hooks/useMutateSpot'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { selectSpot } from '../slices/spotSlice'
 import { selectPost } from '../slices/postSlice'
+import { selectHeaders } from '../slices/headersSlice'
 
 const Test: VFC = () => {
 
-  const { fetchSpotMutation } = useMutateSpot()
-  const spot = useAppSelector(selectSpot)
-  const post = useAppSelector(selectPost)
-  console.log(post)
-
+  const headers = useAppSelector(selectHeaders)
   const Click = () =>{ 
-    const data:any = 'ChIJ1SFv4dV2A2AR3hKmVbI2pdA'
-    // axios.get(`http://localhost:3000/api/v1/spot/${data}`)
-    // .then(res => {
-    //   console.log(res)
-    // })
-    fetchSpotMutation.mutate(data)
+    axios.get(`${process.env.REACT_APP_REST_URL}/profiles`)
+    .then(res =>{
+      console.log(res.data)
+    })
 
   }
 
-  const updateClick = () => {
-    axios.put(`${process.env.REACT_APP_REST_URL}/posts/160`,post)
+  const createClick = () => {
+    const data:any = {
+      nickname: 'モック',
+      gender: '女性',
+      introduction: '自己紹介2回目でーす',
+      twitter_url: 'https//',
+      instagram_url: '',
+      avatar: ''
+    }
+
+    axios.put(`${process.env.REACT_APP_REST_URL}/profiles/1`,data,headers,)
     .then(res =>{
       console.log(res)
     })
@@ -34,7 +38,7 @@ const Test: VFC = () => {
     <div>
       <button onClick={Click}>ゲット</button>
       <br/>
-      <button onClick={updateClick}>アップデート</button>
+      <button onClick={createClick}>クリエイト</button>
     </div>
   )
 }
