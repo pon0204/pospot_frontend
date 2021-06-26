@@ -7,28 +7,26 @@ import { useAppSelector } from "../app/hooks";
 import { Auth0Provider } from '@auth0/auth0-react';
 import { selectHeaders } from "../slices/headersSlice";
 
-export const useQueryPostShow = (id:number) => {
+export const useQueryPostsQuery = (query? :string) => {
   // const token = useAppSelector(selectUserToken)
 
   const headers = useAppSelector(selectHeaders)
 
-  const getPostShow = async () => {
+  const getPostsQuery = async () => {
+    if(headers.headers.Authorization != null){
     const { data } = await axios.get(
-      `${process.env.REACT_APP_REST_URL}/posts/${id}`,headers)
-      return data
+      `${process.env.REACT_APP_REST_URL}/posts?${query}`,headers)
+      return data.posts
+    }
   }
 
   return useQuery({
-    queryKey: 'postShow',
-    queryFn: getPostShow,
+    queryKey: 'postsQuery',
+    queryFn: getPostsQuery,
     staleTime: 0,
-    cacheTime: 0,
     // refetchOnWindowFocus: true,
+    //cacheTime: 5000,
+    // refetchInterval: 5000,
   })
 }
-
-// postのshowと同時にspotも必要
-
-// 一緒に持ってくる?
-
 

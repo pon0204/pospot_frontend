@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import {useMutatePost} from '../../hooks/useMutatePost'
 import { useAuth0 } from "@auth0/auth0-react";
 import zIndex from '@material-ui/core/styles/zIndex';
+import CardMenu from './CardMenu';
 
 const useStyles = makeStyles((theme: Theme) =>
 
@@ -27,6 +28,8 @@ const options = [
 
 
 export const PostCard = (item:any) => {
+
+  const currentUserId = localStorage.getItem('currentUserId')
 
   const [heart,setHeart] = useState(false)
 
@@ -69,7 +72,7 @@ export const PostCard = (item:any) => {
       <Link to={`/posts/${item.item.id}`}>
         <div className='w-full h-full border z-0 relative'>
           <div className='flex pt-4 pl-4'>
-            <div className='bg-blue-300 w-16 h-16 rounded-full'></div>
+            <Link to={`/profile/${item.item.user_id}`}><div className='bg-blue-300 w-16 h-16 rounded-full'></div></Link>
             <div className='ml-4 py-2'>
             <h3 className='font-bold'>{title}</h3>
             <p className='text-gray-600'>{item.item.created_at.substring(0,item.item.created_at.indexOf('T'))}</p>
@@ -91,6 +94,13 @@ export const PostCard = (item:any) => {
         <p className='p-2 text-'>{caption}</p>
         </div>
       </Link>
+      {
+      currentUserId == item.item.user_id &&(
+      <div className='absolute top-2 right-2 z-10'>
+       <CardMenu/>
+      </div>
+      )
+      }
         <button onClick={Click} className='absolute right-2 bottom-2 z-10'>
           { heart ? 
           <FavoriteIcon color='secondary' style={{ fontSize: 32 }}/>

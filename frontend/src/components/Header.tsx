@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -7,6 +7,10 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useAuth0 } from "@auth0/auth0-react";
+
+import { useAppDispatch } from '../app/hooks';
+import { useMutateUser } from '../hooks/useMutateUser';
+import { setHeaders } from '../slices/headersSlice';
 
 import {  Link } from "react-router-dom";
 
@@ -24,11 +28,36 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-
-
 export default function Header() {
   const classes = useStyles();
   const {isAuthenticated,loginWithRedirect,logout } = useAuth0();
+  const hoge = localStorage.getItem('currentUserId')
+
+  console.log(hoge)
+
+  const dispatch = useAppDispatch()
+  const { getAccessTokenSilently,user }:any = useAuth0();
+  const { userIdMutation } = useMutateUser()
+
+  useEffect(() => {
+    const getToken = async () => {
+
+    try{
+      const accessToken = await getAccessTokenSilently({
+      });
+      dispatch(setHeaders(accessToken))
+      // if(!localStorage.getItem('currentUserId')){
+      userIdMutation.mutate()
+      // }
+    }
+    catch(e){
+      console.log(e.message)
+  } 
+}
+    getToken()
+
+  
+  }, [])
 
   return (
     <div className={classes.root}>

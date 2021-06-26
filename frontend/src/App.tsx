@@ -15,6 +15,9 @@ import Post from './components/posts/Post';
 import PostShow from './components/posts/PostShow';
 import PostForm from './components/posts/PostForm';
 import Test from './components/test'
+import ProfileNew from './components/profile/ProfileNew';
+import ProfileShow from './components/profile/ProfileShow';
+import { useMutateUser } from './hooks/useMutateUser';
 
 
 const queryClient = new QueryClient({
@@ -27,23 +30,26 @@ const queryClient = new QueryClient({
 })
 
 const App: VFC = () => {
-  const dispatch = useAppDispatch()
-  const { getAccessTokenSilently }:any = useAuth0();
+//   const dispatch = useAppDispatch()
+//   const { getAccessTokenSilently,user }:any = useAuth0();
+//   const { userIdMutation } = useMutateUser()
+//   useEffect(() => {
+//     const getToken = async () => {
 
-  useEffect(() => {
-    const getToken = async () => {
+//     try{
+//       const accessToken = await getAccessTokenSilently({
+//       });
+//       dispatch(setHeaders(accessToken))
+//       userIdMutation.mutate()
+//     }
+//     catch(e){
+//       console.log(e.message)
+//   } 
+// }
+//     getToken()
 
-    try{
-      const accessToken = await getAccessTokenSilently({
-      });
-      dispatch(setHeaders(accessToken))    
-    }
-    catch(e){
-      console.log(e.message)
-  } 
-}
-    getToken()
-  }, [])
+  
+//   }, [])
   
   return (
     
@@ -76,9 +82,16 @@ const App: VFC = () => {
           />
           }
           />
-          <Route exact path="/profile">
-            {/* <MainTag/> */}
+          <Route exact path="/profile/new">
+            <ProfileNew/>
           </Route>
+          <Route exact path="/profile/:profileId"
+          render={({ match }:any) =>
+          <ProfileShow
+          match={match}
+          />
+          }
+          />
           <Route exact path="/test">
             <Test/>
           </Route>

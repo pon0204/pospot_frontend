@@ -12,13 +12,15 @@ class Api::V1::ProfilesController < SecuredController
 
   def show
     # profileとspotと画像のurlを返す
-    profile = profile.find(params[:id])
-    image = profile.image_url
+    
+    # binding.pry
+    
+    profile = Profile.find(params[:id])
 
     render json: {
       profile: profile,
-      image_url: image,
     },
+    methods: [:image_url],
     status: :ok
   end
 

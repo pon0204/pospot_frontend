@@ -1,10 +1,11 @@
 class Api::V1::PostsController < SecuredController
-  skip_before_action :authorize_request, only: [:index,:show,:update]
+  skip_before_action :authorize_request, only: [:show,:update,:index,:query]
 
   def index
-    posts = Post.all
+      posts = Post.all
     render json: {
-      posts: posts
+      posts: posts,
+      # profile_id: ,
     }, 
     methods: [:image_url],
     status: :ok
@@ -33,7 +34,7 @@ class Api::V1::PostsController < SecuredController
     if post_data['eyecatch'] == '' then
       post_data.delete('eyecatch')
     end
-
+    
     post = @current_user.posts.build(post_data)
     
     if post.save
@@ -64,6 +65,20 @@ class Api::V1::PostsController < SecuredController
       render json: { error: "Failed to destroy" }, status: 422
     end
   end
+
+  def query 
+    if params[:profile_id]    
+      profile = Profile.find(params[:profile_id])
+      posts = Post.where(user_id: profile['user_id'])
+    else    
+    end
+    render json: {
+      posts: posts
+    }, 
+    methods: [:image_url],
+    status: :ok
+  end
+  
 
   private
   def post_params

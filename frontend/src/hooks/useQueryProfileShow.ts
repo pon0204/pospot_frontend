@@ -7,20 +7,20 @@ import { useAppSelector } from "../app/hooks";
 import { Auth0Provider } from '@auth0/auth0-react';
 import { selectHeaders } from "../slices/headersSlice";
 
-export const useQueryPostShow = (id:number) => {
+export const useQueryProfileShow = (id:number) => {
   // const token = useAppSelector(selectUserToken)
 
   const headers = useAppSelector(selectHeaders)
-
-  const getPostShow = async () => {
+  
+  const getProfileShow = async () => {
     const { data } = await axios.get(
-      `${process.env.REACT_APP_REST_URL}/posts/${id}`,headers)
+      `${process.env.REACT_APP_REST_URL}/profiles/${id}`,headers)
       return data
   }
 
   return useQuery({
-    queryKey: 'postShow',
-    queryFn: getPostShow,
+    queryKey: 'profileShow',
+    queryFn: getProfileShow,
     staleTime: 0,
     cacheTime: 0,
     // refetchOnWindowFocus: true,
