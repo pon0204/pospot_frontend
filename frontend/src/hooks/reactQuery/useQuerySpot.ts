@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from 'react-query'
 import axios from 'axios'
-import { User } from '../types/types'
+import { User } from '../../types/types'
 import { useAuth0 } from "@auth0/auth0-react";
-import { useAppSelector } from "../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 import { Auth0Provider } from '@auth0/auth0-react';
-import { selectHeaders } from "../slices/headersSlice";
+import { selectHeaders } from "../../slices/headersSlice";
 
 export const useQuerySpotShow = (id:number) => {
   // const token = useAppSelector(selectUserToken)

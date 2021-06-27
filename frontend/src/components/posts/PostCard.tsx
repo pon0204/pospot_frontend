@@ -3,9 +3,12 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Link } from "react-router-dom";
-import {useMutatePost} from '../../hooks/useMutatePost'
+import {useMutatePost} from '../../hooks/castomHook/useMutatePost'
 import { useAuth0 } from "@auth0/auth0-react";
 import zIndex from '@material-ui/core/styles/zIndex';
+import CardMenu from './CardMenu';
+import defaultPhoto from '../../profile_default.png'
+import { IconButton } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
 
@@ -15,8 +18,14 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 400,
       height: 450,
       position: 'relative',
+    },
+    button: {
+      ':focus':{
+        outline: 'none'
+      }
     }
   }),
+
 );
 
 
@@ -26,7 +35,9 @@ const options = [
 ];
 
 
-export const PostCard = (item:any) => {
+export const PostCard = (item:any,profiles:any) => {
+
+  const currentUserId = localStorage.getItem('currentUserId')
 
   const [heart,setHeart] = useState(false)
 
@@ -69,7 +80,17 @@ export const PostCard = (item:any) => {
       <Link to={`/posts/${item.item.id}`}>
         <div className='w-full h-full border z-0 relative'>
           <div className='flex pt-4 pl-4'>
-            <div className='bg-blue-300 w-16 h-16 rounded-full'></div>
+            <Link to={`/profile/${item.item.user_id}`}>
+            <div className='border-2 border-gray-300 relative cursor-pointer w-16 h-16 block rounded-full mx-auto' >
+          {item.item.avatar_url == null ?
+          <img src={defaultPhoto} className='rounded-full' alt="" />
+          :
+        // <img src={defaultPhoto} className='rounded-full' alt="" />
+          <img src={item.item.avatar_url} className='rounded-full' alt="" />
+        
+    }
+    </div>
+              </Link>
             <div className='ml-4 py-2'>
             <h3 className='font-bold'>{title}</h3>
             <p className='text-gray-600'>{item.item.created_at.substring(0,item.item.created_at.indexOf('T'))}</p>
@@ -91,13 +112,24 @@ export const PostCard = (item:any) => {
         <p className='p-2 text-'>{caption}</p>
         </div>
       </Link>
-        <button onClick={Click} className='absolute right-2 bottom-2 z-10'>
+      {
+      currentUserId == item.item.user_id &&(
+      <div className='absolute top-2 right-2 z-10'>
+       <CardMenu/>
+      </div>
+      )
+      }
+        <div className='absolute right-2 bottom-2 z-10'>
           { heart ? 
-          <FavoriteIcon color='secondary' style={{ fontSize: 32 }}/>
+          <IconButton onClick={Click} style={{outline: 'none'}}>
+            <FavoriteIcon color='secondary' style={{ fontSize: 32 }}/>
+          </IconButton>
           : 
-          <FavoriteBorderIcon color='secondary' style={{ fontSize: 32 }}/>
+          <IconButton onClick={Click} style={{outline: 'none'}}>
+            <FavoriteBorderIcon color='secondary' style={{ fontSize: 32 }}/>
+          </IconButton>
           }
-        </button>
+        </div>
     </div>
   );
 }

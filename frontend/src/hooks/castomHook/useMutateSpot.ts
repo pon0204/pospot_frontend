@@ -1,11 +1,11 @@
 import axios from 'axios'
-import { useAppDispatch } from '../app/hooks'
-import { setEditedSpot,resetEditedSpot } from '../slices/spotSlice'
+import { useAppDispatch } from '../../app/hooks'
+import { setEditedSpot,resetEditedSpot } from '../../slices/spotSlice'
 import { useQueryClient, useMutation } from 'react-query'
 
-import { useAppSelector } from "../app/hooks";
-import { selectHeaders } from "../slices/headersSlice";
-import { EditSpot,SpotData } from '../types/types';
+import { useAppSelector } from "../../app/hooks";
+import { selectHeaders } from "../../slices/headersSlice";
+import { EditSpot,SpotData } from '../../types/types';
 
 
 export const useMutateSpot = () => {

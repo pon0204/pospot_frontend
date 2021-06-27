@@ -2,12 +2,14 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import headersReducer from '../slices/headersSlice'
 import postReducer from '../slices/postSlice'
 import spotReducer from '../slices/spotSlice'
+import profileReducer from '../slices/profileSlice';
 
 export const store = configureStore({
   reducer: {
     headers: headersReducer,
     post: postReducer,
-    spot: spotReducer
+    spot: spotReducer,
+    profile: profileReducer
   },
 
 

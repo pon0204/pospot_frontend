@@ -1,12 +1,29 @@
 class Api::V1::PostsController < SecuredController
-  skip_before_action :authorize_request, only: [:index,:show,:spot,:update]
+  skip_before_action :authorize_request, only: [:show,:update,:index,:query]
 
   def index
     posts = Post.all
+    resluts = []
+    posts.map{|post| 
+      post_image = post.image_url
+      profile = Profile.find_by(user_id: post['user_id'])
+      profile_image = profile.avatar_url
+      post = post.attributes
+      post['image_url'] = post_image      
+      post['avatar_url'] = profile_image
+      resluts.push(post)     
+      # post.assign_attributes(post_image)  
+    }
+    
+    
+    # profiles = Profile.find(1)
+    # profiles = profiles.avatar_url
+    
     render json: {
-      posts: posts
+      # posts: posts,
+      posts: resluts,
     }, 
-    methods: [:image_url],
+    # methods: [:image_url],
     status: :ok
   end
 
@@ -33,7 +50,7 @@ class Api::V1::PostsController < SecuredController
     if post_data['eyecatch'] == '' then
       post_data.delete('eyecatch')
     end
-
+    
     post = @current_user.posts.build(post_data)
     
     if post.save
@@ -64,6 +81,38 @@ class Api::V1::PostsController < SecuredController
       render json: { error: "Failed to destroy" }, status: 422
     end
   end
+
+  def query 
+
+    if params[:profile_id]    
+      ## プロフィールのインスタンスを作成
+      profile = Profile.find(params[:profile_id])
+      profile_image = profile.avatar_url
+      posts = Post.where(user_id: profile['user_id'])
+
+      resluts = []
+      posts.map{|post| 
+      post_image = post.image_url
+      post = post.attributes
+      post['image_url'] = post_image   
+      post['avatar_url'] = profile_image
+      resluts.push(post)     
+    }
+    else    
+
+      # 目標 返り値にavatar_urlを加えたい
+      #
+      #
+      #
+    end
+
+    render json: {
+      posts: resluts
+    }, 
+    methods: [:image_url],
+    status: :ok
+  end
+  
 
   private
   def post_params
