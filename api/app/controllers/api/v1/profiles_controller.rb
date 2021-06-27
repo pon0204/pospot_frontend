@@ -6,7 +6,7 @@ class Api::V1::ProfilesController < SecuredController
     render json: {
       profiles: profiles
     }, 
-    methods: [:image_url],
+    methods: [:avatar_url],
     status: :ok
   end
 
@@ -20,7 +20,7 @@ class Api::V1::ProfilesController < SecuredController
     render json: {
       profile: profile,
     },
-    methods: [:image_url],
+    methods: [:avatar_url],
     status: :ok
   end
 
@@ -28,7 +28,7 @@ class Api::V1::ProfilesController < SecuredController
 
     profile_data = profile_params    
     # 画像がnullか確認
-    if profile_data['avatar'] == '' then
+    if profile_data['avatar'] == '' || profile_data['avatar'] == 'undefined' then
       profile_data.delete('avatar')
     end
     
@@ -38,7 +38,7 @@ class Api::V1::ProfilesController < SecuredController
       
     if profile.save
       render json: profile,
-      methods: [:image_url]
+      methods: [:avatar_url]
     else
       render json: profile.errors, status: 422
     end

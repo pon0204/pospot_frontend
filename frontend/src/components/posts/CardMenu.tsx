@@ -6,7 +6,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const options = [
   'Delete',
-  'Edit',
+  // 'Edit',
 ];
 
 const ITEM_HEIGHT = 48;
@@ -26,6 +26,7 @@ export const CardMenu = () => {
   return (
     <div>
       <IconButton
+        style={{outline: 'none'}}
         aria-label="more"
         aria-controls="long-menu"
         aria-haspopup="true"

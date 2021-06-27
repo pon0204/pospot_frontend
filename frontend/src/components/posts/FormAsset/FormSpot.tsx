@@ -9,7 +9,7 @@ import parse from 'autosuggest-highlight/parse';
 import throttle from 'lodash/throttle';
 
 //redux,react-query
-import { useMutateSpot } from '../../../hooks/useMutateSpot'
+import { useMutateSpot } from '../../../hooks/castomHook/useMutateSpot'
 import { useAppSelector, useAppDispatch } from '../../../app/hooks'
 
 function loadScript(src: string, position: HTMLElement | null, id: string) {

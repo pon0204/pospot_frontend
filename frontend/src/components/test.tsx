@@ -1,7 +1,7 @@
 import React,{VFC} from 'react'
 import axios from 'axios'
 
-import { useMutateSpot } from '../hooks/useMutateSpot'
+import { useMutateSpot } from '../hooks/castomHook/useMutateSpot'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { selectSpot } from '../slices/spotSlice'
 import { selectPost } from '../slices/postSlice'

@@ -15,9 +15,9 @@ import Post from './components/posts/Post';
 import PostShow from './components/posts/PostShow';
 import PostForm from './components/posts/PostForm';
 import Test from './components/test'
-import ProfileNew from './components/profile/ProfileNew';
+import ProfileEdit from './components/profile/ProfileEdit';
 import ProfileShow from './components/profile/ProfileShow';
-import { useMutateUser } from './hooks/useMutateUser';
+import { useMutateUser } from './hooks/castomHook/useMutateUser';
 
 
 const queryClient = new QueryClient({
@@ -82,9 +82,13 @@ const App: VFC = () => {
           />
           }
           />
-          <Route exact path="/profile/new">
-            <ProfileNew/>
-          </Route>
+          <Route exact path="/profile/edit/:profileId"
+          render={({ match }:any) =>
+          <ProfileEdit
+          match={match}
+          />
+          }
+          />
           <Route exact path="/profile/:profileId"
           render={({ match }:any) =>
           <ProfileShow

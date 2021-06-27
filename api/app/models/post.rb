@@ -9,4 +9,9 @@ class Post < ApplicationRecord
   def image_url
     eyecatch.attached? ? url_for(eyecatch) : nil
   end
+  
+  def avatar_url
+    avatar.attached? ? url_for(avatar) : nil
+  end
+
 end

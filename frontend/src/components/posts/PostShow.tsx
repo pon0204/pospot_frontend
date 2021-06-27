@@ -1,8 +1,8 @@
 import React, { VFC } from 'react'
 import { useEffect } from 'react'
 import { useQueryClient } from 'react-query'
-import { useMutatePost } from '../../hooks/useMutatePost'
-import { useQueryPostShow } from '../../hooks/useQueryPostShow'
+import { useMutatePost } from '../../hooks/castomHook/useMutatePost'
+import { useQueryPostShow } from '../../hooks/reactQuery/useQueryPostShow'
 
 import { useAppSelector } from '../../app/hooks'
 import { selectShowPost } from '../../slices/postSlice'

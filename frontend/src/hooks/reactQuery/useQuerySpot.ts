@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from 'react-query'
 import axios from 'axios'
-import { PostData, User } from '../types/types'
+import { User } from '../../types/types'
 import { useAuth0 } from "@auth0/auth0-react";
-import { useAppSelector } from "../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 import { Auth0Provider } from '@auth0/auth0-react';
-import { selectHeaders } from "../slices/headersSlice";
+import { selectHeaders } from "../../slices/headersSlice";
 
-export const useQueryPosts = () => {
+export const useQuerySpotShow = (id:number) => {
   // const token = useAppSelector(selectUserToken)
 
   const headers = useAppSelector(selectHeaders)
@@ -15,11 +15,11 @@ export const useQueryPosts = () => {
   const getPosts = async () => {
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_REST_URL}/posts`)
+      `${process.env.REACT_APP_REST_URL}/spots/`)
       return data.posts
   }
 
-  return useQuery<PostData[],Error>({
+  return useQuery({
     queryKey: 'posts',
     queryFn: getPosts,
     staleTime: 0,
@@ -27,4 +27,5 @@ export const useQueryPosts = () => {
     //cacheTime: 5000,
     // refetchInterval: 5000,
   })
+
 }

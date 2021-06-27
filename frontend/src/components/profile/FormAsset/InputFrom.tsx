@@ -8,8 +8,9 @@ import FormControl from '@material-ui/core/FormControl';
 import clsx from 'clsx';
 
 import { useAppSelector, useAppDispatch } from '../../../app/hooks'
-import { setEditedPost, selectPost } from '../../../slices/postSlice'
+
 import { useMutatePost } from '../../../hooks/castomHook/useMutatePost'
+import { selectProfile, setEditedProfile } from '../../../slices/profileSlice';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -50,25 +51,26 @@ const useStyles = makeStyles((theme) => ({
 
 export const InputForm = () => {
   const classes = useStyles();
-  const editedPost = useAppSelector(selectPost)
+  const editedProfile = useAppSelector(selectProfile)
+
   const dispatch = useAppDispatch()
 
   return (
     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-    <InputLabel>タイトル</InputLabel>
+    <InputLabel>ニックネーム</InputLabel>
     <OutlinedInput
-      value={editedPost.title}
+      value={editedProfile.nickname}
       onChange={(e) => 
-        dispatch(setEditedPost({ ...editedPost, title: e.target.value}))
+        dispatch(setEditedProfile({ ...editedProfile, nickname: e.target.value}))
       }
-      labelWidth={70}
+      labelWidth={100}
     />     
     <FormControl className={clsx(classes.margin,classes.textField)} variant="outlined">
-    <InputLabel>説明</InputLabel>
+    <InputLabel>自己紹介</InputLabel>
     <OutlinedInput
-      value={editedPost.caption}
+      value={editedProfile.introduction}
       onChange={(e) => 
-        dispatch(setEditedPost({ ...editedPost, caption: e.target.value}))
+        dispatch(setEditedProfile({ ...editedProfile, introduction: e.target.value}))
       }
       multiline
       rows={5}

@@ -2,7 +2,7 @@ import {VFC} from 'react'
 import { useAppSelector, useAppDispatch } from '../../../app/hooks'
 import { setEditedPost, selectPost } from '../../../slices/postSlice'
 import { setEditedSpot, selectSpot } from '../../../slices/spotSlice'
-import { useMutatePost } from '../../../hooks/useMutatePost'
+import { useMutatePost } from '../../../hooks/castomHook/useMutatePost'
 import Button from '@material-ui/core/Button';
 
 

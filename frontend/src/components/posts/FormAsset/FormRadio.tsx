@@ -6,7 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks'
 import { setEditedPost, selectPost } from '../../../slices/postSlice'
-import { useMutatePost } from '../../../hooks/useMutatePost'
+import { useMutatePost } from '../../../hooks/castomHook/useMutatePost'
 
 export const FormRadio = () => {
   const editedPost = useAppSelector(selectPost)

@@ -2,14 +2,14 @@ import {VFC,useEffect} from 'react'
 import InputForm from './FormAsset/InputFrom'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { setEditedPost, selectPost, resetEditedPost } from '../../slices/postSlice'
-import { useMutatePost } from '../../hooks/useMutatePost'
+import { useMutatePost } from '../../hooks/castomHook/useMutatePost'
 import FormButton from './FormAsset/FormButton'
 import { FormRadio } from './FormAsset/FormRadio'
 import { FormAutoComp } from './FormAsset/FormAutoComp'
 import FormFile from './FormAsset/FormFile'
 import { FormSpot } from './FormAsset/FormSpot'
 import FormSpots from './FormAsset/FormSpots'
-import { useQueryPostShow } from '../../hooks/useQueryPostShow'
+import { useQueryPostShow } from '../../hooks/reactQuery/useQueryPostShow'
 
 const PostForm: VFC<any> = ({match}:any) => {
   const id = match?.params.postId
