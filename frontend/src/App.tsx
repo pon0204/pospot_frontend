@@ -30,27 +30,6 @@ const queryClient = new QueryClient({
 })
 
 const App: VFC = () => {
-//   const dispatch = useAppDispatch()
-//   const { getAccessTokenSilently,user }:any = useAuth0();
-//   const { userIdMutation } = useMutateUser()
-//   useEffect(() => {
-//     const getToken = async () => {
-
-//     try{
-//       const accessToken = await getAccessTokenSilently({
-//       });
-//       dispatch(setHeaders(accessToken))
-//       userIdMutation.mutate()
-//     }
-//     catch(e){
-//       console.log(e.message)
-//   } 
-// }
-//     getToken()
-
-  
-//   }, [])
-  
   return (
     
     <div className='relative h-screen'>
@@ -63,7 +42,6 @@ const App: VFC = () => {
             <Post/>
           </Route>
           <Route exact path="/posts/new">
-            {/* <MainTag/> */}
             <PostForm/>
           </Route>
           <Route

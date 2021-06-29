@@ -5,12 +5,16 @@ class Api::V1::PostsController < SecuredController
     posts = Post.all
     resluts = []
     posts.map{|post| 
+      likes = post.likes.select(:user_id)
       post_image = post.image_url
       profile = Profile.find_by(user_id: post['user_id'])
       profile_image = profile.avatar_url
+      
+      # 投稿をアクティブレコードからオブジェクトに変換
       post = post.attributes
       post['image_url'] = post_image      
       post['avatar_url'] = profile_image
+      post['likes'] = likes
       resluts.push(post)     
       # post.assign_attributes(post_image)  
     }
@@ -92,10 +96,12 @@ class Api::V1::PostsController < SecuredController
 
       resluts = []
       posts.map{|post| 
+      likes = post.likes.select(:user_id)
       post_image = post.image_url
       post = post.attributes
       post['image_url'] = post_image   
       post['avatar_url'] = profile_image
+      post['likes'] = likes
       resluts.push(post)     
     }
     else    
@@ -109,7 +115,7 @@ class Api::V1::PostsController < SecuredController
     render json: {
       posts: resluts
     }, 
-    methods: [:image_url],
+    # methods: [:image_url],
     status: :ok
   end
   

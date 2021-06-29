@@ -25,11 +25,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Post: VFC = () => {    
   const classes = useStyles();
-  // const { status, data } = useQueryPosts()
 
-  
   const {status,data} = useQueryPosts()
-
     if (status === 'loading') return (
       <div className="flex justify-center flex-wrap">
         <Skeleton className={classes.margin} variant="rect" width={385} height={500} />
