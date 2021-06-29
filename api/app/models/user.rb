@@ -16,7 +16,7 @@ class User < ApplicationRecord
   end
 
   def unfollow!(user)
-    user_id = get_user_id(user)
+    user_id = get_user_id(user)    
     relation = following_relationships.find_by!(following_id: user_id)
     relation.destroy!
   end
@@ -32,7 +32,6 @@ class User < ApplicationRecord
 
   def self.profile_create_payload(payload)
     user = User.find_by(sub: payload['sub']) 
-    
     if(user.profile.blank?)
     profile = user.build_profile(nickname: "ユーザー#{user['id']}")
     profile.save
@@ -47,6 +46,5 @@ class User < ApplicationRecord
       user
     end
   end
-
 end
 
