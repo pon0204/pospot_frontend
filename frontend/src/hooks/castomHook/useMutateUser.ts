@@ -9,6 +9,7 @@ import { setEditedPost,resetEditedPost, setShowPost, setQueryPost } from '../../
 import { useMutateSpot } from './useMutateSpot'
 
 import { selectHeaders } from "../../slices/headersSlice";
+import { setShowProfile } from '../../slices/profileSlice'
 
 
 export const useMutateUser = () => {
@@ -23,8 +24,17 @@ export const useMutateUser = () => {
       localStorage.setItem('currentUserId', res.data)
     }
   })
-  
-  const profileUpdateMutaion = useMutation(
+
+  const profileShowMutation = useMutation(
+    (id:number) => 
+    axios.get(`${process.env.REACT_APP_REST_URL}/profiles/${id}`),
+  {
+    onSuccess: (res) =>{
+      dispatch(setShowProfile(res.data))
+    }
+  }
+  )
+  const profileUpdateMutation = useMutation(
     (data:any) =>
     axios.put(`${process.env.REACT_APP_REST_URL}/profiles/2`,data,headers),
     {
@@ -35,7 +45,8 @@ export const useMutateUser = () => {
     
     
     )
-    return { userIdMutation,profileUpdateMutaion}
+
+    return { userIdMutation,profileUpdateMutation,profileShowMutation}
 }
 
 

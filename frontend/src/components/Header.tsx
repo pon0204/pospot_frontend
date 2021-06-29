@@ -37,7 +37,6 @@ export default function Header() {
   const dispatch = useAppDispatch()
   const { getAccessTokenSilently,user }:any = useAuth0();
   const { userIdMutation } = useMutateUser()
-  console.log(localStorage.getItem('currentUserId'))
 
   const removeUserId = () =>{
     localStorage.removeItem('currentUserId')

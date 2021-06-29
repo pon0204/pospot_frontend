@@ -19,16 +19,6 @@ const initialState: profileState = {
     avatar: '',
 },
   showProfile: {
-    profiles:{
-      id: null,
-      user_id: null,
-      title: '',
-      caption: '',
-      with: '',
-      genre: '',
-      created_at: '',
-      updated_at: ''
-    }
   },
 }
 

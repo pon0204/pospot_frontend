@@ -7,11 +7,13 @@ import { selectSpot } from '../slices/spotSlice'
 import { selectPost } from '../slices/postSlice'
 import { selectHeaders } from '../slices/headersSlice'
 import { useAuth0 } from "@auth0/auth0-react";
+import { useQueryClient } from 'react-query'
 
 const Test: VFC = () => {
   const { user, isAuthenticated, getAccessTokenSilently }:any = useAuth0();
   console.log(user)
   const headers = useAppSelector(selectHeaders)
+
   const Click = () =>{ 
     axios.get(`${process.env.REACT_APP_REST_URL}/profiles`)
     .then(res =>{
@@ -20,16 +22,7 @@ const Test: VFC = () => {
   }
 
   const createClick = () => {
-    const data:any = {
-      nickname: 'モック',
-      gender: '女性',
-      introduction: '自己紹介2回目でーす',
-      twitter_url: 'https//',
-      instagram_url: '',
-      avatar: ''
-    }
-
-    axios.put(`${process.env.REACT_APP_REST_URL}/profiles/1`,data,headers,)
+    axios.post(`${process.env.REACT_APP_REST_URL}/posts/1/likes`,null,headers)
     .then(res =>{
       console.log(res)
     })

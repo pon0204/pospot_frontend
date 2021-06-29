@@ -1,17 +1,12 @@
 import {VFC} from 'react'
 import { useAppSelector, useAppDispatch } from '../../../app/hooks'
-import { setEditedPost, selectPost } from '../../../slices/postSlice'
-import { setEditedSpot, selectSpot } from '../../../slices/spotSlice'
-import { useMutatePost } from '../../../hooks/castomHook/useMutatePost'
-import Button from '@material-ui/core/Button';
 import { selectProfile } from '../../../slices/profileSlice'
 import { useMutateUser } from '../../../hooks/castomHook/useMutateUser'
 
 
 const FormButton:VFC = () => {
   const editedProfile = useAppSelector(selectProfile)
-  const dispatch = useAppDispatch()
-  const { profileUpdateMutaion } = useMutateUser()
+  const { profileUpdateMutation } = useMutateUser()
 
   const profileUpdateClick = () => {
     const data: any = new FormData()
@@ -19,7 +14,7 @@ const FormButton:VFC = () => {
     data.append('introduction',editedProfile.introduction)
     data.append('gender',editedProfile.gender)
     data.append('avatar',editedProfile.avatar)
-    profileUpdateMutaion.mutate(data,editedProfile.id)
+    profileUpdateMutation.mutate(data,editedProfile.id)
   }
 
   // if(editedSpot.spot.name != '') return (

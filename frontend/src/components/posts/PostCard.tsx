@@ -9,6 +9,8 @@ import zIndex from '@material-ui/core/styles/zIndex';
 import CardMenu from './CardMenu';
 import defaultPhoto from '../../profile_default.png'
 import { IconButton } from '@material-ui/core';
+import { useEffect } from 'react';
+import { useMutateLike } from '../../hooks/castomHook/useMutateLike';
 
 const useStyles = makeStyles((theme: Theme) =>
 
@@ -38,16 +40,20 @@ const options = [
 export const PostCard = (item:any,profiles:any) => {
 
   const currentUserId = localStorage.getItem('currentUserId')
-
-  const [heart,setHeart] = useState(false)
-
+  const [likeHeart,setHeart] = useState(false)
   const classes = useStyles();
-  const { deletePostMutation } = useMutatePost()
-  const { user, isAuthenticated, getAccessTokenSilently }:any = useAuth0();
-
-  const Click = () =>{
+  const {createLikeMutation,deleteLikeMutation} = useMutateLike()
+  const {isAuthenticated,loginWithRedirect,logout } = useAuth0();
+  
+  const heartClick = () =>{
     setHeart((prev) => !prev)  
   }
+  
+  useEffect(() => {
+    const likes = item.item.likes
+    const currentUserLike = likes.some((v:any) => v.user_id == currentUserId)
+    setHeart(currentUserLike)
+  },[])
   
   let title = item.item.title
   let withData = item.item.with
@@ -61,12 +67,10 @@ export const PostCard = (item:any,profiles:any) => {
   if(caption.length > 64){
     caption = caption.substr(0,64) + '...'
   }
-  
 
   if(withData == ''){
     withData = null
   }
-
 
   if(genres){
     genres = genres.split(',')
@@ -115,17 +119,29 @@ export const PostCard = (item:any,profiles:any) => {
       {
       currentUserId == item.item.user_id &&(
       <div className='absolute top-2 right-2 z-10'>
-       <CardMenu/>
+      <CardMenu/>
       </div>
       )
       }
         <div className='absolute right-2 bottom-2 z-10'>
-          { heart ? 
-          <IconButton onClick={Click} style={{outline: 'none'}}>
+          { likeHeart ? 
+          <IconButton onClick={() => {
+            deleteLikeMutation.mutate(item.item.id)
+            heartClick()
+          }}
+          style={{outline: 'none'}}>
             <FavoriteIcon color='secondary' style={{ fontSize: 32 }}/>
           </IconButton>
           : 
-          <IconButton onClick={Click} style={{outline: 'none'}}>
+          <IconButton onClick={() => {
+            if(isAuthenticated){
+              createLikeMutation.mutate(item.item.id)
+              heartClick()
+              }else{
+                loginWithRedirect()
+              }
+            }} 
+            style={{outline: 'none'}}>
             <FavoriteBorderIcon color='secondary' style={{ fontSize: 32 }}/>
           </IconButton>
           }
