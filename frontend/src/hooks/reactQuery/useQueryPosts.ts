@@ -16,6 +16,8 @@ export const useQueryPosts = () => {
 
     const { data } = await axios.get(
       `${process.env.REACT_APP_REST_URL}/posts`)
+      // ジャンルを配列に変換
+      data.posts.map((v:any) => v.genre = v.genre.split(','))
       return data
   }
 

@@ -73,7 +73,6 @@ export const PostCard = (item:any,profiles:any) => {
   }
 
   if(genres){
-    genres = genres.split(',')
     genres = genres.slice(0,3)
   }else {
     genres = null
@@ -119,7 +118,7 @@ export const PostCard = (item:any,profiles:any) => {
       {
       currentUserId == item.item.user_id &&(
       <div className='absolute top-2 right-2 z-10'>
-      <CardMenu/>
+      <CardMenu id={item.item.id}/>
       </div>
       )
       }

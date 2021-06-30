@@ -12,6 +12,7 @@ import Test from './components/test'
 import ProfileEdit from './components/profile/ProfileEdit';
 import ProfileShow from './components/profile/ProfileShow';
 import PostsIndex from './components/posts/PostsIndex';
+import { useQueryPosts } from './hooks/reactQuery/useQueryPosts';
 
 
 const queryClient = new QueryClient({

@@ -4,7 +4,7 @@ import {useAppSelector, useAppDispatch } from '../../app/hooks'
 // import { resetEditedTask } from '../slices/todoSlice'
 import { useQueryClient, useMutation } from 'react-query'
 import { selectSpot } from '../../slices/spotSlice'
-import { setEditedPost,resetEditedPost, setShowPost, setQueryPost } from '../../slices/postSlice'
+import { setEditedPost,resetEditedPost, setShowPost } from '../../slices/postSlice'
 
 import { useMutateSpot } from './useMutateSpot'
 
@@ -17,16 +17,6 @@ export const useMutatePost = () => {
   
   const editedSpot = useAppSelector(selectSpot)
   const { createSpotMutation } = useMutateSpot()
-
-
-  const queryPostMutation = useMutation(
-    (query: any) => 
-    axios.get(`${process.env.REACT_APP_REST_URL}/post/query?${query}`,headers),
-  {
-    onSuccess: (res) => {
-      dispatch(setQueryPost(res.data))
-    }
-  })
 
   const createPostMutation = useMutation(
     (post: EditPost) => 
@@ -41,7 +31,7 @@ export const useMutatePost = () => {
             res.data,
           ])
         }
-        dispatch(resetEditedPost())
+        // dispatch(resetEditedPost())
       },
     }
   )
@@ -61,7 +51,7 @@ export const useMutatePost = () => {
       }
     }
   )
-  return { createPostMutation ,deletePostMutation,queryPostMutation}
+  return { createPostMutation ,deletePostMutation}
 }
 
 
