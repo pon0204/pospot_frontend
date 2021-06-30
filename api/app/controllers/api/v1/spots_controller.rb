@@ -23,12 +23,25 @@ class Api::V1::SpotsController < SecuredController
     body = JSON.parse(response.body)
     body = body['result']
 
+
+    # 都道府県と市をbodyから取得する
+    prefectures_city = ''
+    body['address_components'].reverse.map{|address|
+      address['types'].map{|type|
+        if type == 'administrative_area_level_1' || type == 'locality'
+          prefectures_city += address['long_name']
+        end
+      }
+    }
+        
     body = {
       name: body['name'],
       web_url: body['website'],
       map_url: body['url'],
-      place: body['formatted_address'],
+      place: prefectures_city,
+      place_detail: body['formatted_address'],
       place_id: body['place_id'],
+
     }
     render json: {
       spot: body

@@ -6,19 +6,19 @@ class Api::V1::PostsController < SecuredController
     resluts = []
     posts.map{|post| 
       likes = post.likes.select(:user_id)
-      post_image = post.image_url
       profile = Profile.find_by(user_id: post['user_id'])
+      post_image = post.image_url
       profile_image = profile.avatar_url
-      
+      spot_place = post.spot['place']
       # 投稿をアクティブレコードからオブジェクトに変換
       post = post.attributes
       post['image_url'] = post_image      
       post['avatar_url'] = profile_image
       post['likes'] = likes
+      post['place'] = spot_place
       resluts.push(post)     
       # post.assign_attributes(post_image)  
     }
-    
     
     # profiles = Profile.find(1)
     # profiles = profiles.avatar_url

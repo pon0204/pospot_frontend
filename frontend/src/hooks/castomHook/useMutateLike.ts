@@ -14,28 +14,37 @@ export const useMutateLike = () => {
       axios.post(`${process.env.REACT_APP_REST_URL}/posts/${postId}/likes`,null,headers),
     {
       onSuccess: (res,variables) => {
-        const previousPosts = queryClient.getQueryData<any>('posts')
-        const newLikes = [...previousPosts.posts[variables - 1].likes,res.data]
-        previousPosts.posts[variables - 1].likes = newLikes
-        if (previousPosts) {
-          queryClient.setQueryData<any>('posts',previousPosts)
-        }
+        const newPosts = queryClient.getQueryData<any>('posts')
+        // post_idがわかっている post_idが同じものにlikes(res.data)を加える
+        newPosts.posts.map((post:any) => {
+          if(post.id == variables){
+          post.likes = [...post.likes,res.data]
+          }        
+        })
+        console.log(newPosts)
+          queryClient.setQueryData<any>('posts',newPosts)
       },
     }
   )
-
   const deleteLikeMutation = useMutation(
     (postId: number) => 
     axios.delete(`${process.env.REACT_APP_REST_URL}/posts/${postId}/likes/1`,headers),
     {
       onSuccess: (res,variables) => {
-        const previousPosts = queryClient.getQueryData<any>('posts')
-        const newLikes = previousPosts.posts[variables - 1].likes.filter((v:any) => v.user_id != currentUserId)
-
-        previousPosts.posts[variables - 1].likes = newLikes
-        if (previousPosts) {
-          queryClient.setQueryData<any>('posts',previousPosts)
-        }
+        const newPosts = queryClient.getQueryData<any>('posts')
+        const hoge = newPosts.posts.map((post:any) => {
+          if(post.id == variables){
+            // likesの中に自分のuser_idがある場合は消去
+            post.likes.map((like:any,key:any) => {
+            if(like.user_id == currentUserId){
+              delete like.user_id
+            }
+            })
+          }
+        })
+        console.log(hoge)
+        console.log(newPosts)
+        queryClient.setQueryData<any>('posts',newPosts)
       }
     }
   )

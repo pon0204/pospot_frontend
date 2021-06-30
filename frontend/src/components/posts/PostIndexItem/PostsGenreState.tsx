@@ -52,7 +52,7 @@ export default function PostsGenreState() {
   return (
     <Paper component="ul" className={classes.root}>
         <Chip        
-        label="リセット"  
+        label="すべて"  
         className={classes.chip}
         variant='outlined'
         clickable={true}
