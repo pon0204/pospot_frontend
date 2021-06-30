@@ -8,7 +8,6 @@ class Api::V1::SpotsController < SecuredController
     # 投稿を格納
     post = Post.find_by(id: post_id)
     spot = post.build_spot(spot_params)
-
     if spot.save
       render json: spot 
     else

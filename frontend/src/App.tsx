@@ -6,18 +6,12 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 import Header from './components/Header'
-
-import { useAppSelector,useAppDispatch } from "./app/hooks";
-import { setHeaders } from "./slices/headersSlice";
-import { useAuth0 } from "@auth0/auth0-react";
-
-import Post from './components/posts/Post';
 import PostShow from './components/posts/PostShow';
 import PostForm from './components/posts/PostForm';
 import Test from './components/test'
 import ProfileEdit from './components/profile/ProfileEdit';
 import ProfileShow from './components/profile/ProfileShow';
-import { useMutateUser } from './hooks/castomHook/useMutateUser';
+import PostsIndex from './components/posts/PostsIndex';
 
 
 const queryClient = new QueryClient({
@@ -39,7 +33,7 @@ const App: VFC = () => {
         <Switch>
           <Route exact path="/posts">
             {/* <MainTag/> */}
-            <Post/>
+            <PostsIndex/>
           </Route>
           <Route exact path="/posts/new">
             <PostForm/>

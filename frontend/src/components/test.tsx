@@ -22,7 +22,13 @@ const Test: VFC = () => {
   }
 
   const createClick = () => {
-    axios.post(`${process.env.REACT_APP_REST_URL}/posts/1/likes`,null,headers)
+    axios.post(`${process.env.REACT_APP_REST_URL}/profiles/1/follows`,null,headers)
+    .then(res =>{
+      console.log(res)
+    })
+  }
+  const deleteClick = () => {
+    axios.delete(`${process.env.REACT_APP_REST_URL}/profiles/1/follows/1`,headers)
     .then(res =>{
       console.log(res)
     })
@@ -33,6 +39,8 @@ const Test: VFC = () => {
       <button onClick={Click}>ゲット</button>
       <br/>
       <button onClick={createClick}>クリエイト</button>
+      <br/>
+      <button onClick={deleteClick}>デリート</button>
     </div>
   )
 }

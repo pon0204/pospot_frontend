@@ -22,10 +22,8 @@ const PostShow: VFC<any> = ({match}) => {
   map_url = `https://maps.google.co.jp/maps?output=embed&t=m&hl=ja&z=17&q=${spot.name} ${spot.place}`
   }
   
-  console.log(post)
   const image_url = data?.image_url
-  console.log(image_url)
-
+  
   let genres = post?.genre  
 
   if(genres){
