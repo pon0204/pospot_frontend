@@ -1,14 +1,13 @@
 import {useEffect,useState} from 'react'
 import ProfileTabs from './ProfileTabs'
-import { PostCard } from '../posts/PostCard'
-import { useQueryPosts } from '../../hooks/reactQuery/useQueryPosts'
+import { PostCard } from '../../posts/PostCards/PostCard'
+import { useQueryPosts } from '../../../hooks/reactQuery/useQueryPosts'
 import { Height } from '@material-ui/icons'
 import { convertToObject } from 'typescript'
 import { useQueryClient, useMutation } from 'react-query'
-import { EditPost, PostData } from '../../types/types'
-import { resetFollow, selectFollowers, selectFollowsCount, selectFollowsId } from '../../slices/followSlice'
-import { useAppSelector,useAppDispatch } from '../../app/hooks'
-
+import { EditPost, PostData } from '../../../types/types'
+import { resetFollow, selectFollowers, selectFollowsCount, selectFollowsId } from '../../../slices/followSlice'
+import { useAppSelector,useAppDispatch } from '../../../app/hooks'
 
 const ProfileShowPosts = (id:any) => {
   const currentUserId = localStorage.getItem('currentUserId')
@@ -44,18 +43,18 @@ const ProfileShowPosts = (id:any) => {
         <p className='w-1/3'>フォロワー{followsCount.followersCount}人</p>
         <p className='w-1/3'>フォロー中{followsCount.followingsCount}人</p>
       </div>
-      <ProfileTabs handleChange={handleChange} query={query}/>
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center pb-12">
         {query == 0 ?
         currentPosts?.map((item:any) => (
-            <PostCard item={item}/>
-        ))
-        :
-        likesPosts?.map((item:any) => (
           <PostCard item={item}/>
-      ))
-      }
+          ))
+          :
+          likesPosts?.map((item:any) => (
+            <PostCard item={item}/>
+            ))
+          }
       </div>
+          <ProfileTabs handleChange={handleChange} query={query}/>
     </div>
   )
 }

@@ -19,7 +19,7 @@ const ProfileTabs = ({handleChange,query}:any) => {
   const classes = useStyles();
 
   return (
-    <div>
+    <div className='fixed bottom-0 w-full z-50'>
           <Paper square className={classes.root}>
       <Tabs
         value={query}

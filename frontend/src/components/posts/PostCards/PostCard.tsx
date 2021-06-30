@@ -3,14 +3,14 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Link } from "react-router-dom";
-import {useMutatePost} from '../../hooks/castomHook/useMutatePost'
+import {useMutatePost} from '../../../hooks/castomHook/useMutatePost'
 import { useAuth0 } from "@auth0/auth0-react";
 import zIndex from '@material-ui/core/styles/zIndex';
 import CardMenu from './CardMenu';
-import defaultPhoto from '../../profile_default.png'
+import defaultPhoto from '../../../profile_default.png'
 import { IconButton } from '@material-ui/core';
 import { useEffect } from 'react';
-import { useMutateLike } from '../../hooks/castomHook/useMutateLike';
+import { useMutateLike } from '../../../hooks/castomHook/useMutateLike';
 
 const useStyles = makeStyles((theme: Theme) =>
 

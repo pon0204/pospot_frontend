@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { selectHeaders } from "../../slices/headersSlice";
 import { setFollowsCount } from '../../slices/followSlice';
 
-export const useQueryFollows = (profileId:number | string) => {
+export const useQueryFollows = (profileId:number | string | null) => {
   // const token = useAppSelector(selectUserToken)
   const headers = useAppSelector(selectHeaders)
   const dispatch = useAppDispatch()

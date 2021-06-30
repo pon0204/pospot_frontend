@@ -1,6 +1,6 @@
 import React from 'react'
-import ProfileShowProfile from './ProfileShowProfile'
-import ProfileShowPosts from './ProfileShowPosts'
+import ProfileShowProfile from './ProfileShowItem/ProfileShowProfile'
+import ProfileShowPosts from './ProfileShowItem/ProfileShowPosts'
 import { useQueryFollows } from '../../hooks/reactQuery/useQueryFollows'
 import { selectFollowsCount } from '../../slices/followSlice'
 import { useAppSelector } from '../../app/hooks'

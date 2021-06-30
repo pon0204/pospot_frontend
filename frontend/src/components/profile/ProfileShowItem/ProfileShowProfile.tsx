@@ -1,21 +1,19 @@
 import React from 'react'
-import { useQueryProfileShow } from '../../hooks/reactQuery/useQueryProfileShow'
-import defaultPhoto from '../../profile_default.png'
+import { useQueryProfileShow } from '../../../hooks/reactQuery/useQueryProfileShow'
+import defaultPhoto from '../../../profile_default.png'
 import { Link } from 'react-router-dom'
-import { useMutateFollow } from '../../hooks/castomHook/useMutateFollow'
-import { useAppSelector } from '../../app/hooks'
-import { selectFollowsCount } from '../../slices/followSlice'
+import { useMutateFollow } from '../../../hooks/castomHook/useMutateFollow'
+import { useAppSelector } from '../../../app/hooks'
+import { selectFollowsCount } from '../../../slices/followSlice'
 import { useQueryClient } from 'react-query'
 
 const ProfileShowProfile = (id:any) => {
   const currentUserId = localStorage.getItem('currentUserId')
   const {status ,data} = useQueryProfileShow(id.id)
   const {createFollowMutation,deleteFollowMutation} = useMutateFollow()
-  const followCount = useAppSelector(selectFollowsCount)
 
   const queryClient = useQueryClient()
   const followersIds = queryClient.getQueryData<any>('follows')
-  console.log(followersIds)
 
   const currentUserFollowing = followersIds?.followers?.some((v:any) => v.id == currentUserId)
 
