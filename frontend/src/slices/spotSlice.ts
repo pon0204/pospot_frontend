@@ -1,12 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
-import { PostData,EditSpot} from '../types/types'
+import { EditSpot } from '../types/types';
 
 
 export interface SpotState {
   editedSpot: EditSpot
-  
-  // editedTag: Tag
 }
 
 const initialState: SpotState = {

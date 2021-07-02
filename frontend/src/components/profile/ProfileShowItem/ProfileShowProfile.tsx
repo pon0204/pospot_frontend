@@ -1,9 +1,9 @@
 import React from 'react'
-import { useQueryProfileShow } from '../../../hooks/reactQuery/useQueryProfileShow'
-import defaultPhoto from '../../../profile_default.png'
+import { useQueryClient } from 'react-query'
 import { Link } from 'react-router-dom'
 import { useMutateFollow } from '../../../hooks/castomHook/useMutateFollow'
-import { useQueryClient } from 'react-query'
+import { useQueryProfileShow } from '../../../hooks/reactQuery/useQueryProfileShow'
+import defaultPhoto from '../../../profile_default.png'
 
 const ProfileShowProfile = (id:any) => {
   const currentUserId = localStorage.getItem('currentUserId')

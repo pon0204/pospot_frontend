@@ -1,28 +1,14 @@
 /* eslint-disable no-use-before-define */
-import React, { VFC,useState } from 'react';
 import Chip from '@material-ui/core/Chip';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { useAppSelector, useAppDispatch } from '../../../app/hooks'
-import { setEditedPost, selectPost } from '../../../slices/postSlice'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-
-    margin: 25,
-    '& > * + *': {
-      marginTop: theme.spacing(3),
-    },
-  },
-}));
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import React, { VFC } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { selectPost, setEditedPost } from '../../../slices/postSlice';
 
 export const FormAutoComp:VFC = () => {
-  const classes = useStyles();
   const editedPost = useAppSelector(selectPost)
   const dispatch = useAppDispatch()
-
-  // const [genre, setGenre] = useState<any>();
 
   const handleChange = (e:any,v:any) => {
     console.log(v)
@@ -35,7 +21,6 @@ export const FormAutoComp:VFC = () => {
   
   return (
     <div className='full-width'>
-
       <Autocomplete
         multiple
         id="tags-filled"
@@ -45,17 +30,14 @@ export const FormAutoComp:VFC = () => {
         onChange={(e,v) => handleChange(e,v)}
         renderTags={(value, getTagProps) =>
           value.map((option, index) => 
-          
             (<Chip variant="outlined" label={option} {...getTagProps({ index })} 
             />                                    
             // console.log(option)          
           ))
         }
-        
         renderInput={(params) => (
           <TextField {...params} variant="outlined" label="ジャンル" placeholder="ジャンル" />
         )
-        
       }
       />
     </div>

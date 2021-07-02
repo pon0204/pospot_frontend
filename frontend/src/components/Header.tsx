@@ -1,21 +1,11 @@
-import React,{useEffect} from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import { useAuth0 } from "@auth0/auth0-react";
-
+import AppBar from '@material-ui/core/AppBar';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import React, { useEffect } from 'react';
+import { Link } from "react-router-dom";
 import { useAppDispatch } from '../app/hooks';
 import { useMutateUser } from '../hooks/castomHook/useMutateUser';
 import { setHeaders } from '../slices/headersSlice';
-
-import {  Link } from "react-router-dom";
-import { useQueryClient } from 'react-query';
-import { useQueryProfiles } from '../hooks/reactQuery/useQueryProfiles';
-import { remove } from 'lodash';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,7 +25,7 @@ export default function Header() {
   const classes = useStyles();
   const {isAuthenticated,loginWithRedirect,logout } = useAuth0();
   const dispatch = useAppDispatch()
-  const { getAccessTokenSilently,user }:any = useAuth0();
+  const { getAccessTokenSilently }:any = useAuth0();
   const { userIdMutation } = useMutateUser()
 
   const removeUserId = () =>{
@@ -44,7 +34,6 @@ export default function Header() {
 
   useEffect(() => {
     const getToken = async () => {
-
     try{
       const accessToken = await getAccessTokenSilently({
       });
@@ -58,8 +47,6 @@ export default function Header() {
   } 
 }
     getToken()
-
-  
   }, [])
 
   return (

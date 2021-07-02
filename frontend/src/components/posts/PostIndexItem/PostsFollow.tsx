@@ -1,8 +1,8 @@
-import React, { useEffect,useState } from 'react'
-import { useQueryClient } from 'react-query'
-import { PostCard } from '../PostCards/PostCard'
-import { selectQueryGenre, selectQueryPlace } from '../../../slices/postSlice';
+import React, { useEffect, useState } from 'react';
+import { useQueryClient } from 'react-query';
 import { useAppSelector } from '../../../app/hooks';
+import { selectQueryGenre, selectQueryPlace } from '../../../slices/postSlice';
+import { PostCard } from '../PostCards/PostCard';
 
 const PostsFollow = () => {
   const queryClient = useQueryClient()
@@ -37,8 +37,6 @@ const PostsFollow = () => {
     const filterPlace = posts.filter((post:any) => post.place.indexOf(queryPlace) >= 0 == true)
     return filterPlace
   }
-  // if (status === 'loading') return (<div className='absolute top-1/2 right-1/2'><CircularProgress/></div>)
-  // if (status === 'error') return (<div>{'Error'}</div>)
 
   return (
   <div className='py-12'>

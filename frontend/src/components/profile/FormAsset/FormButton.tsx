@@ -1,8 +1,7 @@
-import {VFC} from 'react'
-import { useAppSelector, useAppDispatch } from '../../../app/hooks'
-import { selectProfile } from '../../../slices/profileSlice'
+import { VFC } from 'react'
+import { useAppSelector } from '../../../app/hooks'
 import { useMutateUser } from '../../../hooks/castomHook/useMutateUser'
-
+import { selectProfile } from '../../../slices/profileSlice'
 
 const FormButton:VFC = () => {
   const editedProfile = useAppSelector(selectProfile)

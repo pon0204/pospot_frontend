@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
-import { PostData,EditSpot} from '../types/types'
 
 export interface FollowState {
   followsCount:any

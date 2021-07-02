@@ -1,34 +1,10 @@
-
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
-import { Box} from '@material-ui/core'
-import Button from '@material-ui/core/Button' 
-import axios from 'axios';
+import React, { useState, VFC } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { selectPost, setEditedPost } from '../../../slices/postSlice';
 
-import React, {VFC,useState} from 'react';
-import { useAppSelector, useAppDispatch } from '../../../app/hooks'
-import { setEditedPost, selectPost } from '../../../slices/postSlice'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    textAlign:'center'
-  },
-  margin: {
-    margin: theme.spacing(1),
-  },
-  withoutLabel: {
-    marginTop: theme.spacing(3),
-  },
-  textField: {
-    width: '50ch',
-  },
-
+const useStyles = makeStyles(() => ({
   inputLabel:{
     display: 'block',
     position: 'relative',
@@ -55,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
     margin: '15px auto',
     display: 'block',
     objectFit: 'cover'
-
   }
 }));
 

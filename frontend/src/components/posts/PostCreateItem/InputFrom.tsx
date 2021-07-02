@@ -1,16 +1,11 @@
-import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-
-import { useAppSelector, useAppDispatch } from '../../../app/hooks'
-import { setEditedPost, selectPost } from '../../../slices/postSlice'
-import { useMutatePost } from '../../../hooks/castomHook/useMutatePost'
-
+import React from 'react';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { selectPost, setEditedPost } from '../../../slices/postSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,23 +24,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     width: '100%'
   },
-  inputLabel:{
-    display: 'block',
-    position: 'relative',
-    backgroundColor: '#1877F2',
-    color: '#fff',
-    fontSize: '16px',
-    padding: '10px 20px',
-    borderRadius: '8px',
-    transition: 'all 0.5s',
-    width: '50%',
-    margin: '30px auto 0px auto',
-    cursor: 'pointer',
-    '&:hover':{
-      backgroundColor: '#004db1'
-    },
-  },
-
 }));
 
 export const InputForm = () => {
@@ -54,6 +32,7 @@ export const InputForm = () => {
   const dispatch = useAppDispatch()
 
   return (
+    <div>
     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
     <InputLabel>タイトル</InputLabel>
     <OutlinedInput
@@ -63,6 +42,7 @@ export const InputForm = () => {
       }
       labelWidth={70}
     />     
+    </FormControl>
     <FormControl className={clsx(classes.margin,classes.textField)} variant="outlined">
     <InputLabel>説明</InputLabel>
     <OutlinedInput
@@ -73,10 +53,9 @@ export const InputForm = () => {
       multiline
       rows={5}
       labelWidth={70}
-    />
+    />    
   </FormControl>
-    
-  </FormControl>
+    </div>
   );
 }
 

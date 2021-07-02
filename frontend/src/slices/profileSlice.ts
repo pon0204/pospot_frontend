@@ -1,14 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
-import {} from '../types/types'
-
 
 export interface profileState {
   editedProfile: any
   showProfile: any
-
-
-  // editedTag: Tag
 }
 
 const initialState: profileState = {

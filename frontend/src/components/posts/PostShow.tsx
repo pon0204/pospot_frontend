@@ -1,14 +1,6 @@
+import CircularProgress from '@material-ui/core/CircularProgress'
 import React, { VFC } from 'react'
-import { useEffect } from 'react'
-import { useQueryClient } from 'react-query'
-import { useMutatePost } from '../../hooks/castomHook/useMutatePost'
 import { useQueryPostShow } from '../../hooks/reactQuery/useQueryPostShow'
-
-import { useAppSelector } from '../../app/hooks'
-import { selectShowPost } from '../../slices/postSlice'
-import { PostData } from '../../types/types'
-
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 const PostShow: VFC<any> = ({match}) => {
   const id = match.params.postId

@@ -1,22 +1,15 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom';
-import InputForm from './FormAsset/InputFrom';
-import { FormRadio } from './FormAsset/FormRadio';
-import FormFile from './FormAsset/FormFile'
-import FormButton from './FormAsset/FormButton';
-import { useAppSelector } from '../../app/hooks';
-import { selectProfile} from '../../slices/profileSlice';
+import React from 'react';
 import { useQueryProfileShow } from '../../hooks/reactQuery/useQueryProfileShow';
+import FormButton from './FormAsset/FormButton';
+import FormFile from './FormAsset/FormFile';
+import { FormRadio } from './FormAsset/FormRadio';
+import InputForm from './FormAsset/InputFrom';
 const ProfileEdit = ({match}:any) => {
-  // const profile = useAppSelector(selectProfile)
+  const id = match.params.profileId
   const currentUserId:any = localStorage.getItem('currentUserId')
-  const {status,data} = useQueryProfileShow(currentUserId)
-  console.log(data)
+  const {status,data} = useQueryProfileShow(id)
 
-
-  if (status === 'loading') return (<div>
-
-  </div>  )
+  if (status === 'loading') return (<div></div>  )
 
   if(data.profile.id != currentUserId){
     return(

@@ -1,15 +1,12 @@
-import {VFC} from 'react'
-import { useAppSelector, useAppDispatch } from '../../../app/hooks'
-import { setEditedPost, selectPost } from '../../../slices/postSlice'
-import { setEditedSpot, selectSpot } from '../../../slices/spotSlice'
+import { VFC } from 'react'
+import { useAppSelector } from '../../../app/hooks'
 import { useMutatePost } from '../../../hooks/castomHook/useMutatePost'
-import Button from '@material-ui/core/Button';
-
+import { selectPost } from '../../../slices/postSlice'
+import { selectSpot } from '../../../slices/spotSlice'
 
 const FormButton:VFC = () => {
   const editedPost = useAppSelector(selectPost)
   const editedSpot = useAppSelector(selectSpot)
-  const dispatch = useAppDispatch()
   const { createPostMutation } = useMutatePost()
 
   const postCreateClick = () => {

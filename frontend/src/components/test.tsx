@@ -1,13 +1,9 @@
-import React,{VFC} from 'react'
+import { useAuth0 } from "@auth0/auth0-react"
 import axios from 'axios'
-
-import { useMutateSpot } from '../hooks/castomHook/useMutateSpot'
-import { useAppSelector, useAppDispatch } from '../app/hooks'
-import { selectSpot } from '../slices/spotSlice'
-import { selectPost } from '../slices/postSlice'
+import React, { VFC } from 'react'
+import { useAppSelector } from '../app/hooks'
 import { selectHeaders } from '../slices/headersSlice'
-import { useAuth0 } from "@auth0/auth0-react";
-import { useQueryClient } from 'react-query'
+
 
 const Test: VFC = () => {
   const { user, isAuthenticated, getAccessTokenSilently }:any = useAuth0();

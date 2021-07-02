@@ -1,7 +1,6 @@
 import React from 'react'
-import { createNamedExports } from 'typescript'
-import { useAppDispatch , useAppSelector} from '../../../app/hooks'
-import { setEditedSpot, selectSpot } from '../../../slices/spotSlice'
+import { useAppSelector } from '../../../app/hooks'
+import { selectSpot } from '../../../slices/spotSlice'
 
 const FormSpots = () => {
   const editedSpot = useAppSelector(selectSpot)

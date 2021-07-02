@@ -1,12 +1,11 @@
-import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { resetQueryPlace, selectQueryPlace, setQueryPlace } from '../../../slices/postSlice';
+import React from 'react';
+import { useAppDispatch } from '../../../app/hooks';
+import { resetQueryPlace, setQueryPlace } from '../../../slices/postSlice';
 
 export const AutoCompPlace = () => {
   const dispatch = useAppDispatch()
-  const place = useAppSelector(selectQueryPlace)
   
   const handleChange = (e:any,v:any) =>{
     v ?

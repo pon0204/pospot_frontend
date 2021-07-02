@@ -1,21 +1,15 @@
-import {useEffect,useState} from 'react'
-import ProfileTabs from './ProfileTabs'
-import { PostCard } from '../../posts/PostCards/PostCard'
+import { useEffect, useState } from 'react'
+import { useAppSelector } from '../../../app/hooks'
 import { useQueryPosts } from '../../../hooks/reactQuery/useQueryPosts'
-import { Height } from '@material-ui/icons'
-import { convertToObject } from 'typescript'
-import { useQueryClient, useMutation } from 'react-query'
-import { EditPost, PostData } from '../../../types/types'
-import { resetFollow, selectFollowers, selectFollowsCount, selectFollowsId } from '../../../slices/followSlice'
-import { useAppSelector,useAppDispatch } from '../../../app/hooks'
+import { selectFollowsCount } from '../../../slices/followSlice'
+import { PostCard } from '../../posts/PostCards/PostCard'
+import ProfileTabs from './ProfileTabs'
 
 const ProfileShowPosts = (id:any) => {
-  const currentUserId = localStorage.getItem('currentUserId')
   const { status, data } = useQueryPosts()
   const [currentPosts,setCurrentPosts] = useState<any>()
   const [likesPosts,setLikesPosts] = useState<any>()
   const [query, setQuery] = useState(0);
-  const dispatch = useAppDispatch()
   const followsCount = useAppSelector(selectFollowsCount)
   
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {

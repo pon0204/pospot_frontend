@@ -1,23 +1,23 @@
-import React, {VFC,useState} from 'react'
-import { useQueryPosts } from '../../hooks/reactQuery/useQueryPosts'
-import { Link } from 'react-router-dom';
-import CreateIcon from '@material-ui/icons/Create';
-import PostsFollow from './PostIndexItem/PostsFollow';
-import PostsAll from './PostIndexItem/PostsAll';
-import PostsIndexTabs from './PostIndexItem/PostsIndexTabs';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import CreateIcon from '@material-ui/icons/Create';
+import React, { useEffect, useState, VFC } from 'react';
+import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../app/hooks';
+import { useQueryFollows } from '../../hooks/reactQuery/useQueryFollows';
+import { useQueryPosts } from '../../hooks/reactQuery/useQueryPosts';
+import { resetQueryGenre, resetQueryPlace } from '../../slices/postSlice';
 import { AutoCompGenre } from './PostIndexItem/AutoCompGenre';
 import { AutoCompPlace } from './PostIndexItem/AutoCompPlace';
-import { useAppDispatch } from '../../app/hooks';
-import { resetQueryGenre, resetQueryPlace } from '../../slices/postSlice';
-import { useQueryFollows } from '../../hooks/reactQuery/useQueryFollows';
-import { useEffect } from 'react';
+import PostsAll from './PostIndexItem/PostsAll';
+import PostsFollow from './PostIndexItem/PostsFollow';
+import PostsIndexTabs from './PostIndexItem/PostsIndexTabs';
 
 const PostsIndex: VFC = () => {    
-  const { status, data } = useQueryPosts()
+  const { status } = useQueryPosts()
   const currentUserId = localStorage.getItem('currentUserId')
   useQueryFollows(currentUserId)
   const dispatch = useAppDispatch()
+
   const [tabState,setTabState] = useState(0)
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setTabState(newValue);

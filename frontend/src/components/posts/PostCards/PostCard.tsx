@@ -1,17 +1,14 @@
-import React ,{useState} from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import { Link } from "react-router-dom";
-import {useMutatePost} from '../../../hooks/castomHook/useMutatePost'
 import { useAuth0 } from "@auth0/auth0-react";
-import zIndex from '@material-ui/core/styles/zIndex';
-import CardMenu from './CardMenu';
-import defaultPhoto from '../../../profile_default.png'
 import { IconButton } from '@material-ui/core';
-import { useEffect } from 'react';
-import { useMutateLike } from '../../../hooks/castomHook/useMutateLike';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import RoomIcon from '@material-ui/icons/Room';
+import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+import { useMutateLike } from '../../../hooks/castomHook/useMutateLike';
+import defaultPhoto from '../../../profile_default.png';
+import CardMenu from './CardMenu';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,19 +29,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 );
 
-
-const options = [
-  'Edit',
-  'Delete',
-];
-
-
 export const PostCard = (item:any,profiles:any) => {
   const currentUserId = localStorage.getItem('currentUserId')
   const [likeHeart,setHeart] = useState(false)
   const classes = useStyles();
   const {createLikeMutation,deleteLikeMutation} = useMutateLike()
-  const {isAuthenticated,loginWithRedirect,logout } = useAuth0();
+  const {isAuthenticated,loginWithRedirect } = useAuth0();
   
   const heartClick = () =>{
     setHeart((prev) => !prev)  
@@ -94,7 +84,6 @@ export const PostCard = (item:any,profiles:any) => {
               {item.item.avatar_url == null ?
               <img src={defaultPhoto} className='rounded-full' alt="" />
               :
-        // <img src={defaultPhoto} className='rounded-full' alt="" />
               <img src={item.item.avatar_url} className='rounded-full' alt="" />
               }
               </div>

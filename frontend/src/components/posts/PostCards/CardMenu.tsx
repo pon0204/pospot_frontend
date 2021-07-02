@@ -1,16 +1,14 @@
-import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import React from 'react';
 import { useMutatePost } from '../../../hooks/castomHook/useMutatePost';
 
 const options = [
   'Delete',
   // 'Edit',
 ];
-
-const ITEM_HEIGHT = 48;
 
 export const CardMenu = (id:any) => {
   const {deletePostMutation} = useMutatePost()
@@ -44,7 +42,6 @@ export const CardMenu = (id:any) => {
         onClose={handleClose}
         PaperProps={{
           style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
             width: '20ch',
           },
         }}

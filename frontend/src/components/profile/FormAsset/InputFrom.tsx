@@ -1,52 +1,22 @@
-import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-
-import { useAppSelector, useAppDispatch } from '../../../app/hooks'
-
-import { useMutatePost } from '../../../hooks/castomHook/useMutatePost'
+import React from 'react';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectProfile, setEditedProfile } from '../../../slices/profileSlice';
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    textAlign:'center'
-  },
+
   margin: {
     // margin: theme.spacing(1),
       margin: '10px 0px'
   },
-  withoutLabel: {
-    marginTop: theme.spacing(3),
-  },
   textField: {
     width: '100%',
   },
-  title: {
-    width: '100%'
-  },
-  inputLabel:{
-    display: 'block',
-    position: 'relative',
-    backgroundColor: '#1877F2',
-    color: '#fff',
-    fontSize: '16px',
-    padding: '10px 20px',
-    borderRadius: '8px',
-    transition: 'all 0.5s',
-    width: '50%',
-    margin: '30px auto 0px auto',
-    cursor: 'pointer',
-    '&:hover':{
-      backgroundColor: '#004db1'
-    },
-  },
-
 }));
 
 export const InputForm = () => {

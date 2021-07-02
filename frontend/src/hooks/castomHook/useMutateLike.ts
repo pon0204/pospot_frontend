@@ -1,14 +1,13 @@
-import axios from 'axios'
-import {useAppSelector, useAppDispatch } from '../../app/hooks'
-import { useQueryClient, useMutation } from 'react-query'
+import axios from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
+import { useAppSelector } from '../../app/hooks';
 import { selectHeaders } from "../../slices/headersSlice";
-import { EditPost, PostData } from '../../types/types'
 
 export const useMutateLike = () => {
-  const dispatch = useAppDispatch()
   const queryClient = useQueryClient()
   const headers = useAppSelector(selectHeaders)
   const currentUserId = localStorage.getItem('currentUserId')
+
   const createLikeMutation = useMutation(
     (postId:number) => 
       axios.post(`${process.env.REACT_APP_REST_URL}/posts/${postId}/likes`,null,headers),
@@ -21,7 +20,6 @@ export const useMutateLike = () => {
           post.likes = [...post.likes,res.data]
           }        
         })
-        console.log(newPosts)
           queryClient.setQueryData<any>('posts',newPosts)
       },
     }
@@ -30,7 +28,7 @@ export const useMutateLike = () => {
     (postId: number) => 
     axios.delete(`${process.env.REACT_APP_REST_URL}/posts/${postId}/likes/1`,headers),
     {
-      onSuccess: (res,variables) => {
+      onSuccess: (variables) => {
         const newPosts = queryClient.getQueryData<any>('posts')
         const hoge = newPosts.posts.map((post:any) => {
           if(post.id == variables){
@@ -42,8 +40,6 @@ export const useMutateLike = () => {
             })
           }
         })
-        console.log(hoge)
-        console.log(newPosts)
         queryClient.setQueryData<any>('posts',newPosts)
       }
     }

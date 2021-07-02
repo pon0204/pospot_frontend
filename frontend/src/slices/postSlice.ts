@@ -1,13 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
-import { PostData,EditPost} from '../types/types'
-
+import { EditPost } from '../types/types';
 
 export interface PostState {
   editedPost: EditPost
   showPost: any
-  queryGenre: string  // editedTag: Tag
-  queryPlace: string  // editedTag: Tag
+  queryGenre: string  
+  queryPlace: string  
 }
 
 const initialState: PostState = {
@@ -34,8 +33,6 @@ const initialState: PostState = {
   queryGenre: '',
   queryPlace:''
 }
-
-
 
 export const postSlice = createSlice({
   name: 'post',

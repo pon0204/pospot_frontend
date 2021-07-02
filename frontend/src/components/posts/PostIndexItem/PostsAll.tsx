@@ -1,11 +1,8 @@
-import { VFC } from 'react'
-import { useQueryClient } from 'react-query'
-import { PostCard } from '../PostCards/PostCard'
+import { useEffect, useState, VFC } from 'react';
+import { useQueryClient } from 'react-query';
 import { useAppSelector } from '../../../app/hooks';
-
 import { selectQueryGenre, selectQueryPlace } from '../../../slices/postSlice';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { PostCard } from '../PostCards/PostCard';
 
 const PostsAll:VFC = () => {
   const queryClient = useQueryClient()
@@ -31,11 +28,11 @@ const PostsAll:VFC = () => {
   }, [queryGenre,queryPlace])
 
   const filterGenre = (posts:any) => {
-    const filterGenre = posts.filter((v:any) => v.genre.filter((v:any) => v == queryGenre) == queryGenre)
+    const filterGenre = posts.filter((v:any) => v.genre.filter((v:any) => v === queryGenre) === queryGenre)
     return filterGenre
   }
   const filterPlace = (posts:any) => {
-    const filterPlace = posts.filter((post:any) => post.place.indexOf(queryPlace) >= 0 == true)
+    const filterPlace = posts.filter((post:any) => post.place.indexOf(queryPlace) >= 0 === true)
     return filterPlace
   }
   return (
