@@ -1,12 +1,10 @@
 class Api::V1::SpotsController < SecuredController
-  skip_before_action :authorize_request, only: [:index,:show,:spot_detail,:create]
 
   def create
     # 投稿IDを取得
     post_id = params.permit(:id)
-    post_id = post_id['id']
     # 投稿を格納
-    post = Post.find_by(id: post_id)
+    post = Post.find_by(id: post_id['id'])
     spot = post.build_spot(spot_params)
     if spot.save
       render json: spot 
@@ -23,7 +21,6 @@ class Api::V1::SpotsController < SecuredController
     body = JSON.parse(response.body)
     body = body['result']
 
-
     # 都道府県と市をbodyから取得する
     prefectures_city = ''
     body['address_components'].reverse.map{|address|
@@ -33,23 +30,23 @@ class Api::V1::SpotsController < SecuredController
         end
       }
     }
-        
-    body = {
+    
+    resluts = {
       name: body['name'],
       web_url: body['website'],
       map_url: body['url'],
       place: prefectures_city,
       place_detail: body['formatted_address'],
       place_id: body['place_id'],
-
     }
+
     render json: {
-      spot: body
+      spot: resluts
     }
   end
 
   private 
   def spot_params
-  params.require(:spot).permit(:name,:web_url,:map_url,:place,:place_id)
+  params.require(:spot).permit(:name,:web_url,:map_url,:place,:place_detail,:place_id)
   end
 end

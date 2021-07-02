@@ -16,7 +16,7 @@ export const useMutateSpot = () => {
 
   const fetchSpotMutation = useMutation(
     (placeId) =>
-    axios.get(`${process.env.REACT_APP_REST_URL}/spot/${placeId}`),
+    axios.get(`${process.env.REACT_APP_REST_URL}/spot/${placeId}`,headers),
     {
       onSuccess: (res) => {
         console.log(res.data)
