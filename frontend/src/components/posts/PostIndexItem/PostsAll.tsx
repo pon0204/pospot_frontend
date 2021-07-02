@@ -1,36 +1,49 @@
 import { VFC } from 'react'
 import { useQueryClient } from 'react-query'
 import { PostCard } from '../PostCards/PostCard'
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { useAppSelector } from '../../../app/hooks';
-import { useQueryPostsQuery } from '../../../hooks/reactQuery/useQueryPostsQuery';
-import { selectQueryPostGenre } from '../../../slices/postSlice';
+
+import { selectQueryGenre, selectQueryPlace } from '../../../slices/postSlice';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
 const PostsAll:VFC = () => {
   const queryClient = useQueryClient()
-  const queryGenre = useAppSelector(selectQueryPostGenre)
-  const [postsGenre,setPostGenre] = useState<any>()
+  const queryGenre = useAppSelector(selectQueryGenre)
+  const queryPlace = useAppSelector(selectQueryPlace)
+  const [postsQuery,setPostQuery] = useState<any>()
   const postsAll = queryClient.getQueryData<any>('posts')
 
   useEffect(() => {
-    if(queryGenre){
+    // あとでリファクタリングする
+    if(queryGenre && queryPlace){ 
       // 絞り込むジャンルをセットし、フィルターをかける
-      const postsGenreQuery = postsAll?.posts.filter((v:any) => v.genre.filter((v:any) => v == queryGenre) == queryGenre)
-      setPostGenre(postsGenreQuery)
-      console.log(postsAll,'ジャンルセット後')
+      const filterGenrePosts = filterGenre(postsAll.posts)
+      const filterGenrePlacePosts = filterPlace(filterGenrePosts)
+      setPostQuery(filterGenrePlacePosts)
+    }else if(queryPlace && !queryGenre){
+      const filterPlacePosts = filterPlace(postsAll.posts)
+      setPostQuery(filterPlacePosts)      
+    } else if(queryGenre && !queryPlace){
+      const filterGenrePosts = filterGenre(postsAll.posts)
+      setPostQuery(filterGenrePosts)
     }
-    console.log(postsAll,'ジャンルセット前')
-    console.log(queryGenre)
-  }, [queryGenre])
+  }, [queryGenre,queryPlace])
 
+  const filterGenre = (posts:any) => {
+    const filterGenre = posts.filter((v:any) => v.genre.filter((v:any) => v == queryGenre) == queryGenre)
+    return filterGenre
+  }
+  const filterPlace = (posts:any) => {
+    const filterPlace = posts.filter((post:any) => post.place.indexOf(queryPlace) >= 0 == true)
+    return filterPlace
+  }
   return (
     <div className='py-12'>
       <h2 className='text-center text-xl font-bold mb-4'>新着投稿一覧</h2>
       <div className="flex flex-wrap justify-center">
-      {queryGenre ? 
-      postsGenre?.map((item:any) => (
+      {queryGenre || queryPlace ? 
+      postsQuery?.map((item:any) => (
           <PostCard item={item}/>
       ))
       :

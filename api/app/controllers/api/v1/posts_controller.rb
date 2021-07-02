@@ -10,12 +10,14 @@ class Api::V1::PostsController < SecuredController
       post_image = post.image_url
       profile_image = profile.avatar_url
       spot_place = post.spot['place']
+      spot_name = post.spot['name']
       # 投稿をアクティブレコードからオブジェクトに変換
       post = post.attributes
       post['image_url'] = post_image      
       post['avatar_url'] = profile_image
       post['likes'] = likes
       post['place'] = spot_place
+      post['spot_name'] = spot_name
       resluts.push(post)     
       # post.assign_attributes(post_image)  
     }

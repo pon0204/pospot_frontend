@@ -6,7 +6,8 @@ import { PostData,EditPost} from '../types/types'
 export interface PostState {
   editedPost: EditPost
   showPost: any
-  queryPostGenre: string  // editedTag: Tag
+  queryGenre: string  // editedTag: Tag
+  queryPlace: string  // editedTag: Tag
 }
 
 const initialState: PostState = {
@@ -30,7 +31,8 @@ const initialState: PostState = {
       updated_at: ''
     }
   },
-  queryPostGenre: ''
+  queryGenre: '',
+  queryPlace:''
 }
 
 
@@ -49,20 +51,27 @@ export const postSlice = createSlice({
     resetEditedPost: (state) => {
       state.editedPost = initialState.editedPost
     },
-    setQueryPostGenre: (state, action: PayloadAction<string>) => {
-      state.queryPostGenre = action.payload
+    setQueryGenre: (state, action: PayloadAction<string>) => {
+      state.queryGenre = action.payload
     },
-    resetQueryPostGenre: (state) => {
-      state.queryPostGenre = initialState.queryPostGenre
+    resetQueryGenre: (state) => {
+      state.queryGenre = initialState.queryGenre
+    },
+    setQueryPlace: (state, action: PayloadAction<string>) => {
+      state.queryPlace = action.payload
+    },
+    resetQueryPlace: (state) => {
+      state.queryPlace = initialState.queryPlace
     }
   },
 })
 
-export const { setEditedPost, resetEditedPost, setShowPost,setQueryPostGenre,resetQueryPostGenre} =
+export const { setEditedPost, resetEditedPost, setShowPost,setQueryGenre,resetQueryGenre,setQueryPlace,resetQueryPlace} =
   postSlice.actions
 
   export const selectPost = (state: RootState) => state.post.editedPost
   export const selectShowPost = (state: RootState) => state.post.showPost
-  export const selectQueryPostGenre = (state: RootState) => state.post.queryPostGenre
+  export const selectQueryGenre = (state: RootState) => state.post.queryGenre
+  export const selectQueryPlace = (state: RootState) => state.post.queryPlace
 
 export default postSlice.reducer;
