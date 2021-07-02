@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   include Rails.application.routes.url_helpers
   has_one :spot, dependent: :destroy
   belongs_to :user
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
   has_one_attached :eyecatch
   

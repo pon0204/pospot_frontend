@@ -3,8 +3,6 @@ import { useQueryProfileShow } from '../../../hooks/reactQuery/useQueryProfileSh
 import defaultPhoto from '../../../profile_default.png'
 import { Link } from 'react-router-dom'
 import { useMutateFollow } from '../../../hooks/castomHook/useMutateFollow'
-import { useAppSelector } from '../../../app/hooks'
-import { selectFollowsCount } from '../../../slices/followSlice'
 import { useQueryClient } from 'react-query'
 
 const ProfileShowProfile = (id:any) => {
@@ -37,7 +35,7 @@ const ProfileShowProfile = (id:any) => {
       // <Link to={`/profile/edit/${id}`} className='mx-auto block m-4 px-4 py-2 bg-gray-500 font-bold text-white rounded w-20 text-center'>編集</Link>
       :
       currentUserFollowing == undefined ?
-      <div></div>
+      <div className='mt-4 px-4 py-2 h-4'></div>
       :
       currentUserFollowing ? 
       <button onClick={() => {deleteFollowMutation.mutate(id.id)}} className='mx-auto block mt-4 px-4 py-2 bg-blue-200 font-bold text-gray-600 rounded'>フォロー解除</button>   

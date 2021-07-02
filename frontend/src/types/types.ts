@@ -29,6 +29,7 @@ export interface SpotData {
   web_url: string
   map_url: string
   place: string
+  place_detail: string
   place_id: string
   created_at: string
   updated_at: string
@@ -48,6 +49,7 @@ export interface EditSpot {
   web_url: string
   map_url: string
   place: string
+  place_detail: string
   place_id: string
   }
   id: number | null

@@ -6,9 +6,8 @@ import { PostData,EditPost} from '../types/types'
 export interface PostState {
   editedPost: EditPost
   showPost: any
-  queryPost: any
-  queryPostEnv: any
-  // editedTag: Tag
+  queryGenre: string  // editedTag: Tag
+  queryPlace: string  // editedTag: Tag
 }
 
 const initialState: PostState = {
@@ -32,12 +31,8 @@ const initialState: PostState = {
       updated_at: ''
     }
   },
-  queryPost: {
-
-  },
-  queryPostEnv:{
-
-  }
+  queryGenre: '',
+  queryPlace:''
 }
 
 
@@ -49,28 +44,34 @@ export const postSlice = createSlice({
     setShowPost:(state, action: PayloadAction<any>) => {
       state.showPost = action.payload
     },
-    setQueryPost:(state, action: PayloadAction<any>) => {
-      state.queryPost = action.payload
-    },
-    setQueryPostEnv:(state,action: PayloadAction<any>)=>{
-      state.queryPostEnv = action.payload
-    },
+
     setEditedPost: (state, action: PayloadAction<EditPost>) => {
       state.editedPost = action.payload
     },
     resetEditedPost: (state) => {
       state.editedPost = initialState.editedPost
     },
-    
+    setQueryGenre: (state, action: PayloadAction<string>) => {
+      state.queryGenre = action.payload
+    },
+    resetQueryGenre: (state) => {
+      state.queryGenre = initialState.queryGenre
+    },
+    setQueryPlace: (state, action: PayloadAction<string>) => {
+      state.queryPlace = action.payload
+    },
+    resetQueryPlace: (state) => {
+      state.queryPlace = initialState.queryPlace
+    }
   },
 })
 
-export const { setEditedPost, resetEditedPost, setShowPost,setQueryPost} =
+export const { setEditedPost, resetEditedPost, setShowPost,setQueryGenre,resetQueryGenre,setQueryPlace,resetQueryPlace} =
   postSlice.actions
 
   export const selectPost = (state: RootState) => state.post.editedPost
   export const selectShowPost = (state: RootState) => state.post.showPost
-  export const selectQueryPost = (state: RootState) => state.post.queryPost
-  export const selectQueryPostEnv = (state: RootState) => state.post.queryPostEnv
+  export const selectQueryGenre = (state: RootState) => state.post.queryGenre
+  export const selectQueryPlace = (state: RootState) => state.post.queryPlace
 
 export default postSlice.reducer;

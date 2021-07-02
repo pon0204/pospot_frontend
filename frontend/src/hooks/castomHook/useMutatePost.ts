@@ -4,7 +4,7 @@ import {useAppSelector, useAppDispatch } from '../../app/hooks'
 // import { resetEditedTask } from '../slices/todoSlice'
 import { useQueryClient, useMutation } from 'react-query'
 import { selectSpot } from '../../slices/spotSlice'
-import { setEditedPost,resetEditedPost, setShowPost, setQueryPost } from '../../slices/postSlice'
+import { setEditedPost,resetEditedPost, setShowPost } from '../../slices/postSlice'
 
 import { useMutateSpot } from './useMutateSpot'
 
@@ -18,30 +18,21 @@ export const useMutatePost = () => {
   const editedSpot = useAppSelector(selectSpot)
   const { createSpotMutation } = useMutateSpot()
 
-
-  const queryPostMutation = useMutation(
-    (query: any) => 
-    axios.get(`${process.env.REACT_APP_REST_URL}/post/query?${query}`,headers),
-  {
-    onSuccess: (res) => {
-      dispatch(setQueryPost(res.data))
-    }
-  })
-
   const createPostMutation = useMutation(
     (post: EditPost) => 
       axios.post<PostData>(`${process.env.REACT_APP_REST_URL}/posts/`, post,headers),
     {
       onSuccess: (res) => {
+        // 引数にポストのIDを渡している
         createSpotMutation.mutate({...editedSpot ,id: res.data.id})
-        const previousPosts = queryClient.getQueryData<PostData[]>('posts')
-        if (previousPosts) {
+        const newPosts = queryClient.getQueryData<PostData[]>('posts')
+        if (newPosts) {
           queryClient.setQueryData<PostData[]>('posts', [
-            ...previousPosts,
+            ...newPosts,
             res.data,
           ])
         }
-        dispatch(resetEditedPost())
+        // dispatch(resetEditedPost())
       },
     }
   )
@@ -51,17 +42,15 @@ export const useMutatePost = () => {
     axios.delete(`${process.env.REACT_APP_REST_URL}/posts/${id}`,headers),
     {
       onSuccess: (res,variables) => {
-        const previousPosts = queryClient.getQueryData<PostData[]>('posts')
-        if (previousPosts) {
-          queryClient.setQueryData(
-            'posts',
-            previousPosts.filter((post:PostData) => post.id !== variables)    
-          )
+        console.log(variables)
+        const previousPosts = queryClient.getQueryData<any>('posts')
+        const filterPosts = previousPosts.posts.filter((post:any) => post.id != variables)
+        const newPosts = {posts: filterPosts}
+        queryClient.setQueryData('posts',newPosts)        
         }
       }
-    }
   )
-  return { createPostMutation ,deletePostMutation,queryPostMutation}
+  return { createPostMutation ,deletePostMutation}
 }
 
 

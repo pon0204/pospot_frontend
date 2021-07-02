@@ -16,6 +16,7 @@ const initialState: SpotState = {
     web_url: '',
     map_url: '',
     place: '',
+    place_detail:'',
     place_id: '',
     },
     id: null

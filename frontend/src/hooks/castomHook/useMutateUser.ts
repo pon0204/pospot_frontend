@@ -4,7 +4,7 @@ import {useAppSelector, useAppDispatch } from '../../app/hooks'
 // import { resetEditedTask } from '../slices/todoSlice'
 import { useQueryClient, useMutation } from 'react-query'
 import { selectSpot } from '../../slices/spotSlice'
-import { setEditedPost,resetEditedPost, setShowPost, setQueryPost } from '../../slices/postSlice'
+import { setEditedPost,resetEditedPost, setShowPost } from '../../slices/postSlice'
 
 import { useMutateSpot } from './useMutateSpot'
 
