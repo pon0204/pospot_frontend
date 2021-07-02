@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 import { useAppSelector } from '../../app/hooks';
 import { selectHeaders } from "../../slices/headersSlice";
+import { Post, Posts } from '../../types/types';
 
 export const useMutateLike = () => {
   const queryClient = useQueryClient()
@@ -13,14 +14,16 @@ export const useMutateLike = () => {
       axios.post(`${process.env.REACT_APP_REST_URL}/posts/${postId}/likes`,null,headers),
     {
       onSuccess: (res,variables) => {
-        const newPosts = queryClient.getQueryData<any>('posts')
+        const newPosts = queryClient.getQueryData<Posts>('posts')
         // post_idがわかっている post_idが同じものにlikes(res.data)を加える
+        if(newPosts){
         newPosts.posts.map((post:any) => {
           if(post.id == variables){
           post.likes = [...post.likes,res.data]
           }        
         })
-          queryClient.setQueryData<any>('posts',newPosts)
+          queryClient.setQueryData<Posts>('posts',newPosts)
+      }
       },
     }
   )
@@ -28,20 +31,22 @@ export const useMutateLike = () => {
     (postId: number) => 
     axios.delete(`${process.env.REACT_APP_REST_URL}/posts/${postId}/likes/1`,headers),
     {
-      onSuccess: (variables) => {
-        const newPosts = queryClient.getQueryData<any>('posts')
-        const hoge = newPosts.posts.map((post:any) => {
+      onSuccess: (res,variables) => {
+        const newPosts = queryClient.getQueryData<Posts>('posts')
+        if(newPosts){
+        newPosts.posts.map((post:Post) => {
           if(post.id == variables){
             // likesの中に自分のuser_idがある場合は消去
-            post.likes.map((like:any,key:any) => {
+            post.likes.map((like:any) => {
             if(like.user_id == currentUserId){
               delete like.user_id
             }
             })
-          }
+          }          
         })
-        queryClient.setQueryData<any>('posts',newPosts)
+        queryClient.setQueryData<Posts>('posts',newPosts)
       }
+    }
     }
   )
   return { createLikeMutation ,deleteLikeMutation}

@@ -2,7 +2,7 @@ import axios from 'axios'
 import {useAppSelector, useAppDispatch } from '../../app/hooks'
 import { useMutation } from 'react-query'
 import { selectHeaders } from "../../slices/headersSlice";
-import { setShowProfile } from '../../slices/profileSlice'
+import { EditProfile } from '../../types/types';
 
 export const useMutateUser = () => {
   const dispatch = useAppDispatch()
@@ -17,21 +17,12 @@ export const useMutateUser = () => {
     }
   })
 
-  const profileShowMutation = useMutation(
-    (id:number) => 
-    axios.get(`${process.env.REACT_APP_REST_URL}/profiles/${id}`),
-  {
-    onSuccess: (res) =>{
-      dispatch(setShowProfile(res.data))
-    }
-  }
-  )
   const profileUpdateMutation = useMutation(
-    (data:any) =>
+    (data:EditProfile) =>
     axios.put(`${process.env.REACT_APP_REST_URL}/profiles/1`,data,headers),
     )
 
-    return { userIdMutation,profileUpdateMutation,profileShowMutation}
+    return { userIdMutation,profileUpdateMutation}
 }
 
 

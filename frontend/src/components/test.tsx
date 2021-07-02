@@ -6,7 +6,7 @@ import { selectHeaders } from '../slices/headersSlice'
 
 
 const Test: VFC = () => {
-  const { user, isAuthenticated, getAccessTokenSilently }:any = useAuth0();
+  const { user }:any = useAuth0();
   console.log(user)
   const headers = useAppSelector(selectHeaders)
 

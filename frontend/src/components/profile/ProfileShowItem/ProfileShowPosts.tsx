@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react'
 import { useAppSelector } from '../../../app/hooks'
 import { useQueryPosts } from '../../../hooks/reactQuery/useQueryPosts'
 import { selectFollowsCount } from '../../../slices/followSlice'
+import { Post } from '../../../types/types'
 import { PostCard } from '../../posts/PostCards/PostCard'
 import ProfileTabs from './ProfileTabs'
 
 const ProfileShowPosts = (id:any) => {
   const { status, data } = useQueryPosts()
-  const [currentPosts,setCurrentPosts] = useState<any>()
-  const [likesPosts,setLikesPosts] = useState<any>()
+  const [currentPosts,setCurrentPosts] = useState<Post[]>()
+  const [likesPosts,setLikesPosts] = useState<Post[]>()
   const [query, setQuery] = useState(0);
   const followsCount = useAppSelector(selectFollowsCount)
   
@@ -18,11 +19,11 @@ const ProfileShowPosts = (id:any) => {
 
   useEffect(() =>{
       if(query == 0){
-      const currentPost = data?.posts?.filter((v:any) => v.user_id == id.id)
+      const currentPost = data?.posts?.filter((v:Post) => v.user_id == id.id)
       setCurrentPosts(currentPost)
       }else if(query == 1){
-        // いいねしている投稿のみ取得        
-        const LikePosts = data?.posts?.filter((v:any) => v.likes.some((v:any) => v.user_id == id.id) == true)
+        // いいねしている投稿のみ取得      
+        const LikePosts = data?.posts?.filter((post:Post) => post.likes.some((like:any) => like.user_id == id.id) == true)
       setLikesPosts(LikePosts)
       }
   },[query,status])
@@ -39,11 +40,11 @@ const ProfileShowPosts = (id:any) => {
       </div>
       <div className="flex flex-wrap justify-center pb-12">
         {query == 0 ?
-        currentPosts?.map((item:any) => (
+        currentPosts?.map((item:Post) => (
           <PostCard item={item}/>
           ))
           :
-          likesPosts?.map((item:any) => (
+          likesPosts?.map((item:Post) => (
             <PostCard item={item}/>
             ))
           }

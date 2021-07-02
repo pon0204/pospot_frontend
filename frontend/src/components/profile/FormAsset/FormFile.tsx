@@ -15,9 +15,8 @@ const FormFile:VFC = () => {
     const image = event.target.files[0];
     const imageUrl:any = URL.createObjectURL(image);
     setFileUrl(imageUrl)
-    dispatch(setEditedProfile({ ...editedProfile, avatar: image}))
+    dispatch(setEditedProfile({ ...editedProfile, avatar_url: image}))
   }
-  console.log(editedProfile)
 
   return (
     <div>

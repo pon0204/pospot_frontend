@@ -3,7 +3,6 @@ import { useQuery } from 'react-query';
 
 export const useQueryPosts = () => {
   const getPosts = async () => {
-
     const { data } = await axios.get(
       `${process.env.REACT_APP_REST_URL}/posts`)
       // ジャンルを配列に変換

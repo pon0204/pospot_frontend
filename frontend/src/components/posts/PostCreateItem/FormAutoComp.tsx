@@ -11,9 +11,7 @@ export const FormAutoComp:VFC = () => {
   const dispatch = useAppDispatch()
 
   const handleChange = (e:any,v:any) => {
-    console.log(v)
-    const genres = v.map((gen:any) =>  gen)
-    // setGenre(genres)
+    const genres = v.map((genre:string) =>  genre)
     const genre = genres.join(',')
     dispatch(setEditedPost(
       { ...editedPost, genre: genre}))

@@ -29,20 +29,20 @@ const useStyles = makeStyles((theme: Theme) =>
 
 );
 
-export const PostCard = (item:any,profiles:any) => {
+export const PostCard = (item:any) => {
   const currentUserId = localStorage.getItem('currentUserId')
   const [likeHeart,setHeart] = useState(false)
   const classes = useStyles();
   const {createLikeMutation,deleteLikeMutation} = useMutateLike()
-  const {isAuthenticated,loginWithRedirect } = useAuth0();
+  const {loginWithRedirect } = useAuth0();
   
   const heartClick = () =>{
     setHeart((prev) => !prev)  
   }
-  
+
   useEffect(() => {
     const likes = item.item.likes
-    const currentUserLike = likes.some((v:any) => v.user_id == currentUserId)
+    const currentUserLike = likes.some((like:any) => like.user_id == currentUserId)
     setHeart(currentUserLike)
   },[])
   
@@ -51,7 +51,7 @@ export const PostCard = (item:any,profiles:any) => {
   let genres = item.item.genre  
   let caption = item.item.caption
   let spot_name = item.item.spot_name
-
+  
   if(title.length > 14){
     title = title.substr(0,14) + '...'
   }
@@ -131,7 +131,7 @@ export const PostCard = (item:any,profiles:any) => {
           </IconButton>
           : 
           <IconButton onClick={() => {
-            if(isAuthenticated){
+            if(currentUserId){
               createLikeMutation.mutate(item.item.id)
               heartClick()
               }else{

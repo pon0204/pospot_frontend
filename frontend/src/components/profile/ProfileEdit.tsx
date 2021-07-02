@@ -6,7 +6,7 @@ import { FormRadio } from './FormAsset/FormRadio';
 import InputForm from './FormAsset/InputFrom';
 const ProfileEdit = ({match}:any) => {
   const id = match.params.profileId
-  const currentUserId:any = localStorage.getItem('currentUserId')
+  const currentUserId = localStorage.getItem('currentUserId')
   const {status,data} = useQueryProfileShow(id)
 
   if (status === 'loading') return (<div></div>  )

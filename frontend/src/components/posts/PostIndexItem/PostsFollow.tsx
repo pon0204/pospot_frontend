@@ -2,16 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useAppSelector } from '../../../app/hooks';
 import { selectQueryGenre, selectQueryPlace } from '../../../slices/postSlice';
+import { FollowingsId, Post, Posts } from '../../../types/types';
 import { PostCard } from '../PostCards/PostCard';
 
 const PostsFollow = () => {
   const queryClient = useQueryClient()
   const queryGenre = useAppSelector(selectQueryGenre)
   const queryPlace = useAppSelector(selectQueryPlace)
-  const [postsQuery,setPostQuery] = useState<any>()
+  const [postsQuery,setPostQuery] = useState<Post[]>()
   const postsAll = queryClient.getQueryData<any>('posts')
   const follows = queryClient.getQueryData<any>('follows')
-  const postsQueryFollow = postsAll.posts.filter((v:any) => follows?.followings.map((v:any) => v.id) == v.user_id )
+  
+  const postsQueryFollow = postsAll.posts.filter((post:Post) => follows?.followings.map((following:FollowingsId) => following.id) == post.user_id )
   
   useEffect(() => {
     // あとでリファクタリングする
@@ -29,12 +31,12 @@ const PostsFollow = () => {
     }
   }, [queryGenre,queryPlace])
 
-  const filterGenre = (posts:any) => {
-    const filterGenre = posts.filter((v:any) => v.genre.filter((v:any) => v == queryGenre) == queryGenre)
+  const filterGenre = (posts:Post[]) => {
+    const filterGenre = posts.filter((post:any) => post.genre.filter((genre:string) => genre == queryGenre) == queryGenre)
     return filterGenre
   }
-  const filterPlace = (posts:any) => {
-    const filterPlace = posts.filter((post:any) => post.place.indexOf(queryPlace) >= 0 == true)
+  const filterPlace = (posts:Post[]) => {
+    const filterPlace = posts.filter((post:Post) => post.place.indexOf(queryPlace) >= 0 == true)
     return filterPlace
   }
 
@@ -43,11 +45,11 @@ const PostsFollow = () => {
     <h2 className='text-center text-xl font-bold mb-4'>フォロー投稿一覧</h2>
     <div className="flex flex-wrap justify-center">
       {queryGenre || queryPlace? 
-      postsQuery?.map((item:any) => (
+      postsQuery?.map((item:Post) => (
           <PostCard item={item}/>
       ))
       :
-      postsQueryFollow?.map((item:any) => (
+      postsQueryFollow?.map((item:Post) => (
           <PostCard item={item}/>
         ))
       } 

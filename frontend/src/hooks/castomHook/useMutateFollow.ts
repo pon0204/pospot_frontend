@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { setFollowsCount } from '../../slices/followSlice';
+import { FollowState, setFollowsCount } from '../../slices/followSlice';
 import { selectHeaders } from "../../slices/headersSlice";
 
 export const useMutateFollow = () => {

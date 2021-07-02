@@ -30,11 +30,7 @@ export const useMutateSpot = () => {
     }
   )
 
-  const deleteSpotMutation = useMutation(
-    (id: any) => 
-    axios.delete(`${process.env.REACT_APP_REST_URL}/spots/${id}`,headers),
-  )
-  return { createSpotMutation ,deleteSpotMutation,fetchSpotMutation }
+  return { createSpotMutation,fetchSpotMutation }
 }
 
 

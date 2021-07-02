@@ -4,6 +4,7 @@ import { useMutateUser } from '../../../hooks/castomHook/useMutateUser'
 import { selectProfile } from '../../../slices/profileSlice'
 
 const FormButton:VFC = () => {
+  const currentUserId = localStorage.getItem('currentUserId')
   const editedProfile = useAppSelector(selectProfile)
   const { profileUpdateMutation } = useMutateUser()
 
@@ -12,14 +13,10 @@ const FormButton:VFC = () => {
     data.append('nickname',editedProfile.nickname)
     data.append('introduction',editedProfile.introduction)
     data.append('gender',editedProfile.gender)
-    data.append('avatar',editedProfile.avatar)
-    profileUpdateMutation.mutate(data,editedProfile.id)
+    data.append('avatar',editedProfile.avatar_url)
+    profileUpdateMutation.mutate(data)
   }
 
-  // if(editedSpot.spot.name != '') return (
-  //   <button className="bg-red-500 mt-3 rounded text-lg font-bold mx-auto w-2/6 p-4 block text-white"
-  //   onClick={postCreateClick}
-  //   >投稿</button>
   return (
     <button className="bg-red-500 mt-3 rounded text-lg font-bold mx-auto w-2/6 p-4 block text-white"
     onClick={profileUpdateClick}

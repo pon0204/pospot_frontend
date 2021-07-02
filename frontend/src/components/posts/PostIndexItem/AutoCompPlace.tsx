@@ -5,11 +5,13 @@ import { useAppDispatch } from '../../../app/hooks';
 import { resetQueryPlace, setQueryPlace } from '../../../slices/postSlice';
 
 export const AutoCompPlace = () => {
+  interface places {
+    place: string
+  }
   const dispatch = useAppDispatch()
-  
-  const handleChange = (e:any,v:any) =>{
-    v ?
-    dispatch(setQueryPlace(v.place))
+  const handleChange = (e:any,places:places) =>{
+    places ?
+    dispatch(setQueryPlace(places.place))
     : 
     dispatch(resetQueryPlace())
   }

@@ -38,9 +38,7 @@ export default function Header() {
       const accessToken = await getAccessTokenSilently({
       });
       dispatch(setHeaders(accessToken))
-      // if(!localStorage.getItem('currentUserId')){
       userIdMutation.mutate()
-      // }
     }
     catch(e){
       console.log(e.message)

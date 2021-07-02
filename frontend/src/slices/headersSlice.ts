@@ -1,15 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 
-export interface TokenState {
-  token: string
+export interface headers {
+  Authorization: string | null
+  'Content-Type': 'application/json'
 }
 
-const initialState:any = {  
+export interface headersState {
+  headers: headers
+}
+
+const initialState:headersState = {  
   headers: {
     Authorization: null,
     'Content-Type': 'application/json',
-    // "sub": 'google-oauth2|106160814069089305764'
   }
 }
 
@@ -17,7 +21,6 @@ export const headersSlice = createSlice({
   name: 'headers',
   initialState,
   reducers: {
-
     setHeaders: (state, action: PayloadAction<string>) => {
       state.headers.Authorization = action.payload
     }
