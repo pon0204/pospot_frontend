@@ -1,5 +1,5 @@
 import CircularProgress from '@material-ui/core/CircularProgress';
-import CreateIcon from '@material-ui/icons/Create';
+import AddIcon from '@material-ui/icons/Add';
 import React, { useEffect, useState, VFC } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hooks';
@@ -17,7 +17,7 @@ const PostsIndex: VFC = () => {
   const currentUserId = localStorage.getItem('currentUserId')
   useQueryFollows(currentUserId)
   const dispatch = useAppDispatch()
-
+  
   const [tabState,setTabState] = useState(0)
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setTabState(newValue);
@@ -30,13 +30,12 @@ const PostsIndex: VFC = () => {
       }
   }, [])
 
-    if (status === 'loading') return (<div className='absolute top-1/2 right-1/2'><CircularProgress/></div>)
+    if (status === 'loading') return (<div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'><CircularProgress/></div>)
     if (status === 'error') return (<div>{'Error'}</div>)
     
   return (
-    <>
-    {/* <PostsGenreState/> */}
-    <div className='py-2 md:flex md:justify-center'>
+    <div className='pt-2 pb-28'>
+    <div className='md:flex md:justify-center'>
     <AutoCompGenre/>
     <AutoCompPlace/>
     </div>
@@ -46,10 +45,12 @@ const PostsIndex: VFC = () => {
     <PostsFollow/>  
     }
     <PostsIndexTabs handleChange={handleChange} tabState={tabState}/>
-    <Link to='posts/new' className='fixed p-4 bg-gray-400 bg-opacity-30 rounded-full' style={{right: '5%',bottom: '5%'}}>
-    <CreateIcon style={{fontSize: 52}} color='primary'/>
+    <div className='fixed bottom-20 right-6 lg:right-20 bg-opacity-30 bg-blue-300 rounded-full'>
+    <Link to='posts/new' className='p-4 block'>
+    <AddIcon style={{fontSize: 52}} color='primary'/>
     </Link>
-    </>
+    </div>
+    </div>
   )
 }
 

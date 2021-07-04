@@ -4,6 +4,7 @@ import FormButton from './FormAsset/FormButton';
 import FormFile from './FormAsset/FormFile';
 import { FormRadio } from './FormAsset/FormRadio';
 import InputForm from './FormAsset/InputFrom';
+
 const ProfileEdit = ({match}:any) => {
   const id = match.params.profileId
   const currentUserId = localStorage.getItem('currentUserId')

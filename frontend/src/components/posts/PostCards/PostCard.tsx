@@ -1,18 +1,33 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { IconButton } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Dialog, { DialogProps } from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import Slide from '@material-ui/core/Slide';
+import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { TransitionProps } from '@material-ui/core/transitions';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import RoomIcon from '@material-ui/icons/Room';
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import { useMutateLike } from '../../../hooks/castomHook/useMutateLike';
 import defaultPhoto from '../../../profile_default.png';
+import PostShow from "../PostShow";
 import CardMenu from './CardMenu';
 
 
-const useStyles = makeStyles((theme: Theme) =>
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & { children?: React.ReactElement<any, any> },
+  ref: React.Ref<unknown>,
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card:{
       margin: 10,
@@ -24,9 +39,8 @@ const useStyles = makeStyles((theme: Theme) =>
       ':focus':{
         outline: 'none'
       }
-    }
+    },
   }),
-
 );
 
 export const PostCard = (item:any) => {
@@ -35,7 +49,21 @@ export const PostCard = (item:any) => {
   const classes = useStyles();
   const {createLikeMutation,deleteLikeMutation} = useMutateLike()
   const {loginWithRedirect } = useAuth0();
-  
+
+  const theme = useTheme();
+  const [open, setOpen] = useState(false);
+  const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
+  const smMediaWidth = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const handleClickOpen = (scrollType: DialogProps['scroll']) => () => {
+    setOpen(true);
+    setScroll(scrollType);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const heartClick = () =>{
     setHeart((prev) => !prev)  
   }
@@ -74,10 +102,11 @@ export const PostCard = (item:any) => {
     genres = null
   }
 
+  console.log(item.item.id)
   return (
     <div className={classes.card}>
-      <Link to={`/posts/${item.item.id}`}>
-        <div className='w-full h-full border z-0 relative'>
+      <button type="button" onClick={handleClickOpen('paper')} className='w-full h-full' style={{outline: 'none'}}>
+        <div className='w-full h-full border z-0 relative text-left'>
           <div className='flex pt-2 pl-4'>
             <Link to={`/profile/${item.item.user_id}`}>
               <div className='border-2 border-gray-300 relative cursor-pointer w-16 h-16 block rounded-full mx-auto' >
@@ -105,14 +134,12 @@ export const PostCard = (item:any) => {
           </div>
           ))} 
           </div>
-        {/* <div className='overflow-x-auto'> */}
         <h3 className='text-center p-1 text-lg font-bold w-11/12 mx-auto my-2 text-white bg-blue-600 whitespace-nowrap overflow-auto'>{spot_name}</h3>
-        {/* </div> */}
         <img  className='block w-full object-cover h-48' src={item.item.image_url} alt="" />
         <p className='p-2'>{caption}</p>
         <p className='absolute bottom-2 left-2 bg-gray-600 text-white p-1 pr-2'><RoomIcon/> {item.item.place}</p>
         </div>
-      </Link>
+      </button>
       {
       currentUserId == item.item.user_id &&(
       <div className='absolute top-2 right-2 z-10'>
@@ -143,6 +170,56 @@ export const PostCard = (item:any) => {
           </IconButton>
           }
         </div>
+        <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+        fullScreen={smMediaWidth}
+        fullWidth={true}
+        maxWidth='xl'
+        >
+        <DialogContent dividers={scroll === 'paper'} 
+        style={{
+          padding: '0px 4px 0px 4px',
+        }}
+        >
+          {open &&
+          <div style={{height: '90vh'}}>
+            <PostShow id={item.item.id} style={{height: '90vh'}}/>
+          </div>
+          }
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+          <HighlightOffIcon style={{fontSize: 40}}/>
+          </Button>
+          { likeHeart ? 
+          <IconButton onClick={() => {
+            deleteLikeMutation.mutate(item.item.id)
+            heartClick()
+          }}
+          style={{outline: 'none'}}>
+            <FavoriteIcon color='secondary' style={{ fontSize: 40 }}/>
+          </IconButton>
+          : 
+          <IconButton onClick={() => {
+            if(currentUserId){
+              createLikeMutation.mutate(item.item.id)
+              heartClick()
+              }else{
+                loginWithRedirect()
+              }
+            }} 
+            style={{outline: 'none'}}>
+            <FavoriteBorderIcon color='secondary' style={{ fontSize: 40 }}/>
+          </IconButton>
+          }
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

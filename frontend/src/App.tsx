@@ -35,14 +35,6 @@ const App: VFC = () => {
           <Route exact path="/posts/new">
             <PostForm/>
           </Route>
-          <Route
-          exact path="/posts/:postId"
-          render={({ match }:any) =>
-          <PostShow
-          match={match}
-          />
-          }
-          /> 
           <Route exact path="/profile/edit/:profileId"
           render={({ match }:any) =>
           <ProfileEdit

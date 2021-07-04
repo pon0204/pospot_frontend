@@ -5,8 +5,8 @@ import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useAppDispatch } from '../app/hooks';
 import { useMutateUser } from '../hooks/castomHook/useMutateUser';
-import { setHeaders } from '../slices/headersSlice';
 import defaultPhoto from '../profile_default.png';
+import { setHeaders } from '../slices/headersSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,7 +56,7 @@ getToken()
           <Link to="/posts">
             投稿一覧
           </Link>
-          {currentUserId ?
+          {isAuthenticated ?
           (
             <div className='flex items-center'>
             <Link to={`/profile/${currentUserId}`}>

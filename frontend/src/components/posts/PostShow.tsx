@@ -2,10 +2,10 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import React, { VFC } from 'react'
 import { useQueryPostShow } from '../../hooks/reactQuery/useQueryPostShow'
 
-const PostShow: VFC<any> = ({match}) => {
-  const id = match.params.postId
+const PostShow: VFC<any> = (id) => {
+  // const id = match.params.postId
   
-  const { status, data } = useQueryPostShow(id)
+  const { status, data } = useQueryPostShow(id.id)
   const post = data?.post
   const spot = data?.spot
   const image_url = data?.image_url
@@ -25,13 +25,11 @@ const PostShow: VFC<any> = ({match}) => {
     genres = null
   }
 
-  if (status === 'loading') return (<div>
-    <CircularProgress />
-  </div>  )
+  if (status === 'loading') return (<div className='absolute top-1/2 right-1/2 -translate-x-1/2 -translate-y-1/2'><CircularProgress/></div>)
   if (status === 'error') return <div>{'Error'}</div>
 
   return (
-    <div className='w-full px-2 lg:w-1/2 lg:mx-auto'>
+    <div className='w-full lg:w-11/12 lg:mx-auto'>
       <h2 className='mt-10 text-4xl text-gray-700 font-bold text-center'>{post.title}</h2>
       <p className='mt-4 text-lg text-gray-600 text-center'>{post.created_at.substring(0,post.created_at.indexOf('T'))}</p>
       <div className="flex my-4">
