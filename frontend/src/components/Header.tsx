@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch } from '../app/hooks';
 import { useMutateUser } from '../hooks/castomHook/useMutateUser';
 import { setHeaders } from '../slices/headersSlice';
+import defaultPhoto from '../profile_default.png';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +28,7 @@ export default function Header() {
   const dispatch = useAppDispatch()
   const { getAccessTokenSilently }:any = useAuth0();
   const { userIdMutation } = useMutateUser()
+  const currentUserId = localStorage.getItem('currentUserId')
 
   const removeUserId = () =>{
     localStorage.removeItem('currentUserId')
@@ -44,7 +46,7 @@ export default function Header() {
       console.log(e.message)
   } 
 }
-    getToken()
+getToken()
   }, [])
 
   return (
@@ -54,8 +56,12 @@ export default function Header() {
           <Link to="/posts">
             投稿一覧
           </Link>
-          {isAuthenticated ?
+          {currentUserId ?
           (
+            <div className='flex items-center'>
+            <Link to={`/profile/${currentUserId}`}>
+              <img src={defaultPhoto} alt="" className='block rounded-full w-10 h-10 mr-4'/>
+            </Link>
             <button className='text-right' color="inherit" onClick={() => 
             {
               logout({ returnTo: window.location.origin })
@@ -63,6 +69,7 @@ export default function Header() {
             }
             }
               >ログアウト</button>
+            </div>
           ):(
             <button className='text-right' color="inherit" onClick={loginWithRedirect}>ログイン</button>
           )
