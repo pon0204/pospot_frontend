@@ -2,7 +2,7 @@ import { useEffect, useState, VFC } from 'react';
 import { useQueryClient } from 'react-query';
 import { useAppSelector } from '../../../app/hooks';
 import { selectQueryGenre, selectQueryPlace } from '../../../slices/postSlice';
-import { Post, Posts } from '../../../types/types';
+import { Post } from '../../../types/types';
 import { PostCard } from '../PostCards/PostCard';
 
 const PostsAll:VFC = () => {

@@ -1,12 +1,9 @@
+import { TextField } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectProfile, setEditedProfile } from '../../../slices/profileSlice';
-
 
 const useStyles = makeStyles((theme) => ({
 
@@ -26,29 +23,60 @@ export const InputForm = () => {
   const dispatch = useAppDispatch()
 
   return (
+    <div>
     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-    <InputLabel>ニックネーム</InputLabel>
-    <OutlinedInput
-      value={editedProfile.nickname}
-      onChange={(e) => 
-        dispatch(setEditedProfile({ ...editedProfile, nickname: e.target.value}))
-      }
-      labelWidth={100}
-    />     
-    <FormControl className={clsx(classes.margin,classes.textField)} variant="outlined">
-    <InputLabel>自己紹介</InputLabel>
-    <OutlinedInput
+    {editedProfile.nickname.length >= 51 ? 
+      <TextField
+        label='ニックネーム'
+        value={editedProfile.nickname}
+        onChange={(e) => 
+          dispatch(setEditedProfile({ ...editedProfile, nickname: e.target.value}))
+        }
+        variant="outlined"
+        error
+        helperText="50文字以下で入力してください"
+        className={classes.margin}
+      />     
+      :
+        <TextField
+          label='ニックネーム'
+          value={editedProfile.nickname}
+          onChange={(e) => 
+            dispatch(setEditedProfile({ ...editedProfile, nickname: e.target.value}))
+          }
+          variant="outlined"
+          className={classes.margin}
+        />    
+    }
+    {editedProfile.introduction.length >= 201 ?
+    <TextField
+      label='自己紹介'
       value={editedProfile.introduction}
       onChange={(e) => 
         dispatch(setEditedProfile({ ...editedProfile, introduction: e.target.value}))
       }
+      className={classes.margin}
+      variant='outlined'
       multiline
       rows={5}
-      labelWidth={70}
-    />
+      error
+      helperText="200文字以下で入力してください"
+    /> 
+    :
+    <TextField
+      label='自己紹介'
+      value={editedProfile.introduction}
+      onChange={(e) => 
+        dispatch(setEditedProfile({ ...editedProfile, introduction: e.target.value}))
+      }
+      className={classes.margin}
+      variant='outlined'
+      multiline
+      rows={5}
+    /> 
+    }
   </FormControl>
-    
-  </FormControl>
+  </div>
   );
 }
 

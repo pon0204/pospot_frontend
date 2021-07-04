@@ -1,6 +1,5 @@
+import { TextField } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import React from 'react';
@@ -13,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
   margin: {
     // margin: theme.spacing(1),
-      margin: '10px 0px'
+      margin: '5px 0px'
   },
   withoutLabel: {
     marginTop: theme.spacing(3),
@@ -34,26 +33,56 @@ export const InputForm = () => {
   return (
     <div>
     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-    <InputLabel>タイトル</InputLabel>
-    <OutlinedInput
-      value={editedPost.title}
-      onChange={(e) => 
-        dispatch(setEditedPost({ ...editedPost, title: e.target.value}))
-      }
-      labelWidth={70}
-    />     
-    </FormControl>
-    <FormControl className={clsx(classes.margin,classes.textField)} variant="outlined">
-    <InputLabel>説明</InputLabel>
-    <OutlinedInput
+    {editedPost.title.length >= 51 ? 
+      <TextField
+        label='タイトル'
+        value={editedPost.title}
+        onChange={(e) => 
+          dispatch(setEditedPost({ ...editedPost, title: e.target.value}))
+        }
+        variant="outlined"
+        error
+        helperText="50文字以下で入力してください"
+        className={classes.margin}
+      />     
+      :
+        <TextField
+          label='タイトル'
+          value={editedPost.title}
+          onChange={(e) => 
+            dispatch(setEditedPost({ ...editedPost, title: e.target.value}))
+          }
+          variant="outlined"
+          className={classes.margin}
+        />    
+    }
+    {editedPost.caption.length >= 401 ?
+    <TextField
+      label='説明'
       value={editedPost.caption}
       onChange={(e) => 
         dispatch(setEditedPost({ ...editedPost, caption: e.target.value}))
       }
+      className={classes.margin}
+      variant='outlined'
       multiline
       rows={5}
-      labelWidth={70}
-    />    
+      error
+      helperText="400文字以下で入力してください"
+    /> 
+    :
+    <TextField
+      label='説明'
+      value={editedPost.caption}
+      onChange={(e) => 
+        dispatch(setEditedPost({ ...editedPost, caption: e.target.value}))
+      }
+      className={classes.margin}
+      variant='outlined'
+      multiline
+      rows={5}
+    /> 
+    }
   </FormControl>
     </div>
   );

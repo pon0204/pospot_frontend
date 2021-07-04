@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useAppSelector } from '../../../app/hooks';
 import { selectQueryGenre, selectQueryPlace } from '../../../slices/postSlice';
-import { FollowingsId, Post, Posts } from '../../../types/types';
+import { FollowingsId, Post } from '../../../types/types';
 import { PostCard } from '../PostCards/PostCard';
 
 const PostsFollow = () => {

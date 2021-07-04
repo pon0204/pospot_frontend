@@ -16,28 +16,51 @@ export const FormAutoComp:VFC = () => {
     dispatch(setEditedPost(
       { ...editedPost, genre: genre}))
   }
+  const genreLength = editedPost.genre.split(',').length
+  
+  console.log(genreLength)
   
   return (
     <div className='full-width'>
+      {genreLength >= 2 ? 
+      // <div>
       <Autocomplete
         multiple
         id="tags-filled"
-        options={genres.map((option) => option.title)}
-        // defaultValue={[genre[13].title]}
         freeSolo
+        options={genres.map((option) => option.title)}
         onChange={(e,v) => handleChange(e,v)}
         renderTags={(value, getTagProps) =>
           value.map((option, index) => 
-            (<Chip variant="outlined" label={option} {...getTagProps({ index })} 
-            />                                    
-            // console.log(option)          
+          (<Chip variant="outlined" label={option} {...getTagProps({ index })} 
+          />                                    
           ))
         }
         renderInput={(params) => (
-          <TextField {...params} variant="outlined" label="ジャンル" placeholder="ジャンル" />
-        )
+          <TextField {...params} variant="outlined" label="ジャンル(3つまで)" placeholder="ジャンル" />
+          )
+        }
+        />
+        :
+        <Autocomplete
+        multiple
+        id="tags-filled"
+        freeSolo
+        disableCloseOnSelect
+        options={genres.map((option) => option.title)}
+        onChange={(e,v) => handleChange(e,v)}
+        renderTags={(value, getTagProps) =>
+          value.map((option, index) => 
+          (<Chip variant="outlined" label={option} {...getTagProps({ index })} 
+          />                                    
+          ))
+        }
+        renderInput={(params) => (
+          <TextField {...params} variant="outlined" label="ジャンル(3つまで)" placeholder="ジャンル" />
+          )
+        }
+        />        
       }
-      />
     </div>
   );
 }

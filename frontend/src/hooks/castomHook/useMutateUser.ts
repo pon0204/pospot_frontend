@@ -1,11 +1,10 @@
 import axios from 'axios'
-import {useAppSelector, useAppDispatch } from '../../app/hooks'
+import {useAppSelector } from '../../app/hooks'
 import { useMutation } from 'react-query'
 import { selectHeaders } from "../../slices/headersSlice";
 import { EditProfile } from '../../types/types';
 
 export const useMutateUser = () => {
-  const dispatch = useAppDispatch()
   const headers = useAppSelector(selectHeaders)
   
   const userIdMutation = useMutation(

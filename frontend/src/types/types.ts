@@ -41,10 +41,10 @@ export interface SpotData {
 
 export interface EditPost {
   title: string
-  caption: string | null
-  with: string | null
-  genre: string | null  
-  eyecatch: string | null  
+  caption: string
+  with: string
+  genre: string
+  eyecatch: string
 }
 
 export interface EditSpot {

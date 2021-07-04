@@ -4,7 +4,6 @@ import { useMutateUser } from '../../../hooks/castomHook/useMutateUser'
 import { selectProfile } from '../../../slices/profileSlice'
 
 const FormButton:VFC = () => {
-  const currentUserId = localStorage.getItem('currentUserId')
   const editedProfile = useAppSelector(selectProfile)
   const { profileUpdateMutation } = useMutateUser()
 
@@ -17,7 +16,13 @@ const FormButton:VFC = () => {
     profileUpdateMutation.mutate(data)
   }
 
+  if(editedProfile.nickname.length >= 51 || editedProfile.introduction.length >= 201){
+    return (      
+    <button disabled className="cursor-default bg-red-300 mt-3 rounded text-lg font-bold mx-auto w-2/6 p-4 block text-white">エラーの項目があります</button>)
+  }
+
   return (
+    
     <button className="bg-red-500 mt-3 rounded text-lg font-bold mx-auto w-2/6 p-4 block text-white"
     onClick={profileUpdateClick}
     >更新</button>

@@ -1,41 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import React, { useState, VFC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectPost, setEditedPost } from '../../../slices/postSlice';
 
-
-const useStyles = makeStyles(() => ({
-  inputLabel:{
-    display: 'block',
-    position: 'relative',
-    backgroundColor: '#1877F2',
-    color: '#fff',
-    fontSize: '16px',
-    padding: '10px 20px',
-    borderRadius: '8px',
-    transition: 'all 0.5s',
-    width: '50%',
-    margin: '30px auto 0px auto',
-    cursor: 'pointer',
-    textAlign: 'center',
-    '&:hover':{
-      backgroundColor: '#004db1'
-    },
-  },
-  inputFile: {
-    display: 'none'
-  },
-  img:{
-    width: '91%',
-    height: '250px',
-    margin: '15px auto',
-    display: 'block',
-    objectFit: 'cover'
-  }
-}));
-
 const FormFile:VFC = () => {
-  const classes = useStyles();
   const [fileUrl, setFileUrl] = useState<string>('');
   const editedPost = useAppSelector(selectPost)
   const dispatch = useAppDispatch()
@@ -49,13 +17,22 @@ const FormFile:VFC = () => {
 
   return (
     <div>
-    <label htmlFor='file' className={classes.inputLabel}>アイキャッチ画像</label>
-        <input className={classes.inputFile} onChange={imageChange} type="file" id="file" name="file" accept="image/png,image/jpg"/>
-      {
-      fileUrl && (
-      <img src={fileUrl} className={classes.img}/>
-      )
-      } 
+    {fileUrl ? 
+    <div>
+    <label htmlFor='file' className='text-center py-1 border-4 border-light-blue-500 w-full block cursor-pointer'>
+    <AddAPhotoIcon className='' style={{fontSize: 24}}/>アイキャッチ画像変更
+    </label>
+    <img src={fileUrl} className='w-full my-4' style={{height:250}}/>
+    </div>
+    :
+    <label htmlFor='file' className='border-dashed border-4 border-light-blue-500 w-full block cursor-pointer relative' style={{height: '250px'}}>
+    <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+    <AddAPhotoIcon className='' style={{fontSize: 32}}/>
+    <p className='ml-1 pt-1 inline-block'>アイキャッチ画像</p>
+    </div>
+    </label>
+  }
+  <input className='hidden' onChange={imageChange} type="file" id="file" name="file" accept="image/png,image/jpg"/>
     </div>
   )
 }

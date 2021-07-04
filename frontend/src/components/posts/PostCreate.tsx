@@ -16,7 +16,7 @@ const PostForm: VFC = () => {
     )
   }
   return (
-    <div className="w-full pl-2 md:w-1/2 md:mx-auto py-4">
+    <div className="w-full px-2 md:w-1/2 md:mx-auto py-4">
     <FormFile/>
     <InputForm/>
     <FormAutoComp/>
