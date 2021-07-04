@@ -80,17 +80,17 @@ export const PostCard = (item:any) => {
   let caption = item.item.caption
   let spot_name = item.item.spot_name
   
-  if(title.length > 14){
-    title = title.substr(0,14) + '...'
+  if(title.length > 13){
+    title = title.substr(0,13) + '...'
   }
 
-  if(caption.length > 47){
-    caption = caption.substr(0,47) + '...'
+  if(caption.length > 44){
+    caption = caption.substr(0,44) + '...'
   }
 
-  if(spot_name.length > 28){
-    spot_name = spot_name.substr(0,28) + '...'
-  }
+  // if(spot_name.length > 28){
+  //   spot_name = spot_name.substr(0,28) + '...'
+  // }
 
   if(withData == ''){
     withData = null
@@ -122,7 +122,7 @@ export const PostCard = (item:any) => {
             <p className='text-gray-600'>{item.item.created_at.substring(0,item.item.created_at.indexOf('T'))}</p>
           </div>
         </div>
-        <div className="flex mt-4 over overflow-hidden">
+        <div className="flex mt-4 overflow-x-auto">
           { withData && (
           <div className="bg-red-200  rounded-md p-1 text-sm text-center mx-2 whitespace-nowrap">
           {withData}
@@ -134,9 +134,9 @@ export const PostCard = (item:any) => {
           </div>
           ))} 
           </div>
-        <h3 className='text-center p-1 text-lg font-bold w-11/12 mx-auto my-2 text-white bg-blue-600 whitespace-nowrap overflow-auto'>{spot_name}</h3>
+        <h3 className='border border-blue-600 text-blue-600 rounded-md text-center p-1  text-lg w-11/12 mx-auto my-2 whitespace-nowrap overflow-x-auto'>{spot_name}</h3>
         <img  className='block w-full object-cover h-48' src={item.item.image_url} alt="" />
-        <p className='p-2'>{caption}</p>
+        <p className='px-2 pt-1'>{caption}</p>
         <p className='absolute bottom-2 left-2 bg-gray-600 text-white p-1 pr-2'><RoomIcon/> {item.item.place}</p>
         </div>
       </button>

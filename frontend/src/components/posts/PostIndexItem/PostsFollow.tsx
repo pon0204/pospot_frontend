@@ -42,7 +42,8 @@ const PostsFollow = () => {
 
   return (
   <div className='py-12'>
-    <h2 className='text-center text-xl font-bold mb-4'>フォロー投稿一覧</h2>
+    <h2 className='text-center text-3xl font-bold mb-4'>フォロー投稿一覧</h2>
+    <hr className='w-16 mx-auto mt-2 border-blue-600 mb-4'/>
     <div className="flex flex-wrap justify-center">
       {queryGenre || queryPlace? 
       postsQuery?.map((item:Post) => (

@@ -5,7 +5,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import PostForm from './components/posts/PostCreate';
-import PostShow from './components/posts/PostShow';
 import PostsIndex from './components/posts/PostsIndex';
 import ProfileEdit from './components/profile/ProfileEdit';
 import ProfileShow from './components/profile/ProfileShow';
