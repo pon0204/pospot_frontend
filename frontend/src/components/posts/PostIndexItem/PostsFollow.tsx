@@ -3,7 +3,7 @@ import { useQueryClient } from 'react-query';
 import { useAppSelector } from '../../../app/hooks';
 import { selectQueryGenre, selectQueryPlace } from '../../../slices/postSlice';
 import { FollowingsId, Post } from '../../../types/types';
-import { PostCard } from '../PostCards/PostCard';
+import { PostCardMemo } from '../PostCards/PostCard';
 
 const PostsFollow = () => {
   const queryClient = useQueryClient()
@@ -47,11 +47,11 @@ const PostsFollow = () => {
     <div className="flex flex-wrap justify-center">
       {queryGenre || queryPlace? 
       postsQuery?.map((item:Post) => (
-          <PostCard item={item}/>
+          <PostCardMemo item={item}/>
       ))
       :
       postsQueryFollow?.map((item:Post) => (
-          <PostCard item={item}/>
+          <PostCardMemo item={item}/>
         ))
       } 
       </div>

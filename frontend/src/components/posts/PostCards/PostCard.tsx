@@ -12,7 +12,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import RoomIcon from '@material-ui/icons/Room';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,memo } from 'react';
 import { Link } from "react-router-dom";
 import { useMutateLike } from '../../../hooks/castomHook/useMutateLike';
 import defaultPhoto from '../../../profile_default.png';
@@ -27,29 +27,12 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    card:{
-      margin: 10,
-      width: 400,
-      height: 465,
-      position: 'relative',
-    },
-    button: {
-      ':focus':{
-        outline: 'none'
-      }
-    },
-  }),
-);
-
-export const PostCard = (item:any) => {
+  const PostCard = (item:any) => {
+    console.log('レンダリング')
   const currentUserId = localStorage.getItem('currentUserId')
-  const [likeHeart,setHeart] = useState(false)
-  const classes = useStyles();
   const {createLikeMutation,deleteLikeMutation} = useMutateLike()
   const {loginWithRedirect } = useAuth0();
-
+  const [likeHeart,setHeart] = useState(false)
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
@@ -67,19 +50,21 @@ export const PostCard = (item:any) => {
   const heartClick = () =>{
     setHeart((prev) => !prev)  
   }
-
-  useEffect(() => {
+    
+    let title = item.item.title
+    let caption = item.item.caption
     const likes = item.item.likes
+    const withData = item.item.with
+    const genres = item.item.genre  
+    const spot_name = item.item.spot_name
     const currentUserLike = likes.some((like:any) => like.user_id == currentUserId)
-    setHeart(currentUserLike)
-  },[])
-  
-  let title = item.item.title
-  let withData = item.item.with
-  let genres = item.item.genre  
-  let caption = item.item.caption
-  let spot_name = item.item.spot_name
-  
+
+    useEffect(() => {
+      const likes = item.item.likes
+      const currentUserLike = likes.some((like:any) => like.user_id == currentUserId)
+      setHeart(currentUserLike)
+    },[])
+    
   if(title.length > 13){
     title = title.substr(0,13) + '...'
   }
@@ -88,22 +73,8 @@ export const PostCard = (item:any) => {
     caption = caption.substr(0,44) + '...'
   }
 
-  // if(spot_name.length > 28){
-  //   spot_name = spot_name.substr(0,28) + '...'
-  // }
-
-  if(withData == ''){
-    withData = null
-  }
-
-  if(genres){
-    genres = genres.slice(0,3)
-  }else {
-    genres = null
-  }
-
   return (
-    <div className={classes.card}>
+    <div className='relative m-2' style={{height:'465px',width: '400px'}}>
       <button type="button" onClick={handleClickOpen('paper')} className='w-full h-full' style={{outline: 'none'}}>
         <div className='w-full h-full border z-0 relative text-left'>
           <div className='flex pt-2 pl-4'>
@@ -196,10 +167,11 @@ export const PostCard = (item:any) => {
           <Button onClick={handleClose} color="primary">
           <HighlightOffIcon style={{fontSize: 40}}/>
           </Button>
-          { likeHeart ? 
+          { 
+          likeHeart ? 
           <IconButton onClick={() => {
-            deleteLikeMutation.mutate(item.item.id)
             heartClick()
+            deleteLikeMutation.mutate(item.item.id)
           }}
           style={{outline: 'none'}}>
             <FavoriteIcon color='secondary' style={{ fontSize: 40 }}/>
@@ -222,3 +194,5 @@ export const PostCard = (item:any) => {
     </div>
   );
 }
+
+export const PostCardMemo = memo(PostCard)

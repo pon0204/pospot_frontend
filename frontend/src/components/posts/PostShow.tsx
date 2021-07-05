@@ -58,7 +58,11 @@ const PostShow: VFC<any> = (id) => {
       <h4 className='border-b font-bold text-xl mt-2 pb-1'>場所</h4>
       <p className='text-lg pt-2'>{spot.place_detail}</p>
       <h4 className='border-b font-bold text-xl mt-2 pb-1'>ウェブサイト</h4>
+      {spot.web_url ?
       <a className='text-blue-700 pt-2 block text-lg' href={spot.web_url}>{spot.name}</a>
+      :
+      <p>ウェブサイトが見つかりませんでした。</p>
+      }
       </div>
       </div>
       <iframe className='mt-4' src={map_url}  scrolling="no" width="100%" height="600"></iframe>
