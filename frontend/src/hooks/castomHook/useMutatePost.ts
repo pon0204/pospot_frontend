@@ -22,13 +22,8 @@ export const useMutatePost = () => {
       onSuccess: (res) => {
         // 引数にポストのIDを渡している
         createSpotMutation.mutate({...editedSpot ,id: res.data.id})
-        const newPosts = queryClient.getQueryData<Post[]>('posts')
-        if (newPosts) {
-          queryClient.setQueryData<Post[]>('posts', [
-            ...newPosts,
-            res.data,
-          ])
-        }
+        // 投稿を再fetchしている
+        queryClient.refetchQueries(['posts'],{active:true})        
         dispatch(resetEditedPost())
       },
     }

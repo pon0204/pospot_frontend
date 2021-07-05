@@ -102,7 +102,6 @@ export const PostCard = (item:any) => {
     genres = null
   }
 
-  console.log(item.item.id)
   return (
     <div className={classes.card}>
       <button type="button" onClick={handleClickOpen('paper')} className='w-full h-full' style={{outline: 'none'}}>
