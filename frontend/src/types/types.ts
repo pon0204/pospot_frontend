@@ -24,6 +24,7 @@ export interface EditProfile {
   introduction: string
   gender: string
   avatar_url: string
+  avatar: any
 }
 
 export interface SpotData {

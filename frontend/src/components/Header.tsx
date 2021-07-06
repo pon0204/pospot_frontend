@@ -3,12 +3,11 @@ import AppBar from '@material-ui/core/AppBar';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import axios from "axios";
 import React, { useEffect } from 'react';
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAppDispatch } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useMutateUser } from '../hooks/castomHook/useMutateUser';
-import defaultPhoto from '../profile_default.png';
 import { setHeaders } from '../slices/headersSlice';
+import { selectAvatar, setCurrentAvatar } from "../slices/profileSlice";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,16 +30,16 @@ export default function Header() {
   const { getAccessTokenSilently }:any = useAuth0();
   const { userIdMutation } = useMutateUser()
   const currentUserId = localStorage.getItem('currentUserId')
-  const [avatar,setAvatar] = useState<any>()
+  const avatar = useAppSelector(selectAvatar)
   
   const removeUserId = () =>{
     localStorage.removeItem('currentUserId')
   }
-  
+
   useEffect(()=>{
     axios.get(`${process.env.REACT_APP_REST_URL}/profiles/${currentUserId}`)
     .then((res)=>
-    setAvatar(res.data)
+    dispatch(setCurrentAvatar(res.data.profile.avatar_url))
     )
   },[])
 
@@ -70,7 +69,7 @@ getToken()
           (
             <div className='flex items-center'>
             <Link to={`/profile/${currentUserId}`}>
-              <img src={avatar?.profile.avatar_url} alt="" className='block rounded-full w-10 h-10 mr-4'/>
+              <img src={avatar} alt="" className='block rounded-full w-10 h-10 mr-4'/>
             </Link>
             <button className='text-right' color="inherit" onClick={() => 
             {

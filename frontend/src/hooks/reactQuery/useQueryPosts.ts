@@ -13,6 +13,6 @@ export const useQueryPosts = () => {
   return useQuery({
     queryKey: 'posts',
     queryFn: getPosts,
-    staleTime: 30000,
+    staleTime: 10000,
   })
 }

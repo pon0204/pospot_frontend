@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQueryClient } from 'react-query'
-import { Post, Posts } from '../../../types/types'
+import { Post } from '../../../types/types'
 import { PostCardMemo } from '../../posts/PostCards/PostCard'
 
 const ProfileShowPostsCurrent = (id:any) => {

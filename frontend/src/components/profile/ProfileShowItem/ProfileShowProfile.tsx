@@ -3,7 +3,7 @@ import { useQueryClient } from 'react-query'
 import { Link } from 'react-router-dom'
 import { useMutateFollow } from '../../../hooks/castomHook/useMutateFollow'
 import { useQueryProfileShow } from '../../../hooks/reactQuery/useQueryProfileShow'
-import defaultPhoto from '../../../profile_default.png'
+import defaultPhoto from '../../../image/profile_default.png'
 import { FollowersId } from '../../../types/types'
 
 const ProfileShowProfile = (id:any) => {

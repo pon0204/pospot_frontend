@@ -4,6 +4,7 @@ import { EditProfile } from '../types/types';
 
 export interface profileState {
   editedProfile: EditProfile
+  currentAvatar: string
 }
 
 const initialState: profileState = {
@@ -12,7 +13,9 @@ const initialState: profileState = {
     introduction: '',
     gender: '',
     avatar_url: '',
+    avatar: ''
 },
+  currentAvatar: ''
 }
 
 export const profileSlice = createSlice({
@@ -25,12 +28,16 @@ export const profileSlice = createSlice({
     resetEditedProfile: (state) => {
       state.editedProfile = initialState.editedProfile
     },
+    setCurrentAvatar: (state, action: PayloadAction<string>) => {
+      state.currentAvatar = action.payload
+    },
   },
 })
 
-export const { setEditedProfile, resetEditedProfile} =
+export const { setEditedProfile, resetEditedProfile,setCurrentAvatar} =
   profileSlice.actions
 
   export const selectProfile = (state: RootState) => state.profile.editedProfile
+  export const selectAvatar = (state: RootState) => state.profile.currentAvatar
 
 export default profileSlice.reducer;

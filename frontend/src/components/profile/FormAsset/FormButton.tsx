@@ -12,7 +12,7 @@ const FormButton:VFC = () => {
     data.append('nickname',editedProfile.nickname)
     data.append('introduction',editedProfile.introduction)
     data.append('gender',editedProfile.gender)
-    data.append('avatar',editedProfile.avatar_url)
+    data.append('avatar',editedProfile.avatar)
     profileUpdateMutation.mutate(data)
   }
 

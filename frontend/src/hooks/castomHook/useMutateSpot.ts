@@ -5,10 +5,13 @@ import { useMutation } from 'react-query'
 import { useAppSelector } from "../../app/hooks";
 import { selectHeaders } from "../../slices/headersSlice";
 import { EditSpot,SpotData } from '../../types/types';
+import { useHistory } from 'react-router-dom';
+import { resetEditedPost } from '../../slices/postSlice';
 
 export const useMutateSpot = () => {
   const headers = useAppSelector(selectHeaders)
   const dispatch = useAppDispatch()
+  const history = useHistory()
 
   const fetchSpotMutation = useMutation(
     (placeId) =>
@@ -25,7 +28,9 @@ export const useMutateSpot = () => {
       axios.post<SpotData>(`${process.env.REACT_APP_REST_URL}/spots/`, spot,headers),
     {
       onSuccess: (res) => {
+        history.push('/posts')
         dispatch(resetEditedSpot())
+        dispatch(resetEditedPost())
       },
     }
   )
