@@ -2,35 +2,43 @@ import { TextField } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { selectProfile, setEditedProfile } from '../../../slices/profileSlice';
+import { selectPost, setEditedPost } from '../../../slices/postSlice';
 
 const useStyles = makeStyles((theme) => ({
-
+  root: {
+    textAlign:'center'
+  },
   margin: {
     // margin: theme.spacing(1),
-      margin: '10px 0px'
+      margin: '5px 0px'
+  },
+  withoutLabel: {
+    marginTop: theme.spacing(3),
   },
   textField: {
     width: '100%',
+  },
+  title: {
+    width: '100%'
   },
 }));
 
 export const InputForm = () => {
   const classes = useStyles();
-  const editedProfile = useAppSelector(selectProfile)
-
+  const editedPost = useAppSelector(selectPost)
   const dispatch = useAppDispatch()
 
   return (
     <div>
     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-    {editedProfile.nickname.length >= 51 ? 
+    {editedPost.title.length >= 51 ? 
       <TextField
-        label='ニックネーム'
-        value={editedProfile.nickname}
+        label='タイトル'
+        value={editedPost.title}
         onChange={(e) => 
-          dispatch(setEditedProfile({ ...editedProfile, nickname: e.target.value}))
+          dispatch(setEditedPost({ ...editedPost, title: e.target.value}))
         }
         variant="outlined"
         error
@@ -39,35 +47,35 @@ export const InputForm = () => {
       />     
       :
         <TextField
-          label='ニックネーム'
-          value={editedProfile.nickname}
+          label='タイトル'
+          value={editedPost.title}
           onChange={(e) => 
-            dispatch(setEditedProfile({ ...editedProfile, nickname: e.target.value}))
+            dispatch(setEditedPost({ ...editedPost, title: e.target.value}))
           }
           variant="outlined"
           className={classes.margin}
         />    
     }
-    {editedProfile.introduction.length >= 201 ?
+    {editedPost.caption.length >= 401 ?
     <TextField
-      label='自己紹介'
-      value={editedProfile.introduction}
+      label='説明'
+      value={editedPost.caption}
       onChange={(e) => 
-        dispatch(setEditedProfile({ ...editedProfile, introduction: e.target.value}))
+        dispatch(setEditedPost({ ...editedPost, caption: e.target.value}))
       }
       className={classes.margin}
       variant='outlined'
       multiline
       rows={5}
       error
-      helperText="200文字以下で入力してください"
+      helperText="400文字以下で入力してください"
     /> 
     :
     <TextField
-      label='自己紹介'
-      value={editedProfile.introduction}
+      label='説明'
+      value={editedPost.caption}
       onChange={(e) => 
-        dispatch(setEditedProfile({ ...editedProfile, introduction: e.target.value}))
+        dispatch(setEditedPost({ ...editedPost, caption: e.target.value}))
       }
       className={classes.margin}
       variant='outlined'
@@ -76,7 +84,7 @@ export const InputForm = () => {
     /> 
     }
   </FormControl>
-  </div>
+    </div>
   );
 }
 

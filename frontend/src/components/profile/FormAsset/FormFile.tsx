@@ -1,22 +1,9 @@
 
-import clsx from 'clsx';
-
-import IconButton from '@material-ui/core/IconButton';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
-import { Box} from '@material-ui/core'
-import Button from '@material-ui/core/Button' 
-import axios from 'axios';
-
-import React, {VFC,useState} from 'react';
-import { useAppSelector, useAppDispatch } from '../../../app/hooks'
-import { setEditedPost, selectPost } from '../../../slices/postSlice'
-import defaultPhoto from '../../../profile_default.png'
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import React, { useState, VFC } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectProfile, setEditedProfile } from '../../../slices/profileSlice';
+
 
 const FormFile:VFC = () => {
 
@@ -30,7 +17,6 @@ const FormFile:VFC = () => {
     setFileUrl(imageUrl)
     dispatch(setEditedProfile({ ...editedProfile, avatar: image}))
   }
-  console.log(editedProfile)
 
   return (
     <div>

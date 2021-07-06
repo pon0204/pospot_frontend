@@ -9,7 +9,6 @@ Rails.application.routes.draw do
         resources :follows, only: [:create,:destroy,:index]
       end
       get '/spot/:place_id', to: 'spots#spot_detail'
-      get '/post/query', to: 'posts#query'
       get '/user_id', to: 'users#user_id'
     end
   end

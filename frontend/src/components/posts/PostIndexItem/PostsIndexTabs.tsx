@@ -1,11 +1,10 @@
-import React from 'react'
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import PhoneIcon from '@material-ui/icons/Phone';
-import AutorenewIcon from '@material-ui/icons/Autorenew';
+import Tabs from '@material-ui/core/Tabs';
 import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
+import React from 'react';
 
 const useStyles = makeStyles({
   root: {

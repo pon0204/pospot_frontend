@@ -1,28 +1,29 @@
-import axios from 'axios'
-import {useAppSelector, useAppDispatch } from '../../app/hooks'
-import { useQueryClient, useMutation } from 'react-query'
+import axios from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
+import { useAppSelector } from '../../app/hooks';
 import { selectHeaders } from "../../slices/headersSlice";
-import { EditPost, PostData } from '../../types/types'
+import { Post, Posts } from '../../types/types';
 
 export const useMutateLike = () => {
-  const dispatch = useAppDispatch()
   const queryClient = useQueryClient()
   const headers = useAppSelector(selectHeaders)
   const currentUserId = localStorage.getItem('currentUserId')
+
   const createLikeMutation = useMutation(
     (postId:number) => 
       axios.post(`${process.env.REACT_APP_REST_URL}/posts/${postId}/likes`,null,headers),
     {
       onSuccess: (res,variables) => {
-        const newPosts = queryClient.getQueryData<any>('posts')
+        const newPosts = queryClient.getQueryData<Posts>('posts')
         // post_idがわかっている post_idが同じものにlikes(res.data)を加える
+        if(newPosts){
         newPosts.posts.map((post:any) => {
           if(post.id == variables){
           post.likes = [...post.likes,res.data]
           }        
         })
-        console.log(newPosts)
-          queryClient.setQueryData<any>('posts',newPosts)
+          queryClient.setQueryData<Posts>('posts',newPosts)
+      }
       },
     }
   )
@@ -31,21 +32,21 @@ export const useMutateLike = () => {
     axios.delete(`${process.env.REACT_APP_REST_URL}/posts/${postId}/likes/1`,headers),
     {
       onSuccess: (res,variables) => {
-        const newPosts = queryClient.getQueryData<any>('posts')
-        const hoge = newPosts.posts.map((post:any) => {
+        const newPosts = queryClient.getQueryData<Posts>('posts')
+        if(newPosts){
+        newPosts.posts.map((post:Post) => {
           if(post.id == variables){
             // likesの中に自分のuser_idがある場合は消去
-            post.likes.map((like:any,key:any) => {
+            post.likes.map((like:any) => {
             if(like.user_id == currentUserId){
               delete like.user_id
             }
             })
-          }
+          }          
         })
-        console.log(hoge)
-        console.log(newPosts)
-        queryClient.setQueryData<any>('posts',newPosts)
+        queryClient.setQueryData<Posts>('posts',newPosts)
       }
+    }
     }
   )
   return { createLikeMutation ,deleteLikeMutation}

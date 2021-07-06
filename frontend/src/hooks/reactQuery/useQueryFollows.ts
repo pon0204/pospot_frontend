@@ -1,11 +1,10 @@
-import { useQuery } from 'react-query'
-import axios from 'axios'
+import axios from 'axios';
+import { useQuery } from 'react-query';
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { selectHeaders } from "../../slices/headersSlice";
 import { setFollowsCount } from '../../slices/followSlice';
+import { selectHeaders } from "../../slices/headersSlice";
 
 export const useQueryFollows = (profileId:number | string | null) => {
-  // const token = useAppSelector(selectUserToken)
   const headers = useAppSelector(selectHeaders)
   const dispatch = useAppDispatch()
   
@@ -21,8 +20,5 @@ export const useQueryFollows = (profileId:number | string | null) => {
     queryFn: getFollows,
     staleTime: 0,
     cacheTime: 0,
-    // refetchOnWindowFocus: true,
-    //cacheTime: 5000,
-    // refetchInterval: 5000,
   })
 }

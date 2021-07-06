@@ -39,7 +39,10 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "plugin:tailwind/recommended"
+    ]
   },
   "browserslist": {
     "production": [
@@ -57,7 +60,10 @@
     "@types/autosuggest-highlight": "^3.1.1",
     "@types/lodash": "^4.14.170",
     "autoprefixer": "^9",
+    "eslint": "^7.29.0",
+    "eslint-plugin-tailwind": "^0.2.1",
     "postcss": "^7",
+    "stylelint-config-recommended": "^5.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }

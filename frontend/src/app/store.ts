@@ -1,9 +1,9 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import headersReducer from '../slices/headersSlice'
-import postReducer from '../slices/postSlice'
-import spotReducer from '../slices/spotSlice'
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
+import followReducer from '../slices/followSlice';
+import headersReducer from '../slices/headersSlice';
+import postReducer from '../slices/postSlice';
 import profileReducer from '../slices/profileSlice';
-import followReducer from '../slices/followSlice'
+import spotReducer from '../slices/spotSlice';
 
 export const store = configureStore({
   reducer: {

@@ -1,15 +1,13 @@
-import axios from 'axios'
-import {useAppSelector, useAppDispatch } from '../../app/hooks'
-import { useQueryClient, useMutation } from 'react-query'
-import { selectHeaders } from "../../slices/headersSlice";
-import { filter } from 'lodash';
+import axios from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setFollowsCount } from '../../slices/followSlice';
+import { selectHeaders } from "../../slices/headersSlice";
 
 export const useMutateFollow = () => {
   const dispatch = useAppDispatch()
   const queryClient = useQueryClient()
   const headers = useAppSelector(selectHeaders)
-  const currentUserId = localStorage.getItem('currentUserId')
 
   const createFollowMutation = useMutation(
     (profileId:number) => 

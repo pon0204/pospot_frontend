@@ -1,37 +1,21 @@
-import {useEffect,useState} from 'react'
-import ProfileTabs from './ProfileTabs'
-import { PostCard } from '../../posts/PostCards/PostCard'
+import { useState } from 'react'
+import { useAppSelector } from '../../../app/hooks'
 import { useQueryPosts } from '../../../hooks/reactQuery/useQueryPosts'
-import { Height } from '@material-ui/icons'
-import { convertToObject } from 'typescript'
-import { useQueryClient, useMutation } from 'react-query'
-import { EditPost, PostData } from '../../../types/types'
-import { resetFollow, selectFollowers, selectFollowsCount, selectFollowsId } from '../../../slices/followSlice'
-import { useAppSelector,useAppDispatch } from '../../../app/hooks'
+import { selectFollowsCount } from '../../../slices/followSlice'
+import { Post } from '../../../types/types'
+import ProfileShowPostsCurrent from './ProfileShowPostsCurrent'
+import ProfileShowPostsLike from './ProfileShowPostsLike'
+import ProfileTabs from './ProfileTabs'
 
 const ProfileShowPosts = (id:any) => {
-  const currentUserId = localStorage.getItem('currentUserId')
   const { status, data } = useQueryPosts()
-  const [currentPosts,setCurrentPosts] = useState<any>()
-  const [likesPosts,setLikesPosts] = useState<any>()
   const [query, setQuery] = useState(0);
-  const dispatch = useAppDispatch()
   const followsCount = useAppSelector(selectFollowsCount)
+  const currentPosts = data?.posts?.filter((v:Post) => v.user_id == id.id)
   
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setQuery(newValue);
   };  
-
-  useEffect(() =>{
-      if(query == 0){
-      const currentPost = data?.posts?.filter((v:any) => v.user_id == id.id)
-      setCurrentPosts(currentPost)
-      }else if(query == 1){
-        // いいねしている投稿のみ取得        
-        const LikePosts = data?.posts?.filter((v:any) => v.likes.some((v:any) => v.user_id == id.id) == true)
-      setLikesPosts(LikePosts)
-      }
-  },[query,status])
 
   if (status === 'loading') return (<div></div>  )
   if (status === 'error') return <div>{'Error'}</div>
@@ -45,13 +29,9 @@ const ProfileShowPosts = (id:any) => {
       </div>
       <div className="flex flex-wrap justify-center pb-12">
         {query == 0 ?
-        currentPosts?.map((item:any) => (
-          <PostCard item={item}/>
-          ))
+        <ProfileShowPostsCurrent id={id.id}/>
           :
-          likesPosts?.map((item:any) => (
-            <PostCard item={item}/>
-            ))
+        <ProfileShowPostsLike id={id.id}/>
           }
       </div>
           <ProfileTabs handleChange={handleChange} query={query}/>

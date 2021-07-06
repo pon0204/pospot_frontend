@@ -1,14 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
-import {} from '../types/types'
-
+import { EditProfile } from '../types/types';
 
 export interface profileState {
-  editedProfile: any
-  showProfile: any
-
-
-  // editedTag: Tag
+  editedProfile: EditProfile
+  currentAvatar: string
 }
 
 const initialState: profileState = {
@@ -16,33 +12,32 @@ const initialState: profileState = {
     nickname: '',
     introduction: '',
     gender: '',
-    avatar: '',
+    avatar_url: '',
+    avatar: ''
 },
-  showProfile: {
-  },
+  currentAvatar: ''
 }
 
 export const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    setShowProfile:(state, action: PayloadAction<any>) => {
-      state.showProfile = action.payload
-    },
-    setEditedProfile: (state, action: PayloadAction<any>) => {
+    setEditedProfile: (state, action: PayloadAction<EditProfile>) => {
       state.editedProfile = action.payload
     },
     resetEditedProfile: (state) => {
       state.editedProfile = initialState.editedProfile
     },
-    
+    setCurrentAvatar: (state, action: PayloadAction<string>) => {
+      state.currentAvatar = action.payload
+    },
   },
 })
 
-export const { setEditedProfile, resetEditedProfile, setShowProfile} =
+export const { setEditedProfile, resetEditedProfile,setCurrentAvatar} =
   profileSlice.actions
 
   export const selectProfile = (state: RootState) => state.profile.editedProfile
-  export const selectShowProfile = (state: RootState) => state.profile.showProfile
+  export const selectAvatar = (state: RootState) => state.profile.currentAvatar
 
 export default profileSlice.reducer;

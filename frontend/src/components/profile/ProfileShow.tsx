@@ -1,17 +1,27 @@
+import AddIcon from '@material-ui/icons/Add'
 import React from 'react'
-import ProfileShowProfile from './ProfileShowItem/ProfileShowProfile'
-import ProfileShowPosts from './ProfileShowItem/ProfileShowPosts'
+import { Link } from 'react-router-dom'
 import { useQueryFollows } from '../../hooks/reactQuery/useQueryFollows'
+import ProfileShowPosts from './ProfileShowItem/ProfileShowPosts'
+import ProfileShowProfile from './ProfileShowItem/ProfileShowProfile'
 
 const ProfileShow = ({match}:any) => {
-  // console.log(data)
+  const currentUserId = localStorage.getItem('currentUserId')
   const id = match.params.profileId
   useQueryFollows(id)
-
+  
   return (  
-    <div className='w-full py-2 lg:mx-auto'>
+    <div className='w-full pt-2 pb-28 lg:mx-auto'>
       <ProfileShowProfile id={id}/>
       <ProfileShowPosts id={id}/>
+      {
+      currentUserId == id &&
+      <div className='fixed bottom-20 right-6 lg:right-20 bg-opacity-30 bg-blue-300 rounded-full'>
+        <Link to='posts/new' className='p-4 block'>
+          <AddIcon style={{fontSize: 52}} color='primary'/>
+        </Link>
+      </div>
+      }
     </div>
   )
 }

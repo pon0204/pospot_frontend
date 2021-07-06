@@ -1,8 +1,7 @@
-import {VFC} from 'react'
-import { useAppSelector, useAppDispatch } from '../../../app/hooks'
-import { selectProfile } from '../../../slices/profileSlice'
+import { VFC } from 'react'
+import { useAppSelector } from '../../../app/hooks'
 import { useMutateUser } from '../../../hooks/castomHook/useMutateUser'
-
+import { selectProfile } from '../../../slices/profileSlice'
 
 const FormButton:VFC = () => {
   const editedProfile = useAppSelector(selectProfile)
@@ -14,14 +13,16 @@ const FormButton:VFC = () => {
     data.append('introduction',editedProfile.introduction)
     data.append('gender',editedProfile.gender)
     data.append('avatar',editedProfile.avatar)
-    profileUpdateMutation.mutate(data,editedProfile.id)
+    profileUpdateMutation.mutate(data)
   }
 
-  // if(editedSpot.spot.name != '') return (
-  //   <button className="bg-red-500 mt-3 rounded text-lg font-bold mx-auto w-2/6 p-4 block text-white"
-  //   onClick={postCreateClick}
-  //   >投稿</button>
+  if(editedProfile.nickname.length >= 51 || editedProfile.introduction.length >= 201){
+    return (      
+    <button disabled className="cursor-default bg-red-300 mt-3 rounded text-lg font-bold mx-auto w-2/6 p-4 block text-white">エラーの項目があります</button>)
+  }
+
   return (
+    
     <button className="bg-red-500 mt-3 rounded text-lg font-bold mx-auto w-2/6 p-4 block text-white"
     onClick={profileUpdateClick}
     >更新</button>

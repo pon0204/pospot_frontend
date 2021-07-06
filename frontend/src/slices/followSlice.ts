@@ -1,12 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
-import { PostData,EditSpot} from '../types/types'
+import { FollowCount, FollowersId, FollowingsId } from '../types/types';
 
 export interface FollowState {
-  followsCount:any
-  followingsId:any
-  followersId:any
-  // editedTag: Tag
+  followsCount:FollowCount
+  followingsId: FollowingsId[]
+  followersId: FollowersId[]
 }
 
 const initialState: FollowState = {
@@ -14,12 +13,12 @@ const initialState: FollowState = {
     followingsCount: null,
     followersCount: null,
   },
-  followingsId:{
-
-  },
-  followersId:{
-
-  }
+  followingsId:[{
+    id: null
+  }],
+  followersId:[{
+    id: null
+  }]
   
 }
 

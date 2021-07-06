@@ -1,19 +1,15 @@
-import React from 'react';
+import React, { VFC } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { VFC,useEffect} from 'react';
-import { BrowserRouter, Route, Switch} from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
-
-import Header from './components/Header'
-import PostShow from './components/posts/PostShow';
-import PostForm from './components/posts/PostForm';
-import Test from './components/test'
+import Header from './components/Header';
+import PostForm from './components/posts/PostCreate';
+import PostsIndex from './components/posts/PostsIndex';
 import ProfileEdit from './components/profile/ProfileEdit';
 import ProfileShow from './components/profile/ProfileShow';
-import PostsIndex from './components/posts/PostsIndex';
-import { useQueryPosts } from './hooks/reactQuery/useQueryPosts';
-
+import Test from './components/test';
+import Top from './components/TopView/Top';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,10 +23,10 @@ const queryClient = new QueryClient({
 const App: VFC = () => {
   return (
     
-    <div className='relative h-screen'>
+  <div className='relative h-screen'>
     <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-    <Header/>
+      <BrowserRouter>
+        <Header/>
         <Switch>
           <Route exact path="/posts">
             {/* <MainTag/> */}
@@ -39,22 +35,6 @@ const App: VFC = () => {
           <Route exact path="/posts/new">
             <PostForm/>
           </Route>
-          <Route
-          exact path="/posts/:postId"
-          render={({ match }:any) =>
-          <PostShow
-          match={match}
-          />
-          }
-          />
-          <Route
-          exact path="/posts/edit/:postId"
-          render={({ match }:any) =>
-          <PostForm
-          match={match}
-          />
-          }
-          />
           <Route exact path="/profile/edit/:profileId"
           render={({ match }:any) =>
           <ProfileEdit
@@ -72,12 +52,14 @@ const App: VFC = () => {
           <Route exact path="/test">
             <Test/>
           </Route>
+          <Route exact path="/">
+            <Top/>
+          </Route>
         </Switch>
-        </BrowserRouter>
-    <ReactQueryDevtools initialIsOpen={false} />
+      </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />  
     </QueryClientProvider>
-    </div>
-
+  </div>
   );
 }
 

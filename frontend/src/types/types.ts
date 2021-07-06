@@ -1,25 +1,30 @@
-export interface User {
-  given_name: string
-  nickname: string
-  name: string
-  picture: string
-  locale: string
-  updated_at: string
-  email: string
-  email_verified: string
-  sub: string
-}
 
-export interface PostData {
+export interface Post {
   id: number
   user_id: number
   title: string
-  caption: string | null
-  with: string | null
-  genre: string | null  
+  caption: string
+  with: string
+  genre: []
   created_at: string
   updated_at: string
-  image_url: any
+  image_url: string | null
+  likes: []
+  avatar_url: string | null
+  place: string
+  spot_name: string
+}
+
+export interface Posts {
+  posts: Post[]
+}
+
+export interface EditProfile {
+  nickname: string
+  introduction: string
+  gender: string
+  avatar_url: string
+  avatar: any
 }
 
 export interface SpotData {
@@ -37,10 +42,10 @@ export interface SpotData {
 
 export interface EditPost {
   title: string
-  caption: string | null
-  with: string | null
-  genre: string | null  
-  eyecatch: string | null  
+  caption: string
+  with: string
+  genre: string
+  eyecatch: string
 }
 
 export interface EditSpot {
@@ -55,3 +60,15 @@ export interface EditSpot {
   id: number | null
 }
 
+export interface FollowCount {
+  followingsCount: number | null
+  followersCount: number | null
+}
+
+export interface FollowingsId {
+  id: number | null
+}
+
+export interface FollowersId {
+  id: number | null
+}

@@ -1,9 +1,10 @@
 import React from 'react'
-import { useQueryProfileShow } from '../../../hooks/reactQuery/useQueryProfileShow'
-import defaultPhoto from '../../../profile_default.png'
+import { useQueryClient } from 'react-query'
 import { Link } from 'react-router-dom'
 import { useMutateFollow } from '../../../hooks/castomHook/useMutateFollow'
-import { useQueryClient } from 'react-query'
+import { useQueryProfileShow } from '../../../hooks/reactQuery/useQueryProfileShow'
+import defaultPhoto from '../../../image/profile_default.png'
+import { FollowersId } from '../../../types/types'
 
 const ProfileShowProfile = (id:any) => {
   const currentUserId = localStorage.getItem('currentUserId')
@@ -13,7 +14,7 @@ const ProfileShowProfile = (id:any) => {
   const queryClient = useQueryClient()
   const followersIds = queryClient.getQueryData<any>('follows')
 
-  const currentUserFollowing = followersIds?.followers?.some((v:any) => v.id == currentUserId)
+  const currentUserFollowing = followersIds?.followers?.some((follower:FollowersId) => follower.id == currentUserId)
 
   if (status === 'loading') return (<div style={{height: 304}}></div>  )
   if (status === 'error') return <div>{'Error'}</div>

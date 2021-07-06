@@ -1,21 +1,13 @@
-import React,{useEffect} from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import { useAuth0 } from "@auth0/auth0-react";
-
-import { useAppDispatch } from '../app/hooks';
+import AppBar from '@material-ui/core/AppBar';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import axios from "axios";
+import React, { useEffect } from 'react';
+import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useMutateUser } from '../hooks/castomHook/useMutateUser';
 import { setHeaders } from '../slices/headersSlice';
-
-import {  Link } from "react-router-dom";
-import { useQueryClient } from 'react-query';
-import { useQueryProfiles } from '../hooks/reactQuery/useQueryProfiles';
-import { remove } from 'lodash';
+import { selectAvatar, setCurrentAvatar } from "../slices/profileSlice";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,31 +27,35 @@ export default function Header() {
   const classes = useStyles();
   const {isAuthenticated,loginWithRedirect,logout } = useAuth0();
   const dispatch = useAppDispatch()
-  const { getAccessTokenSilently,user }:any = useAuth0();
+  const { getAccessTokenSilently }:any = useAuth0();
   const { userIdMutation } = useMutateUser()
-
+  const currentUserId = localStorage.getItem('currentUserId')
+  const avatar = useAppSelector(selectAvatar)
+  
   const removeUserId = () =>{
     localStorage.removeItem('currentUserId')
   }
 
+  useEffect(()=>{
+    axios.get(`${process.env.REACT_APP_REST_URL}/profiles/${currentUserId}`)
+    .then((res)=>
+    dispatch(setCurrentAvatar(res.data.profile.avatar_url))
+    )
+  },[])
+
   useEffect(() => {
     const getToken = async () => {
-
     try{
       const accessToken = await getAccessTokenSilently({
       });
       dispatch(setHeaders(accessToken))
-      // if(!localStorage.getItem('currentUserId')){
       userIdMutation.mutate()
-      // }
     }
     catch(e){
       console.log(e.message)
   } 
 }
-    getToken()
-
-  
+getToken()
   }, [])
 
   return (
@@ -71,6 +67,10 @@ export default function Header() {
           </Link>
           {isAuthenticated ?
           (
+            <div className='flex items-center'>
+            <Link to={`/profile/${currentUserId}`}>
+              <img src={avatar} alt="" className='block rounded-full w-10 h-10 mr-4'/>
+            </Link>
             <button className='text-right' color="inherit" onClick={() => 
             {
               logout({ returnTo: window.location.origin })
@@ -78,6 +78,7 @@ export default function Header() {
             }
             }
               >ログアウト</button>
+            </div>
           ):(
             <button className='text-right' color="inherit" onClick={loginWithRedirect}>ログイン</button>
           )

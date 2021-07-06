@@ -1,63 +1,66 @@
 /* eslint-disable no-use-before-define */
-import React, { VFC,useState } from 'react';
 import Chip from '@material-ui/core/Chip';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { useAppSelector, useAppDispatch } from '../../../app/hooks'
-import { setEditedPost, selectPost } from '../../../slices/postSlice'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-
-    margin: 25,
-    '& > * + *': {
-      marginTop: theme.spacing(3),
-    },
-  },
-}));
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import React, { VFC } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { selectPost, setEditedPost } from '../../../slices/postSlice';
 
 export const FormAutoComp:VFC = () => {
-  const classes = useStyles();
   const editedPost = useAppSelector(selectPost)
   const dispatch = useAppDispatch()
 
-  // const [genre, setGenre] = useState<any>();
-
   const handleChange = (e:any,v:any) => {
-    console.log(v)
-    const genres = v.map((gen:any) =>  gen)
-    // setGenre(genres)
+    const genres = v.map((genre:string) =>  genre)
     const genre = genres.join(',')
     dispatch(setEditedPost(
       { ...editedPost, genre: genre}))
   }
+  const genreLength = editedPost.genre.split(',').length
+  
+  console.log(genreLength)
   
   return (
     <div className='full-width'>
-
+      {genreLength >= 2 ? 
+      // <div>
       <Autocomplete
         multiple
         id="tags-filled"
-        options={genres.map((option) => option.title)}
-        // defaultValue={[genre[13].title]}
         freeSolo
+        options={genres.map((option) => option.title)}
         onChange={(e,v) => handleChange(e,v)}
         renderTags={(value, getTagProps) =>
           value.map((option, index) => 
-          
-            (<Chip variant="outlined" label={option} {...getTagProps({ index })} 
-            />                                    
-            // console.log(option)          
+          (<Chip variant="outlined" label={option} {...getTagProps({ index })} 
+          />                                    
           ))
         }
-        
         renderInput={(params) => (
-          <TextField {...params} variant="outlined" label="ジャンル" placeholder="ジャンル" />
-        )
-        
+          <TextField {...params} variant="outlined" label="ジャンル(3つまで)" placeholder="ジャンル" />
+          )
+        }
+        />
+        :
+        <Autocomplete
+        multiple
+        id="tags-filled"
+        freeSolo
+        disableCloseOnSelect
+        options={genres.map((option) => option.title)}
+        onChange={(e,v) => handleChange(e,v)}
+        renderTags={(value, getTagProps) =>
+          value.map((option, index) => 
+          (<Chip variant="outlined" label={option} {...getTagProps({ index })} 
+          />                                    
+          ))
+        }
+        renderInput={(params) => (
+          <TextField {...params} variant="outlined" label="ジャンル(3つまで)" placeholder="ジャンル" />
+          )
+        }
+        />        
       }
-      />
     </div>
   );
 }

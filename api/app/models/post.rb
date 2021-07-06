@@ -1,10 +1,17 @@
 class Post < ApplicationRecord
   include Rails.application.routes.url_helpers
-  has_one :spot, dependent: :destroy
   belongs_to :user
+  has_one :spot, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
   has_one_attached :eyecatch
+
+  validates :title, presence: true
+  validates :title, length: { maximum: 50 }
+  validates :caption, presence: true
+  validates :caption, length: { maximum: 400 }
+  validates :genre, presence: true
+  validates :with, presence: true
   
   # 紐づいている画像のURLを取得する
   def image_url

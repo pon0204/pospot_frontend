@@ -1,6 +1,5 @@
 class Api::V1::LikesController < SecuredController
-  skip_before_action :authorize_request, only: [:index]
-
+  
   def create  
     like = @current_user.likes.create(post_id: params[:post_id])
     render json: like

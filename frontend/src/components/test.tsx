@@ -1,48 +1,56 @@
-import React,{VFC} from 'react'
-import axios from 'axios'
+import Button from '@material-ui/core/Button';
+import Dialog, { DialogProps } from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import React from 'react';
+import PostShow from './posts/PostShow';
 
-import { useMutateSpot } from '../hooks/castomHook/useMutateSpot'
-import { useAppSelector, useAppDispatch } from '../app/hooks'
-import { selectSpot } from '../slices/spotSlice'
-import { selectPost } from '../slices/postSlice'
-import { selectHeaders } from '../slices/headersSlice'
-import { useAuth0 } from "@auth0/auth0-react";
-import { useQueryClient } from 'react-query'
+export default function ScrollDialog() {
+  const [open, setOpen] = React.useState(false);
+  const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
 
-const Test: VFC = () => {
-  const { user, isAuthenticated, getAccessTokenSilently }:any = useAuth0();
-  console.log(user)
-  const headers = useAppSelector(selectHeaders)
+  const handleClickOpen = (scrollType: DialogProps['scroll']) => () => {
+    setOpen(true);
+    setScroll(scrollType);
+  };
 
-  const Click = () =>{ 
-    axios.get(`${process.env.REACT_APP_REST_URL}/profiles`)
-    .then(res =>{
-      console.log(res.data)
-    })
-  }
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-  const createClick = () => {
-    axios.post(`${process.env.REACT_APP_REST_URL}/profiles/1/follows`,null,headers)
-    .then(res =>{
-      console.log(res)
-    })
-  }
-  const deleteClick = () => {
-    axios.delete(`${process.env.REACT_APP_REST_URL}/profiles/1/follows/1`,headers)
-    .then(res =>{
-      console.log(res)
-    })
-  }
+  const descriptionElementRef = React.useRef<HTMLElement>(null);
+  React.useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [open]);
 
   return (
     <div>
-      <button onClick={Click}>ゲット</button>
-      <br/>
-      <button onClick={createClick}>クリエイト</button>
-      <br/>
-      <button onClick={deleteClick}>デリート</button>
+      <Button onClick={handleClickOpen('paper')}>scroll=paper</Button>
+      <Button onClick={handleClickOpen('body')}>scroll=body</Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+      >
+        <DialogContent dividers={scroll === 'paper'}>
+          <PostShow id={1}/>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
-  )
+  );
 }
-
-export default Test

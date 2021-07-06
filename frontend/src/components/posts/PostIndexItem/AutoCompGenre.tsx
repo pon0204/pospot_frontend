@@ -1,15 +1,17 @@
-import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { useAppDispatch,useAppSelector} from '../../../app/hooks';
-import { resetQueryGenre, selectQueryGenre, setQueryGenre } from '../../../slices/postSlice';
+import React from 'react';
+import { useAppDispatch } from '../../../app/hooks';
+import { resetQueryGenre, setQueryGenre } from '../../../slices/postSlice';
 
 export const AutoCompGenre = () => {
+  interface genres {
+    genre: string
+  }
   const dispatch = useAppDispatch()
-  const genre = useAppSelector(selectQueryGenre)
-  const handleChange = (e:any,v:any) =>{
-    v ?
-    dispatch(setQueryGenre(v.genre))
+  const handleChange = (e:any,genres:genres) =>{
+    genres ?
+    dispatch(setQueryGenre(genres.genre))
     : 
     dispatch(resetQueryGenre())
   }
