@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useMutateUser } from '../hooks/castomHook/useMutateUser';
 import { setHeaders } from '../slices/headersSlice';
 import { selectAvatar, setCurrentAvatar } from "../slices/profileSlice";
+import defaultPhoto from '../image/profile_default.png'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,6 +58,7 @@ export default function Header() {
 }
 getToken()
   }, [])
+  console.log(avatar)
 
   return (
     <div className={classes.root}>
@@ -69,7 +71,11 @@ getToken()
           (
             <div className='flex items-center'>
             <Link to={`/profile/${currentUserId}`}>
+              { avatar ?
               <img src={avatar} alt="" className='block rounded-full w-10 h-10 mr-4'/>
+              :
+              <img src={defaultPhoto} alt="" className='block rounded-full w-10 h-10 mr-4'/>
+              }
             </Link>
             <button className='text-right' color="inherit" onClick={() => 
             {
