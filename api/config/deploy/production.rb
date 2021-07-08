@@ -1,7 +1,7 @@
-server "18.182.197.18", user: "tsuyoshi", roles: %w{app db web}
+server "35.75.24.48", user: "tsuyoshi", roles: %w{app db web}
 
 set :ssh_options, {
-  keys: %w(~/.ssh/pospot_key_rsa),
+  keys: %w(~/.ssh/pospot.pem),
   forward_agent: true,
   auth_methods: %w(publickey),
 }
