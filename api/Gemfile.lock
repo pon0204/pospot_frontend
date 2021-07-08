@@ -121,10 +121,10 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     multipart-post (2.1.1)
+    mysql2 (0.5.3)
     nio4r (2.5.7)
     nokogiri (1.11.7-x86_64-darwin)
       racc (~> 1.4)
-    pg (1.2.3)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -205,7 +205,7 @@ DEPENDENCIES
   faraday
   jwt
   listen (~> 3.2)
-  pg (>= 0.18, < 2.0)
+  mysql2 (>= 0.4.4)
   pry-rails
   puma (~> 4.1)
   rack-cors
