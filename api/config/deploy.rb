@@ -2,7 +2,7 @@
 lock "~> 3.16.0"
 
 set :application, "pospot"
-set :repo_url, "https://github.com/pon0204/portfolio_pospot"
+set :repo_url, "git@github.com:pon0204/portfolio_pospot_api.git"
 set :rbenv_ruby, File.read('.ruby-version').strip
 set :branch, ENV['BRANCH'] || "main"
 
