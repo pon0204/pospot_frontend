@@ -45,7 +45,7 @@ export interface EditPost {
   caption: string
   with: string
   genre: string
-  eyecatch: string
+  eyecatch: any
 }
 
 export interface EditSpot {

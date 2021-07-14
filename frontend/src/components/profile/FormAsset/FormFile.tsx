@@ -3,7 +3,7 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import React, { useState, VFC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectProfile, setEditedProfile } from '../../../slices/profileSlice';
-
+import imageCompression from 'browser-image-compression';
 
 const FormFile:VFC = () => {
 
@@ -11,11 +11,17 @@ const FormFile:VFC = () => {
   const editedProfile = useAppSelector(selectProfile)
   const dispatch = useAppDispatch()
 
-  const imageChange = (event:any) => {
+  const compressOption = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 128
+  };
+
+  const imageChange = async(event:any) => {
     const image = event.target.files[0];
     const imageUrl:any = URL.createObjectURL(image);
+    const compressFile = await imageCompression(image ,compressOption);
     setFileUrl(imageUrl)
-    dispatch(setEditedProfile({ ...editedProfile, avatar: image}))
+    dispatch(setEditedProfile({ ...editedProfile, avatar: compressFile}))
   }
 
   return (

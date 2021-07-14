@@ -2,17 +2,24 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import React, { useState, VFC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectPost, setEditedPost } from '../../../slices/postSlice';
+import imageCompression from 'browser-image-compression';
 
 const FormFile:VFC = () => {
   const [fileUrl, setFileUrl] = useState<string>('');
   const editedPost = useAppSelector(selectPost)
   const dispatch = useAppDispatch()
+    
+  const compressOption = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1024
+  };
 
-  const imageChange = (event:any) => {
+  const imageChange = async(event:any) => {
     const image = event.target.files[0];
+    const compressFile = await imageCompression(image ,compressOption);
     const imageUrl:any = URL.createObjectURL(image);
     setFileUrl(imageUrl)
-    dispatch(setEditedPost({ ...editedPost, eyecatch: image}))
+    dispatch(setEditedPost({ ...editedPost, eyecatch: compressFile}))
   }
 
   return (
