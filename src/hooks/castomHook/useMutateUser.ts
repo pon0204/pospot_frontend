@@ -5,6 +5,7 @@ import { selectHeaders } from "../../slices/headersSlice";
 import { EditProfile } from '../../types/types';
 import { useHistory } from 'react-router-dom';
 import { setCurrentAvatar } from '../../slices/profileSlice';
+import { resetApiLoading } from '../../slices/apiSlice';
 
 export const useMutateUser = () => {
   const headers = useAppSelector(selectHeaders)
@@ -27,6 +28,7 @@ export const useMutateUser = () => {
     axios.put(`${process.env.REACT_APP_REST_URL}/profiles/1`,data,headers),
       {
       onSuccess: (res) => {
+        dispatch(resetApiLoading())
         dispatch(setCurrentAvatar(res.data.avatar_url))
         history.push(`/profile/${res.data.id}`)
         }

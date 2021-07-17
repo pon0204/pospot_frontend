@@ -4,6 +4,7 @@ import headersReducer from '../slices/headersSlice';
 import postReducer from '../slices/postSlice';
 import profileReducer from '../slices/profileSlice';
 import spotReducer from '../slices/spotSlice';
+import apiReducer from '../slices/apiSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     post: postReducer,
     spot: spotReducer,
     profile: profileReducer,
-    follows: followReducer
+    follows: followReducer,
+    api: apiReducer
   },
 
 

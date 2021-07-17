@@ -7,6 +7,7 @@ import { selectHeaders } from "../../slices/headersSlice";
 import { EditSpot,SpotData } from '../../types/types';
 import { useHistory } from 'react-router-dom';
 import { resetEditedPost } from '../../slices/postSlice';
+import { resetApiLoading } from '../../slices/apiSlice';
 
 export const useMutateSpot = () => {
   const headers = useAppSelector(selectHeaders)
@@ -28,6 +29,7 @@ export const useMutateSpot = () => {
       axios.post<SpotData>(`${process.env.REACT_APP_REST_URL}/spots/`, spot,headers),
     {
       onSuccess: (res) => {
+        dispatch(resetApiLoading())
         history.push('/posts')
         dispatch(resetEditedSpot())
         dispatch(resetEditedPost())

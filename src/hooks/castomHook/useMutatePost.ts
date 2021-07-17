@@ -15,7 +15,8 @@ export const useMutatePost = () => {
   const editedSpot = useAppSelector(selectSpot)
   const { createSpotMutation } = useMutateSpot()
 
-  const createPostMutation = useMutation(
+  const createPostMutation = 
+  useMutation(
     (post: EditPost) => 
       axios.post<Post>(`${process.env.REACT_APP_REST_URL}/posts/`, post,headers),
     {
