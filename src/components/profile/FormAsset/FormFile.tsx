@@ -1,9 +1,9 @@
 
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import imageCompression from 'browser-image-compression';
 import React, { useState, VFC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectProfile, setEditedProfile } from '../../../slices/profileSlice';
-import imageCompression from 'browser-image-compression';
 
 const FormFile:VFC = () => {
 

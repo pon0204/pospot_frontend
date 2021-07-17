@@ -1,8 +1,8 @@
 import { VFC } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 import { useMutateUser } from '../../../hooks/castomHook/useMutateUser'
-import { selectProfile } from '../../../slices/profileSlice'
 import { setApiLoading } from '../../../slices/apiSlice'
+import { selectProfile } from '../../../slices/profileSlice'
 
 const FormButton:VFC = () => {
   const editedProfile = useAppSelector(selectProfile)

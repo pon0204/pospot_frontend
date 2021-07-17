@@ -1,12 +1,12 @@
+import CircularProgress from '@material-ui/core/CircularProgress';
 import React from 'react';
+import { useAppSelector } from '../../app/hooks';
 import { useQueryProfileShow } from '../../hooks/reactQuery/useQueryProfileShow';
+import { selectLoading } from '../../slices/apiSlice';
 import FormButton from './FormAsset/FormButton';
 import FormFile from './FormAsset/FormFile';
 import { FormRadio } from './FormAsset/FormRadio';
 import InputForm from './FormAsset/InputFrom';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { selectLoading } from '../../slices/apiSlice';
-import { useAppSelector } from '../../app/hooks';
 
 const ProfileEdit = ({match}:any) => {
   const id = match.params.profileId

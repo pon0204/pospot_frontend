@@ -1,8 +1,8 @@
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import imageCompression from 'browser-image-compression';
 import React, { useState, VFC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectPost, setEditedPost } from '../../../slices/postSlice';
-import imageCompression from 'browser-image-compression';
 
 const FormFile:VFC = () => {
   const [fileUrl, setFileUrl] = useState<string>('');

@@ -1,13 +1,12 @@
-import axios from 'axios'
-import { useAppDispatch } from '../../app/hooks'
-import { setEditedSpot,resetEditedSpot } from '../../slices/spotSlice'
-import { useMutation } from 'react-query'
-import { useAppSelector } from "../../app/hooks";
-import { selectHeaders } from "../../slices/headersSlice";
-import { EditSpot,SpotData } from '../../types/types';
+import axios from 'axios';
+import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import { resetEditedPost } from '../../slices/postSlice';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { resetApiLoading } from '../../slices/apiSlice';
+import { selectHeaders } from "../../slices/headersSlice";
+import { resetEditedPost } from '../../slices/postSlice';
+import { resetEditedSpot, setEditedSpot } from '../../slices/spotSlice';
+import { EditSpot, SpotData } from '../../types/types';
 
 export const useMutateSpot = () => {
   const headers = useAppSelector(selectHeaders)

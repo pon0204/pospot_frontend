@@ -1,11 +1,11 @@
-import axios from 'axios'
-import {useAppDispatch, useAppSelector } from '../../app/hooks'
-import { useMutation, useQueryClient } from 'react-query'
-import { selectHeaders } from "../../slices/headersSlice";
-import { EditProfile } from '../../types/types';
+import axios from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
-import { setCurrentAvatar } from '../../slices/profileSlice';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { resetApiLoading } from '../../slices/apiSlice';
+import { selectHeaders } from "../../slices/headersSlice";
+import { setCurrentAvatar } from '../../slices/profileSlice';
+import { EditProfile } from '../../types/types';
 
 export const useMutateUser = () => {
   const headers = useAppSelector(selectHeaders)
