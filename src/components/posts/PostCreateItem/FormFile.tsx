@@ -10,7 +10,7 @@ const FormFile:VFC = () => {
   const dispatch = useAppDispatch()
     
   const compressOption = {
-    maxSizeMB: 1,
+    maxSizeMB: 0.1,
     maxWidthOrHeight: 1024
   };
 
@@ -29,7 +29,7 @@ const FormFile:VFC = () => {
     <label htmlFor='file' className='text-center py-1 border-4 border-light-blue-500 w-full block cursor-pointer'>
     <AddAPhotoIcon className='' style={{fontSize: 24}}/>アイキャッチ画像変更
     </label>
-    <img src={fileUrl} className='w-full my-4' style={{height:250}}/>
+    <img src={fileUrl} className='object-cover w-full my-4' style={{height:512}}/>
     </div>
     :
     <label htmlFor='file' className='border-dashed border-4 border-light-blue-500 w-full block cursor-pointer relative' style={{height: '250px'}}>
@@ -39,7 +39,7 @@ const FormFile:VFC = () => {
     </div>
     </label>
   }
-  <input className='hidden' onChange={imageChange} type="file" id="file" name="file" accept="image/png,image/jpg"/>
+  <input className='hidden' onChange={imageChange} type="file" id="file" name="file" accept="image/*"/>
     </div>
   )
 }
