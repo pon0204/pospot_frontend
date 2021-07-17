@@ -28,7 +28,6 @@ const Transition = React.forwardRef(function Transition(
 });
 
   const PostCard = (item:any) => {
-    console.log('レンダリング')
   const currentUserId = localStorage.getItem('currentUserId')
   const {createLikeMutation,deleteLikeMutation} = useMutateLike()
   const {loginWithRedirect } = useAuth0();
