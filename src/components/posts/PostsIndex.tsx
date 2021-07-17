@@ -46,7 +46,7 @@ const PostsIndex: VFC = () => {
     }
     <PostsIndexTabs handleChange={handleChange} tabState={tabState}/>
     <div className='fixed bottom-20 right-6 lg:right-20 bg-opacity-30 bg-blue-300 rounded-full'>
-    <Link to='posts/new' className='p-4 block'>
+    <Link to='/posts/new' className='p-4 block'>
     <AddIcon style={{fontSize: 52}} color='primary'/>
     </Link>
     </div>
