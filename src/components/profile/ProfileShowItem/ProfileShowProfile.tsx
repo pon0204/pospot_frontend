@@ -25,11 +25,11 @@ const ProfileShowProfile = (id:any) => {
       {data.profile.avatar_url == null ?
       <img src={defaultPhoto} className='rounded-full' alt="" />
         :
-      <img src={data.profile.avatar_url} className='rounded-full' alt="" />
+      <img src={data.profile.avatar_url} className='w-32 h-32 rounded-full' alt="" />
       }
       </div>
       <p className='mt-4 text-center'>{data.profile.nickname}</p>
-      <p className='mt-4 text-center'>{data.profile.introduction}</p>
+      <p className='mt-4 text-center w-2/3 mx-auto'>{data.profile.introduction}</p>
       {currentUserId == id.id ?
       <Link to={`/profile/edit/${id.id}`}
       className='mx-auto block m-4 px-4 py-2 bg-gray-500 font-bold text-white rounded w-20 text-center'>編集</Link>

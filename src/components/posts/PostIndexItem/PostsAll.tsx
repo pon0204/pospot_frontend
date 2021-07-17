@@ -23,10 +23,7 @@ const PostsAll:VFC = () => {
       const filterPlacePosts = filterPlace(postsAll.posts)
       setPostQuery(filterPlacePosts)      
     } else if(queryGenre && !queryPlace){
-      console.log(postsAll)
       const filterGenrePosts = filterGenre(postsAll.posts)
-      console.log(filterGenrePosts)
-      console.log(queryGenre)
       setPostQuery(filterGenrePosts)
     }
   }, [queryGenre,queryPlace])

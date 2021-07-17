@@ -58,7 +58,6 @@ export default function Header() {
 }
 getToken()
   }, [])
-  console.log(avatar)
 
   return (
     <div className={classes.root}>

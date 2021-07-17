@@ -12,7 +12,7 @@ const FormFile:VFC = () => {
   const dispatch = useAppDispatch()
 
   const compressOption = {
-    maxSizeMB: 1,
+    maxSizeMB: 0.1,
     maxWidthOrHeight: 128
   };
 
@@ -28,10 +28,10 @@ const FormFile:VFC = () => {
     <div>
     <label htmlFor='file' className='border-2 border-gray-300 relative cursor-pointer w-24 h-24 block mt-10 rounded-full mx-auto' >
       {fileUrl ?
-        <img src={fileUrl} className='rounded-full' alt="" />
+        <img src={fileUrl} className='w-24 h-24 rounded-full' alt="" />
       :
       <div className='relative'>
-        <img src={editedProfile.avatar_url} className='opacity-50' alt=''/>
+        <img src={editedProfile.avatar_url} className='w-24 h-24 rounded-full opacity-50' alt=''/>
         <AddAPhotoIcon className='absolute top-8 right-8' style={{fontSize: 32}}/>
         {/* <img src={defaultPhoto} className='rounded-full' alt="" /> */}
       </div>

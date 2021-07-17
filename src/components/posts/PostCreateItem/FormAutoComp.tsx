@@ -18,8 +18,6 @@ export const FormAutoComp:VFC = () => {
   }
   const genreLength = editedPost.genre.split(',').length
   
-  console.log(genreLength)
-  
   return (
     <div className='full-width'>
       {genreLength >= 2 ? 
