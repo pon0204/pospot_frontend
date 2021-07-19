@@ -1,3 +1,4 @@
+import { CircularProgress } from '@material-ui/core'
 import { useEffect, useRef } from 'react'
 import { useQueryClient } from 'react-query'
 import { useAppDispatch } from '../../../app/hooks'
@@ -28,7 +29,7 @@ const ProfileShowPostsCurrent = (id:any) => {
   useEffect(() => {
     return () => {
       dispatch(resetQueryPage())
-      queryClient.removeQueries('postsInfiniteCurrent',{exact:true})
+      queryClient.resetQueries('postsInfiniteCurrent',{exact:true})
     }
   }, [])
 
@@ -44,7 +45,7 @@ const ProfileShowPostsCurrent = (id:any) => {
             </div>
           ))}
       </div>
-      <div className='mx-auto w-96 text-center'>
+      <div className='mx-auto w-96 text-center relative'>
         <button 
         ref={loadMoreButtonRef}
         disabled={!hasNextPage || isFetchingNextPage}
@@ -52,7 +53,7 @@ const ProfileShowPostsCurrent = (id:any) => {
           fetchNextPage();
         }}>
         {isFetchingNextPage || status === 'loading'
-          ? '読込中です'
+          ? <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'><CircularProgress/></div>
           : hasNextPage
           ? '投稿をさらに読み込みますか?'
           : '投稿は以上です。'}
