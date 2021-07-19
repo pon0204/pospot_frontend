@@ -1,19 +1,16 @@
-import CircularProgress from '@material-ui/core/CircularProgress';
 import AddIcon from '@material-ui/icons/Add';
 import React, { useEffect, useState, VFC } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hooks';
 import { useQueryFollows } from '../../hooks/reactQuery/useQueryFollows';
-import { useQueryPosts } from '../../hooks/reactQuery/useQueryPosts';
 import { resetQueryGenre, resetQueryPlace } from '../../slices/postSlice';
 import { AutoCompGenre } from './PostIndexItem/AutoCompGenre';
 import { AutoCompPlace } from './PostIndexItem/AutoCompPlace';
-import PostsAll from './PostIndexItem/PostsAll';
 import PostsFollow from './PostIndexItem/PostsFollow';
 import PostsIndexTabs from './PostIndexItem/PostsIndexTabs';
+import PostsNew from './PostIndexItem/PostsNew';
 
 const PostsIndex: VFC = () => {    
-  const { status } = useQueryPosts()
   const currentUserId = localStorage.getItem('currentUserId')
   useQueryFollows(currentUserId)
   const dispatch = useAppDispatch()
@@ -29,18 +26,15 @@ const PostsIndex: VFC = () => {
       dispatch(resetQueryPlace())
       }
   }, [])
-
-    if (status === 'loading') return (<div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'><CircularProgress/></div>)
-    if (status === 'error') return (<div>{'Error'}</div>)
     
   return (
-    <div className='pt-2 pb-28'>
-    <div className='md:flex md:justify-center'>
+    <div className='pt-10 pb-28'>
+    <div className='md:flex md:justify-center pb-8'>
     <AutoCompGenre/>
     <AutoCompPlace/>
     </div>
     {tabState == 0 ?
-    <PostsAll/>
+    <PostsNew/>
     :
     <PostsFollow/>  
     }

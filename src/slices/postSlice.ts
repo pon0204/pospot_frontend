@@ -4,8 +4,8 @@ import { EditPost } from '../types/types';
 
 export interface PostState {
   editedPost: EditPost
-  queryGenre: string  
-  queryPlace: string
+  queryGenre: string | null
+  queryPlace: string | null
   page: number
 }
 
@@ -17,8 +17,8 @@ const initialState: PostState = {
     genre: '',
     eyecatch: '',
 },
-  queryGenre: '',
-  queryPlace:'',
+  queryGenre: null,
+  queryPlace: null,
   page: 0
 }
 
