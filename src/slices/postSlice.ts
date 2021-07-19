@@ -47,10 +47,13 @@ export const postSlice = createSlice({
     incrementQueryPage: (state) => {
       state.page += 3
     },
+    resetQueryPage: (state) => {
+      state.page = initialState.page
+    },
   },
 })
 
-export const { setEditedPost, resetEditedPost,setQueryGenre,resetQueryGenre,setQueryPlace,resetQueryPlace,incrementQueryPage} =
+export const { setEditedPost, resetEditedPost,setQueryGenre,resetQueryGenre,setQueryPlace,resetQueryPlace,incrementQueryPage,resetQueryPage} =
   postSlice.actions
 
   export const selectPost = (state: RootState) => state.post.editedPost
