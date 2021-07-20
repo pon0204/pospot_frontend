@@ -11,6 +11,7 @@ const PostsItemNew:VFC = () => {
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
 
+  
   const {
     status,
     data,
@@ -18,6 +19,15 @@ const PostsItemNew:VFC = () => {
     fetchNextPage,
     hasNextPage,
   } = useQueryInfinitePostsNew(null,null)
+  
+  useEffect(() => {
+    
+    return () => {
+      dispatch(resetQueryPage())
+      queryClient.removeQueries('postsInfiniteNew',{exact: true})
+    }
+  }, [])
+
 
   const loadMoreButtonRef = useRef<any>() 
 
@@ -26,13 +36,6 @@ const PostsItemNew:VFC = () => {
     onIntersect: fetchNextPage,
     enabled: hasNextPage,
   })
-
-  useEffect(() => {
-    return () => {
-      dispatch(resetQueryPage())
-      queryClient.resetQueries('postsInfiniteNew',{exact:true})
-    }
-  }, [])
 
   return (
     <div>

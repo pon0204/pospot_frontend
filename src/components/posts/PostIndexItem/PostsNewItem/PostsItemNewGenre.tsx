@@ -1,5 +1,5 @@
 import { CircularProgress } from '@material-ui/core';
-import { useEffect, useRef, VFC } from 'react';
+import { useEffect, useRef } from 'react';
 import { useQueryClient } from 'react-query';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import useIntersectionObserver from '../../../../hooks/castomHook/useIntersectionObserver';
@@ -7,7 +7,7 @@ import { useQueryInfinitePostsNew } from '../../../../hooks/reactQuery/useQueryI
 import { resetQueryPage, selectQueryGenre } from '../../../../slices/postSlice';
 import { PostCardMemo } from '../../PostCards/PostCard';
 
-const PostsItemNewGenre:VFC = () => {
+const PostsItemNewGenre = () => {
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
   const queryGenre = useAppSelector(selectQueryGenre)
@@ -29,11 +29,12 @@ const PostsItemNewGenre:VFC = () => {
   })
 
   useEffect(() => {
+    
     return () => {
       dispatch(resetQueryPage())
-      queryClient.resetQueries('postsInfiniteNew',{exact:true})
+      queryClient.removeQueries('postsInfiniteNew',{exact: true})
     }
-  }, [])
+  }, [queryGenre])
 
   return (
     <div>
