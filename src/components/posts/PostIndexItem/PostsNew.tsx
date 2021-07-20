@@ -1,23 +1,26 @@
-import { CircularProgress } from '@material-ui/core'
-import { useEffect, useRef } from 'react'
-import { useQueryClient } from 'react-query'
-import { useAppDispatch } from '../../../app/hooks'
-import useIntersectionObserver from '../../../hooks/castomHook/useIntersectionObserver'
-import { useQueryInfinitePostsLike } from '../../../hooks/reactQuery/useQueryInfinitePostsLike'
-import { resetQueryPage } from '../../../slices/postSlice'
-import { Post } from '../../../types/types'
-import { PostCardMemo } from '../../posts/PostCards/PostCard'
+import { CircularProgress } from '@material-ui/core';
+import { useEffect, useRef } from 'react';
+import { useQueryClient } from 'react-query';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import useIntersectionObserver from '../../../hooks/castomHook/useIntersectionObserver';
+import { useQueryInfinitePostsNew } from '../../../hooks/reactQuery/useQueryInfinitePostsNew';
+import { resetQueryPage, selectQueryGenre, selectQueryPlace } from '../../../slices/postSlice';
+import { Post } from '../../../types/types';
+import { PostCardMemo } from '../PostCards/PostCard';
 
-const ProfileShowPostsLike = (id:any) => {
+const PostsNew = () => {
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
+  const queryGenre = useAppSelector(selectQueryGenre)
+  const queryPlace = useAppSelector(selectQueryPlace)
+
   const {
     status,
     data,
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useQueryInfinitePostsLike(id.id)
+  } = useQueryInfinitePostsNew(queryGenre,queryPlace)
 
   const loadMoreButtonRef = useRef<any>() 
 
@@ -28,11 +31,12 @@ const ProfileShowPostsLike = (id:any) => {
   })
 
   useEffect(() => {
+    
     return () => {
       dispatch(resetQueryPage())
-      queryClient.resetQueries('postsInfiniteLike',{exact:true})
+      queryClient.removeQueries('postsInfiniteNew',{exact: true})
     }
-  }, [])
+  }, [queryGenre,queryPlace])
 
   return (
     <div>
@@ -63,5 +67,4 @@ const ProfileShowPostsLike = (id:any) => {
     </div>
   )
 }
-
-export default ProfileShowPostsLike
+export default PostsNew

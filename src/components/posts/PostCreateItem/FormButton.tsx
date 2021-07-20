@@ -1,6 +1,7 @@
 import { VFC } from 'react'
-import { useAppSelector } from '../../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 import { useMutatePost } from '../../../hooks/castomHook/useMutatePost'
+import { setApiLoading } from '../../../slices/apiSlice'
 import { selectPost } from '../../../slices/postSlice'
 import { selectSpot } from '../../../slices/spotSlice'
 
@@ -8,8 +9,10 @@ const FormButton:VFC = () => {
   const editedPost = useAppSelector(selectPost)
   const editedSpot = useAppSelector(selectSpot)
   const { createPostMutation } = useMutatePost()
+  const dispatch = useAppDispatch()
 
   const postCreateClick = () => {
+    dispatch(setApiLoading())
     const titleLengthOver = editedPost.title.length >= 101
     const captionLengthOver = editedPost.caption.length >= 401
     const genreLengthOver = editedPost.genre.split(',').length >= 4

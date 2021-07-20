@@ -8,7 +8,6 @@ import PostForm from './components/posts/PostCreate';
 import PostsIndex from './components/posts/PostsIndex';
 import ProfileEdit from './components/profile/ProfileEdit';
 import ProfileShow from './components/profile/ProfileShow';
-import Test from './components/test';
 import Top from './components/TopView/Top';
 
 const queryClient = new QueryClient({
@@ -49,9 +48,6 @@ const App: VFC = () => {
           />
           }
           />
-          <Route exact path="/test">
-            <Test/>
-          </Route>
           <Route exact path="/">
             <Top/>
           </Route>

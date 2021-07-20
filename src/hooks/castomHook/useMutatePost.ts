@@ -1,21 +1,20 @@
-import { EditPost, Post, Posts } from '../../types/types'
 import axios from 'axios'
-import {useAppSelector, useAppDispatch } from '../../app/hooks'
-import { useQueryClient, useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
+import { useAppSelector } from '../../app/hooks'
+import { selectHeaders } from "../../slices/headersSlice"
 import { selectSpot } from '../../slices/spotSlice'
+import { EditPost, Post, Posts } from '../../types/types'
 import { useMutateSpot } from './useMutateSpot'
-import { selectHeaders } from "../../slices/headersSlice";
-import { resetEditedPost } from '../../slices/postSlice'
 
 export const useMutatePost = () => {
-  const dispatch = useAppDispatch()
   const queryClient = useQueryClient()
   const headers = useAppSelector(selectHeaders)
   
   const editedSpot = useAppSelector(selectSpot)
   const { createSpotMutation } = useMutateSpot()
 
-  const createPostMutation = useMutation(
+  const createPostMutation = 
+  useMutation(
     (post: EditPost) => 
       axios.post<Post>(`${process.env.REACT_APP_REST_URL}/posts/`, post,headers),
     {

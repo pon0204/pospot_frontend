@@ -1,10 +1,12 @@
 import { VFC } from 'react'
-import { useAppSelector } from '../../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 import { useMutateUser } from '../../../hooks/castomHook/useMutateUser'
+import { setApiLoading } from '../../../slices/apiSlice'
 import { selectProfile } from '../../../slices/profileSlice'
 
 const FormButton:VFC = () => {
   const editedProfile = useAppSelector(selectProfile)
+  const dispatch = useAppDispatch()
   const { profileUpdateMutation } = useMutateUser()
 
   const profileUpdateClick = () => {
@@ -13,6 +15,7 @@ const FormButton:VFC = () => {
     data.append('introduction',editedProfile.introduction)
     data.append('gender',editedProfile.gender)
     data.append('avatar',editedProfile.avatar)
+    dispatch(setApiLoading())
     profileUpdateMutation.mutate(data)
   }
 

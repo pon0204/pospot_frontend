@@ -1,4 +1,5 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
+import apiReducer from '../slices/apiSlice';
 import followReducer from '../slices/followSlice';
 import headersReducer from '../slices/headersSlice';
 import postReducer from '../slices/postSlice';
@@ -11,7 +12,8 @@ export const store = configureStore({
     post: postReducer,
     spot: spotReducer,
     profile: profileReducer,
-    follows: followReducer
+    follows: followReducer,
+    api: apiReducer
   },
 
 

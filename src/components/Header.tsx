@@ -6,9 +6,9 @@ import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useMutateUser } from '../hooks/castomHook/useMutateUser';
+import defaultPhoto from '../image/profile_default.png';
 import { setHeaders } from '../slices/headersSlice';
 import { selectAvatar, setCurrentAvatar } from "../slices/profileSlice";
-import defaultPhoto from '../image/profile_default.png'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

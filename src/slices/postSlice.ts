@@ -4,8 +4,9 @@ import { EditPost } from '../types/types';
 
 export interface PostState {
   editedPost: EditPost
-  queryGenre: string  
-  queryPlace: string  
+  queryGenre: string | null
+  queryPlace: string | null
+  page: number
 }
 
 const initialState: PostState = {
@@ -16,8 +17,9 @@ const initialState: PostState = {
     genre: '',
     eyecatch: '',
 },
-  queryGenre: '',
-  queryPlace:''
+  queryGenre: null,
+  queryPlace: null,
+  page: 0
 }
 
 export const postSlice = createSlice({
@@ -41,15 +43,22 @@ export const postSlice = createSlice({
     },
     resetQueryPlace: (state) => {
       state.queryPlace = initialState.queryPlace
-    }
+    },
+    incrementQueryPage: (state) => {
+      state.page += 6
+    },
+    resetQueryPage: (state) => {
+      state.page = initialState.page
+    },
   },
 })
 
-export const { setEditedPost, resetEditedPost,setQueryGenre,resetQueryGenre,setQueryPlace,resetQueryPlace} =
+export const { setEditedPost, resetEditedPost,setQueryGenre,resetQueryGenre,setQueryPlace,resetQueryPlace,incrementQueryPage,resetQueryPage} =
   postSlice.actions
 
   export const selectPost = (state: RootState) => state.post.editedPost
   export const selectQueryGenre = (state: RootState) => state.post.queryGenre
   export const selectQueryPlace = (state: RootState) => state.post.queryPlace
+  export const selectPage = (state: RootState) => state.post.page
 
 export default postSlice.reducer;
