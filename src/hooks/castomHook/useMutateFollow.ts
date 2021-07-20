@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { resetApiLoading } from '../../slices/apiSlice';
 import { setFollowsCount } from '../../slices/followSlice';
 import { selectHeaders } from "../../slices/headersSlice";
 
@@ -19,6 +20,7 @@ export const useMutateFollow = () => {
         previousFollows.followers = [...previousFollows.followers,newFollowerId]
         queryClient.setQueryData<any>('follows',previousFollows)
         dispatch(setFollowsCount(previousFollows))
+        dispatch(resetApiLoading())
       },
     }
   )
@@ -34,6 +36,7 @@ export const useMutateFollow = () => {
         previousFollows.followers = newFollows
         queryClient.setQueryData<any>('follows',previousFollows)
         dispatch(setFollowsCount(previousFollows))
+        dispatch(resetApiLoading())
       }
     }
   )
