@@ -45,7 +45,7 @@ export const postSlice = createSlice({
       state.queryPlace = initialState.queryPlace
     },
     incrementQueryPage: (state) => {
-      state.page += 3
+      state.page += 6
     },
     setQueryPage: (state) => {
       state.page = 3

@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import useIntersectionObserver from '../../../hooks/castomHook/useIntersectionObserver';
 import { useQueryInfinitePostsFollow } from '../../../hooks/reactQuery/useQueryInfinitePostsFollow';
 import { resetQueryPage, selectQueryGenre, selectQueryPlace } from '../../../slices/postSlice';
+import { Post } from '../../../types/types';
 import { PostCardMemo } from '../PostCards/PostCard';
 
 const PostsFollow = () => {
@@ -44,11 +45,11 @@ const PostsFollow = () => {
 
   return (
     <div>
-      <div className='md:flex md:flex-wrap justify-center pb-12'>
+      <div className='pb-12'>
         {data?.pages.map(page => (
-            <div className='md:flex'>
+            <div className='md:flex md:flex-wrap justify-center'>
               {
-                page.posts.map((post:any) => (
+                page.posts.map((post:Post) => (
                   <PostCardMemo item={post}/>
                 ))}
             </div>
