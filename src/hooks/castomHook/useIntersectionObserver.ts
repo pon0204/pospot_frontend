@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { useAppDispatch } from '../../app/hooks'
+import { useEffect } from 'react'
 
 export default function useIntersectionObserver({
   root,
