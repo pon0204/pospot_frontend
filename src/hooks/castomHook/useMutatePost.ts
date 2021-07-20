@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from 'react-query'
 import { useAppSelector } from '../../app/hooks'
 import { selectHeaders } from "../../slices/headersSlice"
 import { selectSpot } from '../../slices/spotSlice'
-import { EditPost, Post, Posts } from '../../types/types'
+import { EditPost, Post } from '../../types/types'
 import { useMutateSpot } from './useMutateSpot'
 
 export const useMutatePost = () => {
@@ -13,8 +13,7 @@ export const useMutatePost = () => {
   const editedSpot = useAppSelector(selectSpot)
   const { createSpotMutation } = useMutateSpot()
 
-  const createPostMutation = 
-  useMutation(
+  const createPostMutation = useMutation(
     (post: EditPost) => 
       axios.post<Post>(`${process.env.REACT_APP_REST_URL}/posts/`, post,headers),
     {
@@ -22,7 +21,7 @@ export const useMutatePost = () => {
         // 引数にポストのIDを渡している
         createSpotMutation.mutate({...editedSpot ,id: res.data.id})
         // 投稿を再fetchしている
-        queryClient.refetchQueries(['posts'],{active:true})        
+        queryClient.resetQueries(['postsInfiniteNew'],{active:true})        
       },
     }
   )
@@ -32,13 +31,7 @@ export const useMutatePost = () => {
     axios.delete(`${process.env.REACT_APP_REST_URL}/posts/${id}`,headers),
     {
       onSuccess: (res,variables) => {
-        const previousPosts = queryClient.getQueryData<Posts>('posts')
-
-        if(previousPosts){
-        const filterPosts = previousPosts.posts.filter((post:Post) => post.id != variables)
-        const newPosts = {posts: filterPosts}
-        queryClient.setQueryData('posts',newPosts)        
-        }
+        queryClient.resetQueries(['postsInfiniteNew'],{active:true})        
         }
       }
   )

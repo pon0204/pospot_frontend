@@ -29,9 +29,9 @@ export const useMutateSpot = () => {
     {
       onSuccess: (res) => {
         dispatch(resetApiLoading())
-        history.push('/posts')
         dispatch(resetEditedSpot())
         dispatch(resetEditedPost())
+        history.push('/posts')
       },
     }
   )
