@@ -4,13 +4,14 @@ import { useQueryClient } from 'react-query';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import useIntersectionObserver from '../../../hooks/castomHook/useIntersectionObserver';
 import { useQueryInfinitePostsNew } from '../../../hooks/reactQuery/useQueryInfinitePostsNew';
-import { resetQueryPage, selectQueryGenre } from '../../../slices/postSlice';
+import { resetQueryPage, selectQueryGenre, selectQueryPlace } from '../../../slices/postSlice';
 import { PostCardMemo } from '../PostCards/PostCard';
 
 const PostsNew = () => {
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
   const queryGenre = useAppSelector(selectQueryGenre)
+  const queryPlace = useAppSelector(selectQueryPlace)
 
   const {
     status,
@@ -18,7 +19,7 @@ const PostsNew = () => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useQueryInfinitePostsNew(queryGenre,null)
+  } = useQueryInfinitePostsNew(queryGenre,queryPlace)
 
   const loadMoreButtonRef = useRef<any>() 
 
@@ -34,7 +35,7 @@ const PostsNew = () => {
       dispatch(resetQueryPage())
       queryClient.removeQueries('postsInfiniteNew',{exact: true})
     }
-  }, [queryGenre])
+  }, [queryGenre,queryPlace])
 
   return (
     <div>
