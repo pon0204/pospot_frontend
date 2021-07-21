@@ -64,16 +64,16 @@ const Transition = React.forwardRef(function Transition(
       setHeart(currentUserLike)
     },[])
     
-  if(title.length > 13){
-    title = title.substr(0,13) + '...'
+  if(title.length > 12){
+    title = title.substr(0,12) + '...'
   }
 
-  if(caption.length > 44){
-    caption = caption.substr(0,44) + '...'
+  if(caption.length > 42){
+    caption = caption.substr(0,42) + '...'
   }
 
   return (
-    <div className='relative m-2' style={{height:'530px',width: '400px'}}>
+    <div className='relative md:m-2 mx-auto my-2' style={{height:'530px',width: '370px'}}>
       <button type="button" onClick={handleClickOpen('paper')} className='w-full h-full' style={{outline: 'none'}}>
         <div className='w-full h-full border z-0 relative text-left'>
           <div className='flex pt-1 pl-4'>
