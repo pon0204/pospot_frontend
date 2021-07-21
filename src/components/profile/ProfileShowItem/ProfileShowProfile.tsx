@@ -51,8 +51,12 @@ const ProfileShowProfile = (id:any) => {
       :
       currentUserFollowing ? 
       <button onClick={() => {
+        if(currentUserId){
         dispatch(setApiLoading())
         deleteFollowMutation.mutate(id.id)
+        }else{
+          loginWithRedirect()
+        }
       }} className='mx-auto block mt-4 px-4 py-2 bg-blue-200 font-bold text-gray-600 rounded'>フォロー解除</button>   
       :
       <button onClick={() => {
