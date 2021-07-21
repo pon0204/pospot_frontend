@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Header() {
   const classes = useStyles();
-  const {isAuthenticated,loginWithRedirect,logout } = useAuth0();
+  const {isAuthenticated,loginWithRedirect,logout,loginWithPopup } = useAuth0();
   const dispatch = useAppDispatch()
   const { getAccessTokenSilently }:any = useAuth0();
   const { userIdMutation } = useMutateUser()
@@ -50,18 +50,19 @@ export default function Header() {
       const accessToken = await getAccessTokenSilently({
       });
       dispatch(setHeaders(accessToken))
-      alert(accessToken)
+      // alert(accessToken)
       userIdMutation.mutate()
     }
     catch(e){
-      alert('ログインしてないよ')
+      // alert('ログインしてないよ')
+      console.log('だめでしたー')
       console.log(e.message)
       removeUserId()
   } 
 }
 getToken()
-  }, [])
-
+  }, [isAuthenticated])
+console.log(isAuthenticated)
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -88,7 +89,7 @@ getToken()
               >ログアウト</button>
             </div>
           ):(
-            <button className='text-right' color="inherit" onClick={loginWithRedirect}>ログイン</button>
+            <button className='text-right' color="inherit" onClick={loginWithPopup}>ログイン</button>
           )
           }
         </div>
