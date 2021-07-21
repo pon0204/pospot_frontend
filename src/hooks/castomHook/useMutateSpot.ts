@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { resetApiLoading } from '../../slices/apiSlice';
+import { resetApiLoading, resetApiLoadingOther } from '../../slices/apiSlice';
 import { selectHeaders } from "../../slices/headersSlice";
 import { resetEditedPost } from '../../slices/postSlice';
 import { resetEditedSpot, setEditedSpot } from '../../slices/spotSlice';
@@ -18,6 +18,7 @@ export const useMutateSpot = () => {
     axios.get(`${process.env.REACT_APP_REST_URL}/spot/${placeId}`,headers),
     {
       onSuccess: (res) => {
+        dispatch(resetApiLoadingOther())
         dispatch(setEditedSpot(res.data))
       },
     }

@@ -1,3 +1,5 @@
+import { useAuth0 } from '@auth0/auth0-react'
+import { CircularProgress } from '@material-ui/core'
 import React from 'react'
 import { useQueryClient } from 'react-query'
 import { Link } from 'react-router-dom'
@@ -7,8 +9,6 @@ import { useQueryProfileShow } from '../../../hooks/reactQuery/useQueryProfileSh
 import defaultPhoto from '../../../image/profile_default.png'
 import { selectLoading, setApiLoading } from '../../../slices/apiSlice'
 import { FollowersId } from '../../../types/types'
-import { CircularProgress } from '@material-ui/core'
-import { useAuth0 } from '@auth0/auth0-react'
 
 const ProfileShowProfile = (id:any) => {
   const currentUserId = localStorage.getItem('currentUserId')

@@ -7,8 +7,10 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import parse from 'autosuggest-highlight/parse';
 import throttle from 'lodash/throttle';
 import React, { VFC } from 'react';
+import { useAppDispatch } from '../../../app/hooks';
 //redux,react-query
 import { useMutateSpot } from '../../../hooks/castomHook/useMutateSpot';
+import { setApiLoadingOther } from '../../../slices/apiSlice';
 
 function loadScript(src: string, position: HTMLElement | null, id: string) {
   if (!position) {
@@ -52,11 +54,9 @@ export const FormSpot:VFC = () =>  {
   const [options, setOptions] = React.useState<PlaceType[]>([]);
   const loaded = React.useRef(false);
   const placeApiKey = process.env.REACT_APP_PLACE_API
-
-
-  // redux
   const { fetchSpotMutation } = useMutateSpot()
-  
+  const dispatch = useAppDispatch()
+
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
       loadScript(
@@ -128,6 +128,7 @@ export const FormSpot:VFC = () =>  {
           setOptions(newValue ? [newValue, ...options] : options);
           setValue(newValue);
           if(newValue){
+            dispatch(setApiLoadingOther())
             fetchSpotMutation.mutate(newValue.place_id)
           }
         }}

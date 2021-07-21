@@ -7,8 +7,8 @@ import FormButton from './PostCreateItem/FormButton'
 import FormFile from './PostCreateItem/FormFile'
 import { FormRadio } from './PostCreateItem/FormRadio'
 import { FormSpot } from './PostCreateItem/FormSpot'
-import FormSpots from './PostCreateItem/FormSpots'
 import InputForm from './PostCreateItem/InputFrom'
+import SpotDetail from './PostCreateItem/SpotDetail'
 
 const PostForm: VFC = () => {
   const currentUserId = localStorage.getItem('currentUserId')
@@ -33,7 +33,7 @@ const PostForm: VFC = () => {
     <FormAutoComp/>
     <FormRadio/>
     <FormSpot/>
-    <FormSpots/>
+    <SpotDetail/>
     <FormButton/>
     </div>
   )
