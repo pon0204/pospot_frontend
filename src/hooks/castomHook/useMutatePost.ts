@@ -31,7 +31,9 @@ export const useMutatePost = () => {
     axios.delete(`${process.env.REACT_APP_REST_URL}/posts/${id}`,headers),
     {
       onSuccess: (res,variables) => {
-        queryClient.resetQueries(['postsInfiniteNew'],{active:true})        
+        queryClient.resetQueries(['postsInfiniteNew'],{active:true})
+        queryClient.resetQueries(['postsInfiniteLike'],{active:true})
+        queryClient.resetQueries(['postsInfiniteCurrent'],{active:true})
         }
       }
   )
