@@ -54,6 +54,7 @@ export default function Header() {
     }
     catch(e){
       console.log(e.message)
+      removeUserId()
   } 
 }
 getToken()
