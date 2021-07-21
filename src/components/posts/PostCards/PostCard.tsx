@@ -95,8 +95,8 @@ const Transition = React.forwardRef(function Transition(
           {withData}
           </div>
           )} 
-          {genres?.map((genre:string) => (
-          <div className="bg-green-200 mx-2 rounded-md p-1 text-sm whitespace-nowrap">
+          {genres?.map((genre:string,index:number) => (
+          <div className="bg-green-200 mx-2 rounded-md p-1 text-sm whitespace-nowrap" key={index}>
           {genre}
           </div>
           ))} 

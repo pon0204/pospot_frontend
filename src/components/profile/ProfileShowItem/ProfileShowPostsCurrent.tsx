@@ -37,11 +37,11 @@ const ProfileShowPostsCurrent = (id:any) => {
   return (
     <div>
       <div className='pb-12'>
-        {data?.pages.map(page => (
-            <div className='md:flex md:flex-wrap justify-center'>
+        {data?.pages.map((page,index) => (
+            <div className='md:flex md:flex-wrap justify-center' key={index}>
               {
                 page.posts.map((post:Post) => (
-                  <PostCardMemo item={post}/>
+                  <PostCardMemo item={post} key={post.id}/>
                 ))}
             </div>
           ))}

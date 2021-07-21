@@ -37,8 +37,8 @@ const PostShow: VFC<any> = (id) => {
           <div className="bg-red-200  rounded-md p-2 text-center mx-2 whitespace-nowrap">
             {post.with}
           </div>
-          {genres?.map((genre:string) => (
-          <div className="bg-green-200 mx-2 rounded-md p-2 whitespace-nowrap">
+          {genres?.map((genre:string,index:number) => (
+          <div className="bg-green-200 mx-2 rounded-md p-2 whitespace-nowrap" key={index}>
           {genre}
           </div>
           ))} 
