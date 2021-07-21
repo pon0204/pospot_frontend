@@ -50,9 +50,11 @@ export default function Header() {
       const accessToken = await getAccessTokenSilently({
       });
       dispatch(setHeaders(accessToken))
+      alert(accessToken)
       userIdMutation.mutate()
     }
     catch(e){
+      alert('ログインしてないよ')
       console.log(e.message)
       removeUserId()
   } 
