@@ -1,3 +1,4 @@
+import { Chip } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React from 'react';
@@ -11,6 +12,9 @@ export const AutoCompPlace = () => {
   const dispatch = useAppDispatch()
   const handleChange = (e:any,places:places) =>{
     places ?
+    typeof(places) === 'string' ?
+    dispatch(setQueryPlace(places))
+    :
     dispatch(setQueryPlace(places.place))
     : 
     dispatch(resetQueryPlace())
@@ -18,9 +22,17 @@ export const AutoCompPlace = () => {
   return (
     <Autocomplete
       id="combo-box-demo"
-      options={places}
-      getOptionLabel={(places) => places.place}
+      freeSolo
+      options={places.map((option) => option.place)}
+      // options={places}
+      // getOptionLabel={(places) => places.place}
       style={{ width: 300 }}
+          renderTags={(value, getTagProps) =>
+      value.map((option, index) => 
+      (<Chip variant="outlined" label={option} {...getTagProps({ index })} 
+      />                                    
+      ))
+    }
       onChange={(e:any,v:any) => handleChange(e,v)}
       renderInput={(params) => <TextField {...params} label="地域検索"/>}
       className='mx-auto my-2 md:mx-2'

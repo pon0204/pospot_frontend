@@ -9,8 +9,8 @@ export const FormAutoComp:VFC = () => {
   const editedPost = useAppSelector(selectPost)
   const dispatch = useAppDispatch()
 
-  const handleChange = (e:any,v:any) => {
-    const genres = v.map((genre:any) =>  genre.genre)
+  const handleChange = (e:any,v:string[]) => {
+    const genres = v.map((genre:string) =>  genre)
     const genre = genres.join(',')
     dispatch(setEditedPost(
       { ...editedPost, genre: genre}))
@@ -24,13 +24,13 @@ export const FormAutoComp:VFC = () => {
         multiple
         id="tags-filled"
         freeSolo
-        options={genres}
-        groupBy={(genre) => genre.tag}
-        getOptionLabel={(genre) => genre.genre}
+        options={genres.map((option) => option.genre)}
+        // groupBy={(genre) => genre.tag}
+        // getOptionLabel={(genre) => genre.genre}
         onChange={(e,v) => handleChange(e,v)}
         renderTags={(value, getTagProps) =>
           value.map((option, index) => 
-          (<Chip variant="outlined" label={option.genre} {...getTagProps({ index })} 
+          (<Chip variant="outlined" label={option} {...getTagProps({ index })} 
           />                                    
           ))
         }
@@ -45,13 +45,13 @@ export const FormAutoComp:VFC = () => {
         id="tags-filled"
         freeSolo
         disableCloseOnSelect
-        options={genres}
-        groupBy={(genre) => genre.tag}
-        getOptionLabel={(genre) => genre.genre}
+        options={genres.map((option) => option.genre)}
+        // groupBy={(genre) => genre.tag}
+        // getOptionLabel={(genre) => genre.genre}
         onChange={(e,v) => handleChange(e,v)}
         renderTags={(value, getTagProps) =>
           value.map((option, index) => 
-          (<Chip variant="outlined" label={option.genre} {...getTagProps({ index })} 
+          (<Chip variant="outlined" label={option} {...getTagProps({ index })} 
           />                                    
           ))
         }

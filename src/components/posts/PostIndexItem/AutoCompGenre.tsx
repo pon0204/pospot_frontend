@@ -1,3 +1,4 @@
+import { Chip } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React from 'react';
@@ -8,11 +9,15 @@ import { resetQueryGenre, setQueryGenre } from '../../../slices/postSlice';
 export const AutoCompGenre = () => {
 
   interface genres {
-    genre: any
+    genre: string
+    tag: string
   }
   const dispatch = useAppDispatch()
-  const handleChange = (e:any,genres:genres) =>{
+  const handleChange = (e:any,genres:genres | string) => {
     genres ?
+    typeof(genres) === 'string' ? 
+    dispatch(setQueryGenre(genres))
+    :
     dispatch(setQueryGenre(genres.genre))
     : 
     dispatch(resetQueryGenre())
@@ -21,13 +26,21 @@ export const AutoCompGenre = () => {
   return (
     <Autocomplete
     id="combo-box-demo"
-    options={genres}
-    groupBy={(genre) => genre.tag}
-    getOptionLabel={(genre) => genre.genre}
+    // options={genres}
+    options={genres.map((option) => option.genre)}
+    freeSolo
+    // groupBy={(genre) => genre.tag}
+    // getOptionLabel={(genre) => genre.genre}
     style={{ width: 300 }}
-    onChange={(e:any,v:any) => handleChange(e,v)}
+    renderTags={(value, getTagProps) =>
+      value.map((option, index) => 
+      (<Chip variant="outlined" label={option} {...getTagProps({ index })} 
+      />                                    
+      ))
+    }
     renderInput={(params) => <TextField {...params} label="ジャンル検索"/>}
     className='mx-auto my-2 md:mx-2'
+    onChange={(e:any,v:any) => handleChange(e,v)}
     />
     );
   }
