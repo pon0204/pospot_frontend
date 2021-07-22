@@ -25,9 +25,15 @@ const PostShow: VFC<any> = (id) => {
     genres = null
   }
 
-  if (status === 'loading') return (<div className='absolute top-1/2 right-1/2 -translate-x-1/2 -translate-y-1/2'><CircularProgress/></div>)
-  if (status === 'error') return <div>{'Error'}</div>
+  // if (status === 'loading') return (<div className='absolute top-1/2 right-1/2 -translate-x-1/2 -translate-y-1/2'><CircularProgress/></div>)
+  if(status === 'loading')
+  return (
+  <div className='absolute bottom-1/2 left-44 md:bottom-1/2 md:left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10'>
+    <CircularProgress/>
+    </div>)
 
+  if (status === 'error') return <div>{'Error'}</div>
+  
   return (
     <div className='w-full lg:w-11/12 lg:mx-auto'>
       <h2 className='mt-10 text-4xl text-gray-700 font-bold text-center'>{post.title}</h2>
