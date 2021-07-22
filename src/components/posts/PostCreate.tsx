@@ -1,5 +1,6 @@
+import { useAuth0 } from '@auth0/auth0-react'
 import { CircularProgress } from '@material-ui/core'
-import { VFC } from 'react'
+import { useEffect, VFC } from 'react'
 import { useAppSelector } from '../../app/hooks'
 import { selectLoading } from '../../slices/apiSlice'
 import { FormAutoComp } from './PostCreateItem/FormAutoComp'
@@ -13,10 +14,17 @@ import SpotDetail from './PostCreateItem/SpotDetail'
 const PostForm: VFC = () => {
   const currentUserId = localStorage.getItem('currentUserId')
   const loading = useAppSelector(selectLoading)
+  const {isAuthenticated,loginWithPopup } = useAuth0();
 
-  if(!currentUserId){
+  useEffect(() => {
+    if(!isAuthenticated){
+      loginWithPopup()
+    }
+  },[])
+
+  if(!isAuthenticated){
     return (
-      <p>ログインしてください</p>
+      <p className='text-center mt-10'>ログインしてください</p>
     )
   }
   return (

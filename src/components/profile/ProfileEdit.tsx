@@ -1,5 +1,6 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { useQueryProfileShow } from '../../hooks/reactQuery/useQueryProfileShow';
 import { selectLoading } from '../../slices/apiSlice';
@@ -13,6 +14,19 @@ const ProfileEdit = ({match}:any) => {
   const currentUserId = localStorage.getItem('currentUserId')
   const {status,data} = useQueryProfileShow(id)
   const loading = useAppSelector(selectLoading)
+  const {isAuthenticated,loginWithPopup } = useAuth0();
+
+  useEffect(() => {
+    if(!isAuthenticated){
+      loginWithPopup()
+    }
+  },[])
+
+  if(!isAuthenticated){
+    return (
+      <p className='text-center mt-10'>ログインしてください</p>
+    )
+  }
 
   if (status === 'loading') return (<div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'><CircularProgress/></div>)
 

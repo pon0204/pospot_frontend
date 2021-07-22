@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Header() {
   const classes = useStyles();
-  const {isAuthenticated,loginWithRedirect,logout,loginWithPopup } = useAuth0();
+  const {isAuthenticated,logout,loginWithPopup } = useAuth0();
   const dispatch = useAppDispatch()
   const { getAccessTokenSilently }:any = useAuth0();
   const { userIdMutation } = useMutateUser()

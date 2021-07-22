@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Top = () => {
-  const {loginWithRedirect,loginWithPopup,logout,isAuthenticated} = useAuth0()
+  const {loginWithPopup,logout,isAuthenticated} = useAuth0()
 
   return (
     <div className='relative'>

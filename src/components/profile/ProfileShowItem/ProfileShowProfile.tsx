@@ -14,12 +14,11 @@ const ProfileShowProfile = (id:any) => {
   const currentUserId = localStorage.getItem('currentUserId')
   const {status ,data} = useQueryProfileShow(id.id)
   const {createFollowMutation,deleteFollowMutation} = useMutateFollow()
-  const {loginWithRedirect } = useAuth0();
+  const {loginWithPopup } = useAuth0();
   const queryClient = useQueryClient()
   const followersIds = queryClient.getQueryData<any>('follows')
   const dispatch = useAppDispatch()
   const loading = useAppSelector(selectLoading)
-
 
   const currentUserFollowing = followersIds?.followers?.some((follower:FollowersId) => follower.id == currentUserId)
 
@@ -55,7 +54,7 @@ const ProfileShowProfile = (id:any) => {
         dispatch(setApiLoading())
         deleteFollowMutation.mutate(id.id)
         }else{
-          loginWithRedirect()
+          loginWithPopup()
         }
       }} className='mx-auto block mt-4 px-4 py-2 bg-blue-200 font-bold text-gray-600 rounded'>フォロー解除</button>   
       :
@@ -64,7 +63,7 @@ const ProfileShowProfile = (id:any) => {
         dispatch(setApiLoading())
         createFollowMutation.mutate(id.id)
         }else{
-          loginWithRedirect()
+          loginWithPopup()
         }
         }}
         className='mx-auto block mt-4 px-4 py-2 bg-blue-500 font-bold text-white rounded'>フォローする</button>

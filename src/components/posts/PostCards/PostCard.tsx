@@ -30,7 +30,7 @@ const Transition = React.forwardRef(function Transition(
   const PostCard = (item:any) => {
   const currentUserId = localStorage.getItem('currentUserId')
   const {createLikeMutation,deleteLikeMutation} = useMutateLike()
-  const {loginWithRedirect } = useAuth0();
+  const {loginWithPopup } = useAuth0();
   const [likeHeart,setHeart] = useState(false)
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -131,7 +131,7 @@ const Transition = React.forwardRef(function Transition(
               createLikeMutation.mutate(item.item.id)
               heartClick()
               }else{
-                loginWithRedirect()
+                loginWithPopup()
               }
             }} 
             style={{outline: 'none'}}>
@@ -181,7 +181,7 @@ const Transition = React.forwardRef(function Transition(
               createLikeMutation.mutate(item.item.id)
               heartClick()
               }else{
-                loginWithRedirect()
+                loginWithPopup()
               }
             }} 
             style={{outline: 'none'}}>
