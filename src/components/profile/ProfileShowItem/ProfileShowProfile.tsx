@@ -14,7 +14,7 @@ const ProfileShowProfile = (id:any) => {
   const currentUserId = localStorage.getItem('currentUserId')
   const {status ,data} = useQueryProfileShow(id.id)
   const {createFollowMutation,deleteFollowMutation} = useMutateFollow()
-  const {loginWithPopup,isAuthenticated } = useAuth0();
+  const { loginWithPopup } = useAuth0();
   const queryClient = useQueryClient()
   const followersIds = queryClient.getQueryData<any>('follows')
   const dispatch = useAppDispatch()
@@ -41,7 +41,7 @@ const ProfileShowProfile = (id:any) => {
       <div className='mx-auto block w-32 h-10 bg-blue-200 font-bold rounded relative'>
         <div className='absolute pt-1 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'><CircularProgress size='30px'/></div>
       </div>
-      :isAuthenticated && currentUserId == id.id?
+      : currentUserId == id.id?
       <Link to={`/profile/edit/${id.id}`}
       className='mx-auto block m-4 px-4 py-2 bg-gray-500 font-bold text-white rounded w-20 text-center'>編集</Link>
       :
