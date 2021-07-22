@@ -38,7 +38,7 @@ export const AutoCompGenre = () => {
       />                                    
       ))
     }
-    renderInput={(params) => <TextField {...params} label="ジャンル検索"/>}
+    renderInput={(params) => <TextField {...params} label="ジャンル検索" placeholder='検索例: ラーメン 公園'/>}
     className='mx-auto my-2 md:mx-2'
     onChange={(e:any,v:any) => handleChange(e,v)}
     />

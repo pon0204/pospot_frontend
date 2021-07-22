@@ -34,7 +34,7 @@ export const AutoCompPlace = () => {
       ))
     }
       onChange={(e:any,v:any) => handleChange(e,v)}
-      renderInput={(params) => <TextField {...params} label="地域検索"/>}
+      renderInput={(params) => <TextField {...params} label="地域検索" placeholder='検索例: ◯県 or △市 or ◯県△市'/>}
       className='mx-auto my-2 md:mx-2'
     />
   );

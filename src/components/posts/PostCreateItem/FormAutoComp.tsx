@@ -35,7 +35,7 @@ export const FormAutoComp:VFC = () => {
           ))
         }
         renderInput={(params) => (
-          <TextField {...params} variant="outlined" label="ジャンル(3つまで)" placeholder="ジャンル" />
+          <TextField {...params} variant="outlined" label="ジャンル(3つまで)" placeholder="予測変換します。選択肢にないものも入力可能です" />
           )
         }
         />
@@ -56,7 +56,7 @@ export const FormAutoComp:VFC = () => {
           ))
         }
         renderInput={(params) => (
-          <TextField {...params} variant="outlined" label="ジャンル(3つまで)" placeholder="ジャンル" />
+          <TextField {...params} variant="outlined" label="ジャンル(3つまで)" placeholder="予測変換します。選択肢にないものも入力可能です" />
           )
         }
         />        
