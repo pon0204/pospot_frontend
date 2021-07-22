@@ -137,7 +137,7 @@ export const FormSpot:VFC = () =>  {
           setInputValue(newInputValue);
         }}
         renderInput={(params) => (
-          <TextField {...params} label="スポットを追加" variant="outlined" fullWidth />
+          <TextField {...params} label="スポットを追加" variant="outlined" placeholder='予測変換します。 検索例: 東京ドーム' fullWidth />
         )}
         renderOption={(option) => {
           const matches = option.structured_formatting.main_text_matched_substrings;

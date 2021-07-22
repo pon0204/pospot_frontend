@@ -54,6 +54,7 @@ export const InputForm = () => {
           }
           variant="outlined"
           className={classes.margin}
+          placeholder='入力例:毎日行っちゃうほど大好きなお店!!'
         />    
     }
     {editedPost.caption.length >= 401 ?
@@ -81,6 +82,7 @@ export const InputForm = () => {
       variant='outlined'
       multiline
       rows={5}
+      placeholder='入力例:とにかく品揃えが豊富で、毎日新しい発見があります!! 生活用品はもちろんプレゼント買うときもおすすめです!!'
     /> 
     }
   </FormControl>
