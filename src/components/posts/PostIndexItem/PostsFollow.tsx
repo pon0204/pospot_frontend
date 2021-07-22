@@ -55,7 +55,7 @@ const PostsFollow = () => {
             </div>
           ))}
       </div>
-      <div className='mx-auto w-96 text-center relative'>
+      <div className='mx-auto w-80 text-center relative'>
         <button 
         ref={loadMoreButtonRef}
         disabled={!hasNextPage || isFetchingNextPage}

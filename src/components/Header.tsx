@@ -37,13 +37,6 @@ export default function Header() {
     localStorage.removeItem('currentUserId')
   }
 
-  useEffect(()=>{
-    axios.get(`${process.env.REACT_APP_REST_URL}/profiles/${currentUserId}`)
-    .then((res)=>
-    dispatch(setCurrentAvatar(res.data.profile.avatar_url))
-    )
-  },[])
-
   useEffect(() => {
     const getToken = async () => {
     try{
@@ -52,6 +45,10 @@ export default function Header() {
       dispatch(setHeaders(accessToken))
       // alert(accessToken)
       userIdMutation.mutate()
+      axios.get(`${process.env.REACT_APP_REST_URL}/profiles/${currentUserId}`)
+      .then((res)=>
+      dispatch(setCurrentAvatar(res.data.profile.avatar_url))
+      )
     }
     catch(e){
       console.log(e.message)
