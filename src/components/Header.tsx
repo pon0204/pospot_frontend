@@ -54,15 +54,13 @@ export default function Header() {
       userIdMutation.mutate()
     }
     catch(e){
-      // alert('ログインしてないよ')
-      console.log('だめでしたー')
       console.log(e.message)
       removeUserId()
   } 
 }
 getToken()
   }, [isAuthenticated])
-console.log(isAuthenticated)
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
