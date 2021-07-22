@@ -16,9 +16,9 @@ const ProfileShow = ({match}:any) => {
       <ProfileShowPosts id={id}/>
       {
       currentUserId == id &&
-      <div className='fixed bottom-20 right-6 lg:right-20 bg-opacity-30 bg-blue-300 rounded-full'>
+      <div className='fixed z-50 bottom-20 right-6 lg:right-20 bg-opacity-90 bg-blue-900 rounded-full'>
         <Link to='/posts/new' className='p-4 block'>
-          <AddIcon style={{fontSize: 52}} color='primary'/>
+          <AddIcon style={{fontSize: 52,color:'white'}}/>
         </Link>
       </div>
       }
