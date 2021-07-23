@@ -1,44 +1,106 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+## リンク
+[https://pospot-frontend.vercel.app/](https://pospot-frontend.vercel.app/)
 
-## Available Scripts
 
-In the project directory, you can run:
+## サイト概要
+・新しい遊び場を発見・共有するSNS  
+・Google Mapに登録されている地域を投稿で共有できる。(Google Map Place APIを使用)  
+・ジャンルと都道府県での絞り込み検索で遊び場発見  
+![image](https://user-images.githubusercontent.com/70616489/126742169-adb0a9fc-c557-4241-abc5-3b61a9512966.png)  
+![image](https://user-images.githubusercontent.com/70616489/126742417-cda6910b-f0c4-46e0-bb21-bff9a0c1592f.png)
 
-### `yarn start`
+サービス名: ポスポット  
+URL: [https://pospot-frontend.vercel.app/](https://pospot-frontend.vercel.app/)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+github:  
+【フロント】 [https://github.com/pon0204/pospot_frontend](https://github.com/pon0204/pospot_frontend)  
+【バックエンド】[https://github.com/pon0204/pospot_api](https://github.com/pon0204/pospot_api)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## 制作者の思い
+「遊ぶ場所を見つけれずに、毎回同じ場所に行ってしまう」  
+これは僕が普段から感じている悩みです。  
 
-### `yarn test`
+世の中には自分が知らない面白い場所、遊び、お店があるはずが、知る機会や方法があまりなく、  
+「最近新しい体験ができていないなぁ」と思っていました。
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+サービスを通して、  
+「ユーザーが新しい体験し、共有することで人生を楽しんでほしい」  
+「コロナ禍で苦しいお店が、紹介されて、助けになってほしい」  
 
-### `yarn build`
+そんな世の中になってくれたらいいなと思い制作しました。
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 使用技術
+バックエンド - Ruby On Rails  
+フロントエンド - React / TypeScript  
+インフラ - Heroku + AWS S3 / Vercel  
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+【その他技術】  
+・ Auth0 → ログイン認証サービス  
+・Redux Toolkit → クライアントステートの管理  
+・react-query  → サーバーデータ保持  
+・Google Map Place API → 場所情報データを取得 
+【UI/UX】  
+・material-ui  
+・Tailwind CSS   
+【トップ画像・アイコン製作】  
+・Figma  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+※インフラ図準備中
 
-### `yarn eject`
+## 機能一覧
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### ユーザーログイン機能
+・Auth0を使用して実装
+・メールアドレスとGoogleでのログイン可能
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 投稿機能
+・一覧表示(新着投稿,フォロー投稿,ユーザー投稿,いいねした投稿)  
+・削除機能
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 投稿時
+【バリデーション】  
+・文字数,nullのvalidation実装  
+【投稿情報】  
+・アイキャッチ  
+・タイトル  
+・説明  
+・ジャンル  
+・誰と行ったか  
+・場所情報  
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+【アイキャッチ】  
+・Active Storageで実装  
+・画像はAmazon S3に格納  
 
-## Learn More
+【タイトルと説明】  
+・material uiのTextFiledで実装  
+・文字数をカウントし、超えたらエラー  
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+【ジャンル】  
+・AutoCompleteで実装  
+・選択肢をクリック or 自分で好きな値を入力  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+【誰と行ったか】  
+・material uiのラジオボタンで実装  
+
+【場所検索,場所詳細取得】  
+・Google Map Place APIを使用  
+・自分が登録したい場所をAutoCompleteで検索  
+・場所の名前,住所,URLを取得し、DBに保存  
+・投稿に表示 
+
+### ページネーション機能
+・無限スクロールを実装(react-query useQueryInfiniteを使用)  
+
+### いいね機能
+・投稿に対していいね可能  
+・いいねした投稿は一覧表示  
+
+### フォロー機能
+・ユーザーに対してフォロー可能  
+・フォローしたユーザーの投稿を一覧表示  
+
+### 検索機能
+・ジャンルと場所の両方で検索  
+・AutoCompleteで検索  
+
