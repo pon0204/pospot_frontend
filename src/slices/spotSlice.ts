@@ -1,7 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../app/store';
-import { EditSpot } from '../types/types';
-
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '../app/store'
+import { EditSpot } from '../types/types'
 
 export interface SpotState {
   editedSpot: EditSpot
@@ -10,15 +9,15 @@ export interface SpotState {
 const initialState: SpotState = {
   editedSpot: {
     spot: {
-    name: '',
-    web_url: '',
-    map_url: '',
-    place: '',
-    place_detail:'',
-    place_id: '',
+      name: '',
+      web_url: '',
+      map_url: '',
+      place: '',
+      place_detail: '',
+      place_id: '',
     },
-    id: null
-  }
+    id: null,
+  },
 }
 
 export const spotSlice = createSlice({
@@ -34,9 +33,8 @@ export const spotSlice = createSlice({
   },
 })
 
-export const { setEditedSpot, resetEditedSpot} =
-  spotSlice.actions
+export const { setEditedSpot, resetEditedSpot } = spotSlice.actions
 
-  export const selectSpot = (state: RootState) => state.spot.editedSpot
+export const selectSpot = (state: RootState) => state.spot.editedSpot
 
-export default spotSlice.reducer;
+export default spotSlice.reducer

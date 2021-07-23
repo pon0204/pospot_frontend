@@ -1,32 +1,32 @@
-import Button from '@material-ui/core/Button';
-import Dialog, { DialogProps } from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import React from 'react';
-import PostShow from './posts/PostShow';
+import Button from '@material-ui/core/Button'
+import Dialog, { DialogProps } from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import React from 'react'
+import PostShow from './posts/PostShow'
 
 export default function ScrollDialog() {
-  const [open, setOpen] = React.useState(false);
-  const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
+  const [open, setOpen] = React.useState(false)
+  const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper')
 
   const handleClickOpen = (scrollType: DialogProps['scroll']) => () => {
-    setOpen(true);
-    setScroll(scrollType);
-  };
+    setOpen(true)
+    setScroll(scrollType)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
-  const descriptionElementRef = React.useRef<HTMLElement>(null);
+  const descriptionElementRef = React.useRef<HTMLElement>(null)
   React.useEffect(() => {
     if (open) {
-      const { current: descriptionElement } = descriptionElementRef;
+      const { current: descriptionElement } = descriptionElementRef
       if (descriptionElement !== null) {
-        descriptionElement.focus();
+        descriptionElement.focus()
       }
     }
-  }, [open]);
+  }, [open])
 
   return (
     <div>
@@ -40,7 +40,7 @@ export default function ScrollDialog() {
         aria-describedby="scroll-dialog-description"
       >
         <DialogContent dividers={scroll === 'paper'}>
-          <PostShow id={1}/>
+          <PostShow id={1} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
@@ -52,5 +52,5 @@ export default function ScrollDialog() {
         </DialogActions>
       </Dialog>
     </div>
-  );
+  )
 }

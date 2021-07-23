@@ -1,14 +1,14 @@
-import React, { VFC } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.css';
-import Header from './components/Header';
-import PostForm from './components/posts/PostCreate';
-import PostsIndex from './components/posts/PostsIndex';
-import ProfileEdit from './components/profile/ProfileEdit';
-import ProfileShow from './components/profile/ProfileShow';
-import Top from './components/TopView/Top';
+import React, { VFC } from 'react'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import './App.css'
+import Header from './components/Header'
+import PostForm from './components/posts/PostCreate'
+import PostsIndex from './components/posts/PostsIndex'
+import ProfileEdit from './components/profile/ProfileEdit'
+import ProfileShow from './components/profile/ProfileShow'
+import Top from './components/TopView/Top'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,42 +21,37 @@ const queryClient = new QueryClient({
 
 const App: VFC = () => {
   return (
-    
-  <div className='relative h-screen'>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Header/>
-        <Switch>
-          <Route exact path="/posts">
-            {/* <MainTag/> */}
-            <PostsIndex/>
-          </Route>
-          <Route exact path="/posts/new">
-            <PostForm/>
-          </Route>
-          <Route exact path="/profile/edit/:profileId"
-          render={({ match }:any) =>
-          <ProfileEdit
-          match={match}
-          />
-          }
-          />
-          <Route exact path="/profile/:profileId"
-          render={({ match }:any) =>
-          <ProfileShow
-          match={match}
-          />
-          }
-          />
-          <Route exact path="/">
-            <Top/>
-          </Route>
-        </Switch>
-      </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />  
-    </QueryClientProvider>
-  </div>
-  );
+    <div className="relative h-screen">
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Header />
+          <Switch>
+            <Route exact path="/posts">
+              {/* <MainTag/> */}
+              <PostsIndex />
+            </Route>
+            <Route exact path="/posts/new">
+              <PostForm />
+            </Route>
+            <Route
+              exact
+              path="/profile/edit/:profileId"
+              render={({ match }: any) => <ProfileEdit match={match} />}
+            />
+            <Route
+              exact
+              path="/profile/:profileId"
+              render={({ match }: any) => <ProfileShow match={match} />}
+            />
+            <Route exact path="/">
+              <Top />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </div>
+  )
 }
 
-export default App;
+export default App

@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../app/store';
-import { EditPost } from '../types/types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '../app/store'
+import { EditPost } from '../types/types'
 
 export interface PostState {
   editedPost: EditPost
@@ -16,10 +16,10 @@ const initialState: PostState = {
     with: '誰でも',
     genre: '',
     eyecatch: '',
-},
+  },
   queryGenre: null,
   queryPlace: null,
-  page: 0
+  page: 0,
 }
 
 export const postSlice = createSlice({
@@ -53,12 +53,20 @@ export const postSlice = createSlice({
   },
 })
 
-export const { setEditedPost, resetEditedPost,setQueryGenre,resetQueryGenre,setQueryPlace,resetQueryPlace,incrementQueryPage,resetQueryPage} =
-  postSlice.actions
+export const {
+  setEditedPost,
+  resetEditedPost,
+  setQueryGenre,
+  resetQueryGenre,
+  setQueryPlace,
+  resetQueryPlace,
+  incrementQueryPage,
+  resetQueryPage,
+} = postSlice.actions
 
-  export const selectPost = (state: RootState) => state.post.editedPost
-  export const selectQueryGenre = (state: RootState) => state.post.queryGenre
-  export const selectQueryPlace = (state: RootState) => state.post.queryPlace
-  export const selectPage = (state: RootState) => state.post.page
+export const selectPost = (state: RootState) => state.post.editedPost
+export const selectQueryGenre = (state: RootState) => state.post.queryGenre
+export const selectQueryPlace = (state: RootState) => state.post.queryPlace
+export const selectPage = (state: RootState) => state.post.page
 
-export default postSlice.reducer;
+export default postSlice.reducer

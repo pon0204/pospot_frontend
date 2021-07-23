@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../app/store';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '../app/store'
 
 export interface headers {
   Authorization: string | null
@@ -10,11 +10,11 @@ export interface headersState {
   headers: headers
 }
 
-const initialState:headersState = {  
+const initialState: headersState = {
   headers: {
     Authorization: null,
     'Content-Type': 'application/json',
-  }
+  },
 }
 
 export const headersSlice = createSlice({
@@ -23,12 +23,12 @@ export const headersSlice = createSlice({
   reducers: {
     setHeaders: (state, action: PayloadAction<string>) => {
       state.headers.Authorization = action.payload
-    }
-  }
+    },
+  },
 })
 
 export const { setHeaders } = headersSlice.actions
 
 export const selectHeaders = (state: RootState) => state.headers
 
-export default headersSlice.reducer;
+export default headersSlice.reducer

@@ -1,58 +1,58 @@
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import parse from 'autosuggest-highlight/parse';
-import throttle from 'lodash/throttle';
-import React, { VFC } from 'react';
-import { useAppDispatch } from '../../../app/hooks';
+import Grid from '@material-ui/core/Grid'
+import { makeStyles } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
+import LocationOnIcon from '@material-ui/icons/LocationOn'
+import Autocomplete from '@material-ui/lab/Autocomplete'
+import parse from 'autosuggest-highlight/parse'
+import throttle from 'lodash/throttle'
+import React, { VFC } from 'react'
+import { useAppDispatch } from '../../../app/hooks'
 //redux,react-query
-import { useMutateSpot } from '../../../hooks/castomHook/useMutateSpot';
-import { setApiLoadingOther } from '../../../slices/apiSlice';
+import { useMutateSpot } from '../../../hooks/castomHook/useMutateSpot'
+import { setApiLoadingOther } from '../../../slices/apiSlice'
 
 function loadScript(src: string, position: HTMLElement | null, id: string) {
   if (!position) {
-    return;
+    return
   }
 
-  const script = document.createElement('script');
-  script.setAttribute('async', '');
-  script.setAttribute('id', id);
-  script.src = src;
-  position.appendChild(script);
+  const script = document.createElement('script')
+  script.setAttribute('async', '')
+  script.setAttribute('id', id)
+  script.src = src
+  position.appendChild(script)
 }
 
-const autocompleteService = { current: null };
+const autocompleteService = { current: null }
 
 const useStyles = makeStyles((theme) => ({
   icon: {
     color: theme.palette.text.secondary,
     marginRight: theme.spacing(2),
   },
-}));
+}))
 
 interface PlaceType {
-  description: string;
+  description: string
   structured_formatting: {
-    main_text: string;
-    secondary_text: string;
+    main_text: string
+    secondary_text: string
     main_text_matched_substrings: [
       {
-        offset: number;
-        length: number;
-      },
-    ];
-  };
+        offset: number
+        length: number
+      }
+    ]
+  }
 }
 
-export const FormSpot:VFC = () =>  {
-  const classes = useStyles();
-  const [value, setValue] = React.useState<any>(null);
-  const [inputValue, setInputValue] = React.useState('');
-  const [options, setOptions] = React.useState<PlaceType[]>([]);
-  const loaded = React.useRef(false);
+export const FormSpot: VFC = () => {
+  const classes = useStyles()
+  const [value, setValue] = React.useState<any>(null)
+  const [inputValue, setInputValue] = React.useState('')
+  const [options, setOptions] = React.useState<PlaceType[]>([])
+  const loaded = React.useRef(false)
   const placeApiKey = process.env.REACT_APP_PLACE_API
   const { fetchSpotMutation } = useMutateSpot()
   const dispatch = useAppDispatch()
@@ -62,62 +62,75 @@ export const FormSpot:VFC = () =>  {
       loadScript(
         `https://maps.googleapis.com/maps/api/js?key=${placeApiKey}&libraries=places&language=ja`,
         document.querySelector('head'),
-        'google-maps',
-      );
+        'google-maps'
+      )
     }
 
-    loaded.current = true;
+    loaded.current = true
   }
 
   const fetch = React.useMemo(
     () =>
-      throttle((request: { input: string }, callback: (results?: PlaceType[]) => void) => {
-        (autocompleteService.current as any).getPlacePredictions(request, callback);
-      }, 200),
-    [],
-  );
+      throttle(
+        (
+          request: { input: string },
+          callback: (results?: PlaceType[]) => void
+        ) => {
+          ;(autocompleteService.current as any).getPlacePredictions(
+            request,
+            callback
+          )
+        },
+        200
+      ),
+    []
+  )
 
   React.useEffect(() => {
-    let active = true;
+    let active = true
 
     if (!autocompleteService.current && (window as any).google) {
-      autocompleteService.current = new (window as any).google.maps.places.AutocompleteService();
+      autocompleteService.current = new (
+        window as any
+      ).google.maps.places.AutocompleteService()
     }
     if (!autocompleteService.current) {
-      return undefined;
+      return undefined
     }
 
     if (inputValue === '') {
-      setOptions(value ? [value] : []);
-      return undefined;
+      setOptions(value ? [value] : [])
+      return undefined
     }
 
     fetch({ input: inputValue }, (results?: PlaceType[]) => {
       if (active) {
-        let newOptions = [] as PlaceType[];
+        let newOptions = [] as PlaceType[]
 
         if (value) {
-          newOptions = [value];
+          newOptions = [value]
         }
 
         if (results) {
-          newOptions = [...newOptions, ...results];
+          newOptions = [...newOptions, ...results]
         }
 
-        setOptions(newOptions);
+        setOptions(newOptions)
       }
-    });
+    })
 
     return () => {
-      active = false;
-    };
-  }, [value, inputValue, fetch]);
+      active = false
+    }
+  }, [value, inputValue, fetch])
 
   return (
-    <div className='full-width mt-4'>
+    <div className="full-width mt-4">
       <Autocomplete
         id="google-map-demo"
-        getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}
+        getOptionLabel={(option) =>
+          typeof option === 'string' ? option : option.description
+        }
         filterOptions={(x) => x}
         options={options}
         autoComplete
@@ -125,27 +138,37 @@ export const FormSpot:VFC = () =>  {
         filterSelectedOptions
         value={value}
         onChange={(event: any, newValue: any) => {
-          setOptions(newValue ? [newValue, ...options] : options);
-          setValue(newValue);
-          if(newValue){
+          setOptions(newValue ? [newValue, ...options] : options)
+          setValue(newValue)
+          if (newValue) {
             dispatch(setApiLoadingOther())
             fetchSpotMutation.mutate(newValue.place_id)
           }
         }}
         //place_id "ChIJ1SFv4dV2A2AR3hKmVbI2pdA"
         onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
+          setInputValue(newInputValue)
         }}
         renderInput={(params) => (
-          <TextField {...params} label="スポットを追加" variant="outlined" placeholder='予測変換します。 検索例: 東京ドーム' fullWidth />
+          <TextField
+            {...params}
+            label="スポットを追加"
+            variant="outlined"
+            placeholder="予測変換します。 検索例: 東京ドーム"
+            fullWidth
+          />
         )}
         renderOption={(option) => {
-          const matches = option.structured_formatting.main_text_matched_substrings;
+          const matches =
+            option.structured_formatting.main_text_matched_substrings
           const parts = parse(
             option.structured_formatting.main_text,
-            matches.map((match: any) => [match.offset, match.offset + match.length]),
-          );
-  
+            matches.map((match: any) => [
+              match.offset,
+              match.offset + match.length,
+            ])
+          )
+
           return (
             <Grid container alignItems="center">
               <Grid item>
@@ -153,7 +176,10 @@ export const FormSpot:VFC = () =>  {
               </Grid>
               <Grid item xs>
                 {parts.map((part, index) => (
-                  <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
+                  <span
+                    key={index}
+                    style={{ fontWeight: part.highlight ? 700 : 400 }}
+                  >
                     {part.text}
                   </span>
                 ))}
@@ -162,9 +188,9 @@ export const FormSpot:VFC = () =>  {
                 </Typography>
               </Grid>
             </Grid>
-          );
+          )
         }}
       />
     </div>
-  );
+  )
 }

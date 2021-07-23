@@ -1,29 +1,31 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../app/store';
-import { FollowCount, FollowersId, FollowingsId } from '../types/types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '../app/store'
+import { FollowCount, FollowersId, FollowingsId } from '../types/types'
 
 export interface FollowState {
-  followsCount:FollowCount
+  followsCount: FollowCount
   followingsId: FollowingsId[]
   followersId: FollowersId[]
 }
 
 const initialState: FollowState = {
-  followsCount:{
+  followsCount: {
     followingsCount: null,
     followersCount: null,
   },
-  followingsId:[{
-    id: null
-  }],
-  followersId:[{
-    id: null
-  }]
-  
+  followingsId: [
+    {
+      id: null,
+    },
+  ],
+  followersId: [
+    {
+      id: null,
+    },
+  ],
 }
 
 export const followSlice = createSlice({
-
   name: 'follows',
   initialState,
   reducers: {
@@ -40,11 +42,11 @@ export const followSlice = createSlice({
   },
 })
 
-export const { setFollowsCount, resetFollow} =
-  followSlice.actions
+export const { setFollowsCount, resetFollow } = followSlice.actions
 
-  export const selectFollowsCount = (state: RootState) => state.follows.followsCount
-  export const selectFollowsId = (state: RootState) => state.follows.followingsId
-  export const selectFollowers = (state: RootState) => state.follows.followersId
+export const selectFollowsCount = (state: RootState) =>
+  state.follows.followsCount
+export const selectFollowsId = (state: RootState) => state.follows.followingsId
+export const selectFollowers = (state: RootState) => state.follows.followersId
 
-export default followSlice.reducer;
+export default followSlice.reducer

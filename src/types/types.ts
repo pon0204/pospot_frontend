@@ -1,4 +1,3 @@
-
 export interface Post {
   id: number
   user_id: number
@@ -49,13 +48,13 @@ export interface EditPost {
 }
 
 export interface EditSpot {
-  spot:{
-  name: string
-  web_url: string
-  map_url: string
-  place: string
-  place_detail: string
-  place_id: string
+  spot: {
+    name: string
+    web_url: string
+    map_url: string
+    place: string
+    place_detail: string
+    place_id: string
   }
   id: number | null
 }

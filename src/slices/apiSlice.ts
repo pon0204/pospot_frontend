@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../app/store';
+import { createSlice } from '@reduxjs/toolkit'
+import { RootState } from '../app/store'
 
 export interface apiState {
   apiLoading: boolean
@@ -7,8 +7,8 @@ export interface apiState {
 }
 
 const initialState: apiState = {
-  apiLoading : false,
-  apiLoadingOther : false
+  apiLoading: false,
+  apiLoadingOther: false,
 }
 
 export const apiSlice = createSlice({
@@ -30,9 +30,14 @@ export const apiSlice = createSlice({
   },
 })
 
-export const {setApiLoading ,resetApiLoading,setApiLoadingOther,resetApiLoadingOther} =
-  apiSlice.actions
-  export const selectLoading = (state: RootState) => state.api.apiLoading
-  export const selectLoadingOther = (state: RootState) => state.api.apiLoadingOther
+export const {
+  setApiLoading,
+  resetApiLoading,
+  setApiLoadingOther,
+  resetApiLoadingOther,
+} = apiSlice.actions
+export const selectLoading = (state: RootState) => state.api.apiLoading
+export const selectLoadingOther = (state: RootState) =>
+  state.api.apiLoadingOther
 
-export default apiSlice.reducer;
+export default apiSlice.reducer

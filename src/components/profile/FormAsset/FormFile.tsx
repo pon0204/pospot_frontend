@@ -1,43 +1,58 @@
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
+import imageCompression from 'browser-image-compression'
+import React, { useState, VFC } from 'react'
+import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { selectProfile, setEditedProfile } from '../../../slices/profileSlice'
 
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
-import imageCompression from 'browser-image-compression';
-import React, { useState, VFC } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { selectProfile, setEditedProfile } from '../../../slices/profileSlice';
-
-const FormFile:VFC = () => {
-
-  const [fileUrl, setFileUrl] = useState<string>('');
+const FormFile: VFC = () => {
+  const [fileUrl, setFileUrl] = useState<string>('')
   const editedProfile = useAppSelector(selectProfile)
   const dispatch = useAppDispatch()
 
   const compressOption = {
     maxSizeMB: 0.1,
-    maxWidthOrHeight: 128
-  };
+    maxWidthOrHeight: 128,
+  }
 
-  const imageChange = async(event:any) => {
-    const image = event.target.files[0];
-    const imageUrl:any = URL.createObjectURL(image);
-    const compressFile = await imageCompression(image ,compressOption);
+  const imageChange = async (event: any) => {
+    const image = event.target.files[0]
+    const imageUrl: any = URL.createObjectURL(image)
+    const compressFile = await imageCompression(image, compressOption)
     setFileUrl(imageUrl)
-    dispatch(setEditedProfile({ ...editedProfile, avatar: compressFile}))
+    dispatch(setEditedProfile({ ...editedProfile, avatar: compressFile }))
   }
 
   return (
     <div>
-    <label htmlFor='file' className='border-2 border-gray-300 relative cursor-pointer w-24 h-24 block mt-10 rounded-full mx-auto' >
-      {fileUrl ?
-        <img src={fileUrl} className='w-24 h-24 rounded-full' alt="" />
-      :
-      <div className='relative'>
-        <img src={editedProfile.avatar_url} className='w-24 h-24 rounded-full opacity-50' alt=''/>
-        <AddAPhotoIcon className='absolute top-8 right-8' style={{fontSize: 32}}/>
-        {/* <img src={defaultPhoto} className='rounded-full' alt="" /> */}
-      </div>
-    }
-    </label>
-        <input className='hidden' onChange={imageChange} type="file" id="file" name="file" accept="image/png,image/jpg"/>
+      <label
+        htmlFor="file"
+        className="border-2 border-gray-300 relative cursor-pointer w-24 h-24 block mt-10 rounded-full mx-auto"
+      >
+        {fileUrl ? (
+          <img src={fileUrl} className="w-24 h-24 rounded-full" alt="" />
+        ) : (
+          <div className="relative">
+            <img
+              src={editedProfile.avatar_url}
+              className="w-24 h-24 rounded-full opacity-50"
+              alt=""
+            />
+            <AddAPhotoIcon
+              className="absolute top-8 right-8"
+              style={{ fontSize: 32 }}
+            />
+            {/* <img src={defaultPhoto} className='rounded-full' alt="" /> */}
+          </div>
+        )}
+      </label>
+      <input
+        className="hidden"
+        onChange={imageChange}
+        type="file"
+        id="file"
+        name="file"
+        accept="image/png,image/jpg"
+      />
     </div>
   )
 }

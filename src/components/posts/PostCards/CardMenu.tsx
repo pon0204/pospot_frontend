@@ -1,32 +1,32 @@
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import React from 'react';
-import { useMutatePost } from '../../../hooks/castomHook/useMutatePost';
+import IconButton from '@material-ui/core/IconButton'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
+import React from 'react'
+import { useMutatePost } from '../../../hooks/castomHook/useMutatePost'
 
 const options = [
   'Delete',
   // 'Edit',
-];
+]
 
-export const CardMenu = (id:any) => {
-  const {deletePostMutation} = useMutatePost()
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+export const CardMenu = (id: any) => {
+  const { deletePostMutation } = useMutatePost()
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   return (
     <div>
       <IconButton
-        style={{outline: 'none'}}
+        style={{ outline: 'none' }}
         aria-label="more"
         aria-controls="long-menu"
         aria-haspopup="true"
@@ -47,17 +47,20 @@ export const CardMenu = (id:any) => {
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} 
-          onClick={() => {
-            handleClose();
-            deletePostMutation.mutate(id.id);
-            }}>
-          {option}
+          <MenuItem
+            key={option}
+            selected={option === 'Pyxis'}
+            onClick={() => {
+              handleClose()
+              deletePostMutation.mutate(id.id)
+            }}
+          >
+            {option}
           </MenuItem>
         ))}
       </Menu>
     </div>
-  );
+  )
 }
 
 export default CardMenu
