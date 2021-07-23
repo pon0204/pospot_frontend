@@ -40,7 +40,7 @@ const ProfileShowPostsCurrent = (id: any) => {
           </div>
         ))}
       </div>
-      <div className="mx-auto w-80 text-center relative">
+      <div className="w-80 relative mx-auto text-center">
         <button
           ref={loadMoreButtonRef}
           disabled={!hasNextPage || isFetchingNextPage}
@@ -49,7 +49,7 @@ const ProfileShowPostsCurrent = (id: any) => {
           }}
         >
           {isFetchingNextPage || status === 'loading' ? (
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="top-1/2 left-1/2 absolute transform -translate-x-1/2 -translate-y-1/2">
               <CircularProgress />
             </div>
           ) : hasNextPage ? (

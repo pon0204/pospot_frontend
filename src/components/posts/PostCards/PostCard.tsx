@@ -77,7 +77,7 @@ const PostCard = (item: any) => {
 
   return (
     <div
-      className="relative md:m-2 mx-auto my-2"
+      className="md:m-2 relative mx-auto my-2"
       style={{ height: '530px', width: '370px' }}
     >
       <button
@@ -86,10 +86,10 @@ const PostCard = (item: any) => {
         className="w-full h-full"
         style={{ outline: 'none' }}
       >
-        <div className="w-full h-full border z-0 relative text-left">
+        <div className="relative z-0 w-full h-full text-left border">
           <div className="flex pt-1 pl-4">
             <Link to={`/profile/${item.item.user_id}`}>
-              <div className="border-2 border-gray-300 relative cursor-pointer w-16 h-16 block rounded-full mx-auto">
+              <div className="relative block w-16 h-16 mx-auto border-2 border-gray-300 rounded-full cursor-pointer">
                 {item.item.avatar_url == null ? (
                   <img src={defaultPhoto} className="rounded-full" alt="" />
                 ) : (
@@ -101,23 +101,23 @@ const PostCard = (item: any) => {
                 )}
               </div>
             </Link>
-            <div className="ml-4 py-2 w-9/12">
-              <h3 className="font-bold text-lg">{title}</h3>
-              <div className="flex overflow-x-auto mt-1">
-                <p className="text-gray-600 whitespace-nowrap">
+            <div className="w-9/12 py-2 ml-4">
+              <h3 className="text-lg font-bold">{title}</h3>
+              <div className="flex mt-1 overflow-x-auto">
+                <p className="whitespace-nowrap text-gray-600">
                   {item.item.created_at.substring(
                     0,
                     item.item.created_at.indexOf('T')
                   )}
                 </p>
                 {withData && (
-                  <div className="bg-red-200  rounded-md p-1 text-sm text-center mx-2 whitespace-nowrap">
+                  <div className="whitespace-nowrap p-1 mx-2 text-sm text-center bg-red-200 rounded-md">
                     {withData}
                   </div>
                 )}
                 {genres?.map((genre: string, index: number) => (
                   <div
-                    className="bg-green-200 mx-2 rounded-md p-1 text-sm whitespace-nowrap"
+                    className="whitespace-nowrap p-1 mx-2 text-sm bg-green-200 rounded-md"
                     key={index}
                   >
                     {genre}
@@ -126,27 +126,27 @@ const PostCard = (item: any) => {
               </div>
             </div>
           </div>
-          <h3 className="border border-blue-600 text-blue-600 rounded-md text-center p-1  text-lg w-11/12 mx-auto my-2 whitespace-nowrap overflow-x-auto">
+          <h3 className="whitespace-nowrap w-11/12 p-1 mx-auto my-2 overflow-x-auto text-lg text-center text-blue-600 border border-blue-600 rounded-md">
             {spot_name}
           </h3>
           <img
-            className="block w-full object-cover"
+            className="block object-cover w-full"
             src={item.item.image_url}
             alt=""
             style={{ height: 300 }}
           />
           <p className="px-2 pt-1">{caption}</p>
-          <p className="absolute bottom-2 left-2 bg-gray-600 text-white p-1 pr-2">
+          <p className="bottom-2 left-2 absolute p-1 pr-2 text-white bg-gray-600">
             <RoomIcon /> {item.item.place}
           </p>
         </div>
       </button>
       {currentUserId == item.item.user_id && (
-        <div className="absolute top-2 right-2 z-10">
+        <div className="top-2 right-2 absolute z-10">
           <CardMenu id={item.item.id} />
         </div>
       )}
-      <div className="absolute right-2 bottom-0 z-10">
+      <div className="right-2 absolute bottom-0 z-10">
         {likeHeart ? (
           <IconButton
             onClick={() => {
@@ -231,5 +231,4 @@ const PostCard = (item: any) => {
     </div>
   )
 }
-
 export const PostCardMemo = memo(PostCard)

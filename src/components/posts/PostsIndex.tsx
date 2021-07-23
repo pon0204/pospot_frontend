@@ -28,15 +28,15 @@ const PostsIndex: VFC = () => {
   }, [])
 
   return (
-    <div className="pt-10 pb-28">
+    <div className="pb-28 pt-10">
       <div className="md:flex md:justify-center pb-8">
         <AutoCompGenre />
         <AutoCompPlace />
       </div>
       {tabState == 0 ? <PostsNew /> : <PostsFollow />}
       <PostsIndexTabs handleChange={handleChange} tabState={tabState} />
-      <div className="fixed z-50 bottom-20 right-6 lg:right-20 bg-opacity-90 bg-blue-900 rounded-full">
-        <Link to="/posts/new" className="p-4 block">
+      <div className="bottom-20 right-6 lg:right-20 bg-opacity-90 fixed z-50 bg-blue-900 rounded-full">
+        <Link to="/posts/new" className="block p-4">
           <AddIcon style={{ fontSize: 52, color: 'white' }} />
         </Link>
       </div>

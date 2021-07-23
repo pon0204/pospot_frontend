@@ -15,7 +15,7 @@ const ProfileShowPosts = (id: any) => {
 
   return (
     <div>
-      <div className="border-t border-b h-20 mt-4 flex text-center align-center items-center">
+      <div className="align-center flex items-center h-20 mt-4 text-center border-t border-b">
         {/* <p className='w-1/3'>投稿{currentPosts?.length}件</p> */}
         <p className="w-1/2">フォロワー{followsCount.followersCount}人</p>
         <p className="w-1/2">フォロー中{followsCount.followingsCount}人</p>

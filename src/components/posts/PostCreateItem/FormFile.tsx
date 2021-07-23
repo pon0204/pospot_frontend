@@ -28,7 +28,7 @@ const FormFile: VFC = () => {
         <div>
           <label
             htmlFor="file"
-            className="text-center py-1 border-4 border-light-blue-500 w-full block cursor-pointer"
+            className="border-light-blue-500 block w-full py-1 text-center border-4 cursor-pointer"
           >
             <AddAPhotoIcon className="" style={{ fontSize: 24 }} />
             アイキャッチ画像変更
@@ -42,12 +42,12 @@ const FormFile: VFC = () => {
       ) : (
         <label
           htmlFor="file"
-          className="border-dashed border-4 border-light-blue-500 w-full block cursor-pointer relative"
+          className="border-light-blue-500 relative block w-full border-4 border-dashed cursor-pointer"
           style={{ height: '250px' }}
         >
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <div className="top-1/2 left-1/2 absolute transform -translate-x-1/2 -translate-y-1/2">
             <AddAPhotoIcon className="" style={{ fontSize: 32 }} />
-            <p className="ml-1 pt-1 inline-block">アイキャッチ画像</p>
+            <p className="inline-block pt-1 ml-1">アイキャッチ画像</p>
           </div>
         </label>
       )}

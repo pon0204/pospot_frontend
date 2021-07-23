@@ -41,7 +41,7 @@ export const AutoCompGenre = () => {
           placeholder="検索例: ラーメン 公園"
         />
       )}
-      className="mx-auto my-2 md:mx-2"
+      className="md:mx-2 mx-auto my-2"
       onChange={(e: any, v: any) => handleChange(e, v)}
     />
   )

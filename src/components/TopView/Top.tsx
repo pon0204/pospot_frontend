@@ -7,9 +7,9 @@ const Top = () => {
 
   return (
     <div className="relative">
-      <div className="w-screen h-screen bg-no-repeat bg-contain md:bg-cover bg-hero-responsive-img md:bg-hero-img"></div>
+      <div className="md:bg-cover bg-hero-responsive-img md:bg-hero-img w-screen h-screen bg-no-repeat bg-contain"></div>
       <div
-        className="md:flex md:w-1/3 md:justify-between absolute md:right-1/3 right-1/4"
+        className="md:flex md:w-1/3 md:justify-between md:right-1/3 right-1/4 absolute"
         style={{ bottom: '20%' }}
       >
         {isAuthenticated ? (
@@ -17,20 +17,20 @@ const Top = () => {
             onClick={() => {
               logout({ returnTo: window.location.origin })
             }}
-            className="bg-blue-500 font-bold rounded-md px-12 py-4 text-white"
+            className="px-12 py-4 font-bold text-white bg-blue-500 rounded-md"
           >
             ログアウトする
           </button>
         ) : (
           <button
             onClick={loginWithPopup}
-            className="bg-blue-500 font-bold rounded-md px-12 py-4 text-white"
+            className="px-12 py-4 font-bold text-white bg-blue-500 rounded-md"
           >
             ログインする
           </button>
         )}
         <Link to="/posts">
-          <div className="px-12 py-4 font-bold bg-red-500 rounded-md text-white mt-7 md:mt-0">
+          <div className="mt-7 md:mt-0 px-12 py-4 font-bold text-white bg-red-500 rounded-md">
             スポットを見る
           </div>
         </Link>

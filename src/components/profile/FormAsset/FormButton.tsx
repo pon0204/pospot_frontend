@@ -26,7 +26,7 @@ const FormButton: VFC = () => {
     return (
       <button
         disabled
-        className="cursor-default bg-red-300 mt-3 rounded text-lg font-bold mx-auto w-2/6 p-4 block text-white"
+        className="block w-2/6 p-4 mx-auto mt-3 text-lg font-bold text-white bg-red-300 rounded cursor-default"
       >
         エラーの項目があります
       </button>
@@ -35,7 +35,7 @@ const FormButton: VFC = () => {
 
   return (
     <button
-      className="bg-red-500 mt-3 rounded text-lg font-bold mx-auto w-2/6 p-4 block text-white"
+      className="block w-2/6 p-4 mx-auto mt-3 text-lg font-bold text-white bg-red-500 rounded"
       onClick={profileUpdateClick}
     >
       更新

@@ -26,7 +26,7 @@ const FormFile: VFC = () => {
     <div>
       <label
         htmlFor="file"
-        className="border-2 border-gray-300 relative cursor-pointer w-24 h-24 block mt-10 rounded-full mx-auto"
+        className="relative block w-24 h-24 mx-auto mt-10 border-2 border-gray-300 rounded-full cursor-pointer"
       >
         {fileUrl ? (
           <img src={fileUrl} className="w-24 h-24 rounded-full" alt="" />
@@ -38,7 +38,7 @@ const FormFile: VFC = () => {
               alt=""
             />
             <AddAPhotoIcon
-              className="absolute top-8 right-8"
+              className="top-8 right-8 absolute"
               style={{ fontSize: 32 }}
             />
             {/* <img src={defaultPhoto} className='rounded-full' alt="" /> */}

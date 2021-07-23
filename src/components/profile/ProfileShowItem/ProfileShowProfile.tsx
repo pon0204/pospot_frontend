@@ -29,7 +29,7 @@ const ProfileShowProfile = (id: any) => {
 
   return (
     <div>
-      <div className="border-2 border-gray-300 relative cursor-pointer w-32 h-32 block mt-10 rounded-full mx-auto">
+      <div className="relative block w-32 h-32 mx-auto mt-10 border-2 border-gray-300 rounded-full cursor-pointer">
         {data.profile.avatar_url == null ? (
           <img src={defaultPhoto} className="rounded-full" alt="" />
         ) : (
@@ -41,24 +41,24 @@ const ProfileShowProfile = (id: any) => {
         )}
       </div>
       <p className="mt-4 text-center">{data.profile.nickname}</p>
-      <p className="mt-4 text-center w-2/3 mx-auto">
+      <p className="w-2/3 mx-auto mt-4 text-center">
         {data.profile.introduction}
       </p>
       {loading ? (
-        <div className="mx-auto block w-32 h-10 bg-blue-200 font-bold rounded relative">
-          <div className="absolute pt-1 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div className="relative block w-32 h-10 mx-auto font-bold bg-blue-200 rounded">
+          <div className="top-1/2 left-1/2 absolute pt-1 transform -translate-x-1/2 -translate-y-1/2">
             <CircularProgress size="30px" />
           </div>
         </div>
       ) : currentUserId == id.id ? (
         <Link
           to={`/profile/edit/${id.id}`}
-          className="mx-auto block m-4 px-4 py-2 bg-gray-500 font-bold text-white rounded w-20 text-center"
+          className="block w-20 px-4 py-2 m-4 mx-auto font-bold text-center text-white bg-gray-500 rounded"
         >
           編集
         </Link>
       ) : currentUserFollowing == undefined ? (
-        <div className="mt-4 px-4 py-2 h-4"></div>
+        <div className="h-4 px-4 py-2 mt-4"></div>
       ) : currentUserFollowing ? (
         <button
           onClick={() => {
@@ -69,7 +69,7 @@ const ProfileShowProfile = (id: any) => {
               loginWithPopup()
             }
           }}
-          className="mx-auto block mt-4 px-4 py-2 bg-blue-200 font-bold text-gray-600 rounded"
+          className="block px-4 py-2 mx-auto mt-4 font-bold text-gray-600 bg-blue-200 rounded"
         >
           フォロー解除
         </button>
@@ -83,7 +83,7 @@ const ProfileShowProfile = (id: any) => {
               loginWithPopup()
             }
           }}
-          className="mx-auto block mt-4 px-4 py-2 bg-blue-500 font-bold text-white rounded"
+          className="block px-4 py-2 mx-auto mt-4 font-bold text-white bg-blue-500 rounded"
         >
           フォローする
         </button>

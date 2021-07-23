@@ -60,7 +60,7 @@ export default function Header() {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <div className="h-14 p-4 flex justify-between">
+        <div className="h-14 flex justify-between p-4">
           <Link to="/posts">投稿一覧</Link>
           {isAuthenticated ? (
             <div className="flex items-center">
@@ -69,13 +69,13 @@ export default function Header() {
                   <img
                     src={avatar}
                     alt=""
-                    className="block rounded-full w-10 h-10 mr-4"
+                    className="block w-10 h-10 mr-4 rounded-full"
                   />
                 ) : (
                   <img
                     src={defaultPhoto}
                     alt=""
-                    className="block rounded-full w-10 h-10 mr-4"
+                    className="block w-10 h-10 mr-4 rounded-full"
                   />
                 )}
               </Link>

@@ -38,7 +38,7 @@ export const AutoCompPlace = () => {
           placeholder="検索例: ◯県 or △市 or ◯県△市"
         />
       )}
-      className="mx-auto my-2 md:mx-2"
+      className="md:mx-2 mx-auto my-2"
     />
   )
 }

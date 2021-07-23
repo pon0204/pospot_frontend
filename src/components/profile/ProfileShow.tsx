@@ -11,12 +11,12 @@ const ProfileShow = ({ match }: any) => {
   useQueryFollows(id)
 
   return (
-    <div className="w-full pt-2 pb-28 lg:mx-auto">
+    <div className="pb-28 lg:mx-auto w-full pt-2">
       <ProfileShowProfile id={id} />
       <ProfileShowPosts id={id} />
       {currentUserId == id && (
-        <div className="fixed z-50 bottom-20 right-6 lg:right-20 bg-opacity-90 bg-blue-900 rounded-full">
-          <Link to="/posts/new" className="p-4 block">
+        <div className="bottom-20 right-6 lg:right-20 bg-opacity-90 fixed z-50 bg-blue-900 rounded-full">
+          <Link to="/posts/new" className="block p-4">
             <AddIcon style={{ fontSize: 52, color: 'white' }} />
           </Link>
         </div>
