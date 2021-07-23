@@ -4,10 +4,10 @@
 
 ## サイト概要
 ・新しい遊び場を発見・共有するSNS  
-・Google Mapに登録されている地域を投稿で共有できる。(Google Map Place APIを使用)  
+・Google Mapに登録されている場所を投稿で共有できる。(Google Map Place APIを使用)  
 ・ジャンルと都道府県での絞り込み検索で遊び場発見  
-![image](https://user-images.githubusercontent.com/70616489/126742169-adb0a9fc-c557-4241-abc5-3b61a9512966.png)  
-![image](https://user-images.githubusercontent.com/70616489/126742417-cda6910b-f0c4-46e0-bb21-bff9a0c1592f.png)
+
+![image](https://user-images.githubusercontent.com/70616489/126767379-3c32c2eb-c1d9-4ce4-a5b2-e376c2b29570.gif)
 
 サービス名: ポスポット  
 URL: [https://pospot-frontend.vercel.app/](https://pospot-frontend.vercel.app/)
@@ -57,7 +57,7 @@ github:
 ・一覧表示(新着投稿,フォロー投稿,ユーザー投稿,いいねした投稿)  
 ・削除機能
 
-### 投稿時
+### 投稿時  
 【バリデーション】  
 ・文字数,nullのvalidation実装  
 【投稿情報】  
