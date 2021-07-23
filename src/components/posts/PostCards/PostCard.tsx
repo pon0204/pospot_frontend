@@ -78,7 +78,7 @@ const PostCard = (item: any) => {
   return (
     <div
       className="md:m-2 relative mx-auto my-2"
-      style={{ height: '530px', width: '370px' }}
+      style={{ height: '535px', width: '370px' }}
     >
       <button
         type="button"
@@ -103,26 +103,28 @@ const PostCard = (item: any) => {
             </Link>
             <div className="w-9/12 py-2 ml-4">
               <h3 className="text-lg font-bold">{title}</h3>
-              <div className="flex mt-1 overflow-x-auto">
-                <p className="whitespace-nowrap text-gray-600">
-                  {item.item.created_at.substring(
-                    0,
-                    item.item.created_at.indexOf('T')
+              <div className='h-8'>
+                <div className="flex mt-1 overflow-x-auto">
+                  <p className="whitespace-nowrap text-gray-600">
+                    {item.item.created_at.substring(
+                      0,
+                      item.item.created_at.indexOf('T')
+                    )}
+                  </p>
+                  {withData && (
+                    <div className="whitespace-nowrap p-1 mx-2 text-sm text-center bg-red-200 rounded-md">
+                      {withData}
+                    </div>
                   )}
-                </p>
-                {withData && (
-                  <div className="whitespace-nowrap p-1 mx-2 text-sm text-center bg-red-200 rounded-md">
-                    {withData}
-                  </div>
-                )}
-                {genres?.map((genre: string, index: number) => (
-                  <div
-                    className="whitespace-nowrap p-1 mx-2 text-sm bg-green-200 rounded-md"
-                    key={index}
-                  >
-                    {genre}
-                  </div>
-                ))}
+                  {genres?.map((genre: string, index: number) => (
+                    <div
+                      className="whitespace-nowrap p-1 mx-2 text-sm bg-green-200 rounded-md"
+                      key={index}
+                    >
+                      {genre}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
