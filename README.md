@@ -7,7 +7,13 @@
 ・Google Mapに登録されている場所を投稿で共有できる。(Google Map Place APIを使用)  
 ・ジャンルと都道府県での絞り込み検索で遊び場発見  
 
+### ログイン~投稿をジャンル検索
 ![image](https://user-images.githubusercontent.com/70616489/126767379-3c32c2eb-c1d9-4ce4-a5b2-e376c2b29570.gif)
+
+### 投稿機能
+![image](https://user-images.githubusercontent.com/70616489/126768547-ea9dfc3d-a392-4f3f-ba96-bd7c73c04624.gif)
+
+### プロフィール機能
 
 サービス名: ポスポット  
 URL: [https://pospot-frontend.vercel.app/](https://pospot-frontend.vercel.app/)
@@ -52,6 +58,14 @@ github:
 ### ユーザーログイン機能
 ・Auth0を使用して実装
 ・メールアドレスとGoogleでのログイン可能
+
+### ユーザー機能  
+・token付きの付きの通信を検知し、ユーザーを自動でcreate
+・current_user機能付き  
+
+### プロフィール機能  
+・ユーザーcreate時に自動でcreate  
+・アバター画像登録可能  
 
 ### 投稿機能
 ・一覧表示(新着投稿,フォロー投稿,ユーザー投稿,いいねした投稿)  
