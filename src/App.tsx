@@ -25,6 +25,7 @@ const App: VFC = () => {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Header />
+          <div className='h-14'/>
           <Switch>
             <Route exact path="/posts">
               {/* <MainTag/> */}

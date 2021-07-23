@@ -58,8 +58,8 @@ export default function Header() {
   }, [isAuthenticated])
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
+    <div className='relative'>
+      <AppBar position="fixed">
         <div className="h-14 flex justify-between p-4">
           <Link to="/posts">投稿一覧</Link>
           {isAuthenticated ? (
