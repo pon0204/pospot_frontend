@@ -14,7 +14,7 @@ export const FormRadio = () => {
   return (
     <div className="full-width mt-4">
       <FormControl component="fieldset">
-        <FormLabel component="legend">誰と</FormLabel>
+        <FormLabel component="legend">誰と行くといい?</FormLabel>
         <RadioGroup
           row
           aria-label="with"
