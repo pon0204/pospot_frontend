@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
-import PostForm from './components/posts/PostCreate'
+import PostCreate from './components/posts/PostCreate'
 import PostsIndex from './components/posts/PostsIndex'
 import ProfileEdit from './components/profile/ProfileEdit'
 import ProfileShow from './components/profile/ProfileShow'
@@ -32,7 +32,7 @@ const App: VFC = () => {
               <PostsIndex />
             </Route>
             <Route exact path="/posts/new">
-              <PostForm />
+              <PostCreate />
             </Route>
             <Route
               exact

@@ -1,6 +1,7 @@
 import AddIcon from '@material-ui/icons/Add'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import useGaTrackPage from '../../hooks/castomHook/useGaTrackPage'
 import { useQueryFollows } from '../../hooks/reactQuery/useQueryFollows'
 import ProfileShowPosts from './ProfileShowItem/ProfileShowPosts'
 import ProfileShowProfile from './ProfileShowItem/ProfileShowProfile'
@@ -8,6 +9,8 @@ import ProfileShowProfile from './ProfileShowItem/ProfileShowProfile'
 const ProfileShow = ({ match }: any) => {
   const currentUserId = localStorage.getItem('currentUserId')
   const id = match.params.profileId
+  const location = useLocation()
+  useGaTrackPage(location.pathname)
   useQueryFollows(id)
 
   return (

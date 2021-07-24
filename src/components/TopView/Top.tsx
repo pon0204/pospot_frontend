@@ -1,9 +1,12 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import useGaTrackPage from '../../hooks/castomHook/useGaTrackPage'
 
 const Top = () => {
   const { loginWithPopup, logout, isAuthenticated } = useAuth0()
+  const location = useLocation()
+  useGaTrackPage(location.pathname)
 
   return (
     <div className="relative">

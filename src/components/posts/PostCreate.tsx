@@ -1,7 +1,9 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { CircularProgress } from '@material-ui/core'
 import { useEffect, VFC } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useAppSelector } from '../../app/hooks'
+import useGaTrackPage from '../../hooks/castomHook/useGaTrackPage'
 import { selectLoading } from '../../slices/apiSlice'
 import { FormAutoComp } from './PostCreateItem/FormAutoComp'
 import FormButton from './PostCreateItem/FormButton'
@@ -11,10 +13,12 @@ import { FormSpot } from './PostCreateItem/FormSpot'
 import InputForm from './PostCreateItem/InputFrom'
 import SpotDetail from './PostCreateItem/SpotDetail'
 
-const PostForm: VFC = () => {
+const PostCreate: VFC = () => {
   const currentUserId = localStorage.getItem('currentUserId')
   const loading = useAppSelector(selectLoading)
   const { isAuthenticated, loginWithPopup } = useAuth0()
+  const location = useLocation()
+  useGaTrackPage(location.pathname)
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -45,4 +49,4 @@ const PostForm: VFC = () => {
   )
 }
 
-export default PostForm
+export default PostCreate

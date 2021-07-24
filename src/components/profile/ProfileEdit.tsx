@@ -1,7 +1,9 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import React, { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useAppSelector } from '../../app/hooks'
+import useGaTrackPage from '../../hooks/castomHook/useGaTrackPage'
 import { useQueryProfileShow } from '../../hooks/reactQuery/useQueryProfileShow'
 import { selectLoading } from '../../slices/apiSlice'
 import FormButton from './FormAsset/FormButton'
@@ -15,6 +17,8 @@ const ProfileEdit = ({ match }: any) => {
   const { status, data } = useQueryProfileShow(id)
   const loading = useAppSelector(selectLoading)
   const { isAuthenticated, loginWithPopup } = useAuth0()
+  const location = useLocation()
+  useGaTrackPage(location.pathname)
 
   useEffect(() => {
     if (!isAuthenticated) {

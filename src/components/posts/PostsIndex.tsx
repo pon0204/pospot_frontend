@@ -1,7 +1,8 @@
 import AddIcon from '@material-ui/icons/Add'
 import React, { useEffect, useState, VFC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useAppDispatch } from '../../app/hooks'
+import useGaTrackPage from '../../hooks/castomHook/useGaTrackPage'
 import { useQueryFollows } from '../../hooks/reactQuery/useQueryFollows'
 import { resetQueryGenre, resetQueryPlace } from '../../slices/postSlice'
 import { AutoCompGenre } from './PostIndexItem/AutoCompGenre'
@@ -14,6 +15,8 @@ const PostsIndex: VFC = () => {
   const currentUserId = localStorage.getItem('currentUserId')
   useQueryFollows(currentUserId)
   const dispatch = useAppDispatch()
+  const location = useLocation()
+  useGaTrackPage(location.pathname)
 
   const [tabState, setTabState] = useState(0)
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
