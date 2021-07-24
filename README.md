@@ -46,7 +46,7 @@ github:
 ・ Auth0 → ログイン認証サービス  
 ・Redux Toolkit → クライアントステートの管理  
 ・react-query  → サーバーデータ保持  
-・Google Map Place API → 場所情報データを取得 
+・Google Map Place API → 場所情報データを取得  
 【UI/UX】  
 ・material-ui  
 ・Tailwind CSS   
