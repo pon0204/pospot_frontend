@@ -7,13 +7,15 @@
 ・Google Mapに登録されている場所を投稿で共有できる。(Google Map Place APIを使用)  
 ・ジャンルと都道府県での絞り込み検索で遊び場発見  
 
-### ログイン~投稿をジャンル検索
+### ログイン + 投稿のジャンル検索
 ![image](https://user-images.githubusercontent.com/70616489/126767379-3c32c2eb-c1d9-4ce4-a5b2-e376c2b29570.gif)
 
 ### 投稿機能
 ![image](https://user-images.githubusercontent.com/70616489/126768547-ea9dfc3d-a392-4f3f-ba96-bd7c73c04624.gif)
 
-### プロフィール機能
+
+### プロフィール機能 + いいね,フォロー投稿一覧
+![image](https://user-images.githubusercontent.com/70616489/126854580-3a3a4954-3931-43d1-9a93-220492c431ee.gif)  
 
 サービス名: ポスポット  
 URL: [https://pospot-frontend.vercel.app/](https://pospot-frontend.vercel.app/)
@@ -31,7 +33,7 @@ github:
 
 サービスを通して、  
 「ユーザーが新しい体験し、共有することで人生を楽しんでほしい」  
-「コロナ禍で苦しいお店が、紹介されて、助けになってほしい」  
+「コロナ禍で苦しいお店が紹介されて、経営の助けになってほしい」  
 
 そんな世の中になってくれたらいいなと思い制作しました。
 
@@ -79,7 +81,7 @@ github:
 ・タイトル  
 ・説明  
 ・ジャンル  
-・誰と行ったか  
+・誰と行くのがおすすめか  
 ・場所情報  
 
 【アイキャッチ】  
