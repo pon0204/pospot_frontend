@@ -45,7 +45,7 @@ const ProfileShowProfile = (id: any) => {
         {data.profile.introduction}
       </p>
       {loading ? (
-        <div className="relative block w-32 h-10 mx-auto font-bold bg-blue-200 rounded">
+        <div className="relative block w-32 h-10 mx-auto font-bold bg-blue-200 rounded mt-4">
           <div className="top-1/2 left-1/2 absolute pt-1 transform -translate-x-1/2 -translate-y-1/2">
             <CircularProgress size="30px" />
           </div>
