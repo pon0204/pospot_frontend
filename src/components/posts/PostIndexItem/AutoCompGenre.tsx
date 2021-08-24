@@ -7,16 +7,11 @@ import { useAppDispatch } from '../../../app/hooks'
 import { resetQueryGenre, setQueryGenre } from '../../../slices/postSlice'
 
 export const AutoCompGenre = () => {
-  interface genres {
-    genre: string
-    tag: string
-  }
+
   const dispatch = useAppDispatch()
-  const handleChange = (e: any, genres: genres | string) => {
-    genres
-      ? typeof genres === 'string'
-        ? dispatch(setQueryGenre(genres))
-        : dispatch(setQueryGenre(genres.genre))
+  const handleChange = (e: React.ChangeEvent<{}>, genres: string | null) => {
+    genres 
+      ? dispatch(setQueryGenre(genres))
       : dispatch(resetQueryGenre())
   }
 
@@ -42,7 +37,7 @@ export const AutoCompGenre = () => {
         />
       )}
       className="md:mx-2 mx-auto my-2"
-      onChange={(e: any, v: any) => handleChange(e, v)}
+      onChange={(e,v) => handleChange(e, v)}
     />
   )
 }
