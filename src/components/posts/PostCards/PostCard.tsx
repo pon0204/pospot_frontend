@@ -195,7 +195,7 @@ const PostCard = (item: any) => {
         >
           {open && (
             <div style={{ height: '90vh' }}>
-              <PostShow id={item.item.id} style={{ height: '90vh' }} />
+              <PostShow id={item.item.id}/>
             </div>
           )}
         </DialogContent>

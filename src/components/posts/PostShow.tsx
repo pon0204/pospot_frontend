@@ -2,9 +2,11 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import React, { VFC } from 'react'
 import { useQueryPostShow } from '../../hooks/reactQuery/useQueryPostShow'
 
-const PostShow: VFC<any> = (id) => {
-  // const id = match.params.postId
+interface Props {
+  id: number
+}
 
+const PostShow: VFC<Props> = (id) => {
   const { status, data } = useQueryPostShow(id.id)
   const post = data?.post
   const spot = data?.spot
