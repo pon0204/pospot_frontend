@@ -13,7 +13,12 @@ const useStyles = makeStyles({
   },
 })
 
-const PostsIndexTabs = ({ handleChange, tabState }: any) => {
+interface Props {
+  handleChange: any,
+  tabState: number
+}
+
+const PostsIndexTabs = ({ handleChange, tabState }:Props) => {
   const classes = useStyles()
 
   return (
