@@ -14,7 +14,7 @@ const ProfileShowPostsCurrent = (id: any) => {
   const { status, data, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useQueryInfinitePostsCurrent(id.id)
 
-  const loadMoreButtonRef = useRef<any>()
+  const loadMoreButtonRef = useRef<HTMLButtonElement | null>(null)
 
   useIntersectionObserver({
     target: loadMoreButtonRef,
