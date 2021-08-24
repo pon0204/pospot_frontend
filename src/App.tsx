@@ -37,12 +37,12 @@ const App: VFC = () => {
             <Route
               exact
               path="/profile/edit/:profileId"
-              render={({ match }: any) => <ProfileEdit match={match} />}
+              component ={ProfileEdit}
             />
             <Route
               exact
               path="/profile/:profileId"
-              render={({ match }: any) => <ProfileShow match={match} />}
+              component = {ProfileShow} 
             />
             <Route exact path="/">
               <Top />

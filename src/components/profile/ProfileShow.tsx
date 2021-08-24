@@ -6,7 +6,11 @@ import { useQueryFollows } from '../../hooks/reactQuery/useQueryFollows'
 import ProfileShowPosts from './ProfileShowItem/ProfileShowPosts'
 import ProfileShowProfile from './ProfileShowItem/ProfileShowProfile'
 
-const ProfileShow = ({ match }: any) => {
+interface Props {
+  match: {params:{profileId:string}}
+}
+
+const ProfileShow = ({ match }: Props) => {
   const currentUserId = localStorage.getItem('currentUserId')
   const id = match.params.profileId
   const location = useLocation()
