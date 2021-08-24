@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useInfiniteQuery } from 'react-query'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { incrementQueryPage, selectPage } from '../../slices/postSlice'
+import { Posts } from '../../types/types'
 
 export const useQueryInfinitePostsFollow = (
   userId: string | null,
@@ -12,11 +13,11 @@ export const useQueryInfinitePostsFollow = (
   const page = useAppSelector(selectPage)
 
   const getInfinitePostsFollow = async ({ pageParam = 0 }) => {
-    const { data } = await axios.get(
+    const { data } = await axios.get<Posts>(
       `${process.env.REACT_APP_REST_URL}/posts/follow/${userId}/${genre}/${place}/page/` +
         pageParam
     )
-    // ジャンルを配列に変換
+    //Post型定義をすると、splitが存在しないとなるため、any記述
     data.posts.map((v: any) => (v.genre = v.genre.split(',')))
     dispatch(incrementQueryPage())
     return data

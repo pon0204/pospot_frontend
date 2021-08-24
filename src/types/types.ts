@@ -4,7 +4,7 @@ export interface Post {
   title: string
   caption: string
   with: string
-  genre: []
+  genre: string[]
   created_at: string
   updated_at: string
   image_url: string | null
