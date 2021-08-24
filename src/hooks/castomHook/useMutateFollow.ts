@@ -11,7 +11,7 @@ export const useMutateFollow = () => {
   const headers = useAppSelector(selectHeaders)
 
   const createFollowMutation = useMutation(
-    (profileId: number) =>
+    (profileId: string) =>
       axios.post(
         `${process.env.REACT_APP_REST_URL}/profiles/${profileId}/follows`,
         null,
@@ -33,7 +33,7 @@ export const useMutateFollow = () => {
   )
 
   const deleteFollowMutation = useMutation(
-    (profileId: number) =>
+    (profileId: string) =>
       axios.delete(
         `${process.env.REACT_APP_REST_URL}/profiles/${profileId}/follows/1`,
         headers

@@ -9,7 +9,7 @@ import { Post } from '../../../types/types'
 import { PostCardMemo } from '../../posts/PostCards/PostCard'
 
 interface Props {
-  id: number
+  id: string
 }
 
 const ProfileShowPostsLike = (id: Props) => {

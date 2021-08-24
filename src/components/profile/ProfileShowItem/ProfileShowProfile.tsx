@@ -10,7 +10,11 @@ import defaultPhoto from '../../../image/profile_default.png'
 import { selectLoading, setApiLoading } from '../../../slices/apiSlice'
 import { FollowersId } from '../../../types/types'
 
-const ProfileShowProfile = (id: any) => {
+interface Props {
+  id: string
+}
+
+const ProfileShowProfile = (id: Props) => {
   const currentUserId = localStorage.getItem('currentUserId')
   const { status, data } = useQueryProfileShow(id.id)
   const { createFollowMutation, deleteFollowMutation } = useMutateFollow()

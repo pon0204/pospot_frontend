@@ -3,7 +3,7 @@ import { useInfiniteQuery } from 'react-query'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { incrementQueryPage, selectPage } from '../../slices/postSlice'
 
-export const useQueryInfinitePostsLike = (userId: number) => {
+export const useQueryInfinitePostsLike = (userId: string) => {
   const dispatch = useAppDispatch()
   const page = useAppSelector(selectPage)
   const getInfinitePostsLike = async ({ pageParam = 0 }) => {
