@@ -10,7 +10,11 @@ const options = [
   // 'Edit',
 ]
 
-export const CardMenu = (id: any) => {
+interface Props {
+  id: number
+}
+
+export const CardMenu = (id: Props) => {
   const { deletePostMutation } = useMutatePost()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
