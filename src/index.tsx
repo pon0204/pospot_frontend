@@ -7,9 +7,9 @@ import { store } from './app/store'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
 
-const domain: any = process.env.REACT_APP_AUTH0_DOMAIN
-const clientId: any = process.env.REACT_APP_AUTH0_CLIENT_ID
-const audience: any = process.env.REACT_APP_AUTH0_AUDIENCE
+const domain: string = process.env.REACT_APP_AUTH0_DOMAIN || ''
+const clientId: string = process.env.REACT_APP_AUTH0_CLIENT_ID || ''
+const audience: string = process.env.REACT_APP_AUTH0_AUDIENCE || ''
 
 ReactDOM.render(
   <Auth0Provider
