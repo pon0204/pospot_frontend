@@ -14,12 +14,14 @@ const FormFile: VFC = () => {
     maxWidthOrHeight: 1024,
   }
 
-  const imageChange = async (event: any) => {
+  const imageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files !== null) {
     const image = event.target.files[0]
     const compressFile = await imageCompression(image, compressOption)
-    const imageUrl: any = URL.createObjectURL(image)
+    const imageUrl: string = URL.createObjectURL(image)
     setFileUrl(imageUrl)
     dispatch(setEditedPost({ ...editedPost, eyecatch: compressFile }))
+    }
   }
 
   return (
