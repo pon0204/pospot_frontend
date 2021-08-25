@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 })
 
 interface Props {
-  handleChange: any,
+  handleChange: (event: React.ChangeEvent<{}>, value: any) => void
   tabState: number
 }
 

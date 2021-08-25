@@ -13,7 +13,12 @@ const useStyles = makeStyles({
   },
 })
 
-const ProfileTabs = ({ handleChange, query }: any) => {
+interface Props {
+  handleChange: (event: React.ChangeEvent<{}>, value: any) => void
+  query: number
+}
+
+const ProfileTabs = ({ handleChange, query }: Props) => {
   const classes = useStyles()
 
   return (
