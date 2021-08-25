@@ -16,17 +16,22 @@ import React, { memo, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useMutateLike } from '../../../hooks/castomHook/useMutateLike'
 import defaultPhoto from '../../../image/profile_default.png'
+import { Post } from '../../../types/types'
 import PostShow from '../PostShow'
 import CardMenu from './CardMenu'
 
 const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement<any, any> },
+  props: TransitionProps & { children?: React.ReactElement},
   ref: React.Ref<unknown>
 ) {
   return <Slide direction="up" ref={ref} {...props} />
 })
 
-const PostCard = (item: any) => {
+interface Props {
+  item: Post
+}
+
+const PostCard = (item: Props) => {
   const currentUserId = localStorage.getItem('currentUserId')
   const { createLikeMutation, deleteLikeMutation } = useMutateLike()
   const { loginWithPopup } = useAuth0()
@@ -51,18 +56,14 @@ const PostCard = (item: any) => {
 
   let title = item.item.title
   let caption = item.item.caption
-  const likes = item.item.likes
   const withData = item.item.with
   const genres = item.item.genre
   const spot_name = item.item.spot_name
-  const currentUserLike = likes.some(
-    (like: any) => like.user_id == currentUserId
-  )
 
   useEffect(() => {
     const likes = item.item.likes
     const currentUserLike = likes.some(
-      (like: any) => like.user_id == currentUserId
+      (like: {id: null, user_id: number}) => like.user_id === Number(currentUserId)
     )
     setHeart(currentUserLike)
   }, [])
@@ -90,7 +91,7 @@ const PostCard = (item: any) => {
           <div className="flex pt-1 pl-4">
             <Link to={`/profile/${item.item.user_id}`}>
               <div className="relative block w-16 h-16 mx-auto border-2 border-gray-300 rounded-full cursor-pointer">
-                {item.item.avatar_url == null ? (
+                {item.item.avatar_url === null ? (
                   <img src={defaultPhoto} className="rounded-full" alt="" />
                 ) : (
                   <img
@@ -143,7 +144,7 @@ const PostCard = (item: any) => {
           </p>
         </div>
       </button>
-      {currentUserId == item.item.user_id && (
+      {Number(currentUserId) === item.item.user_id && (
         <div className="top-2 right-2 absolute z-10">
           <CardMenu id={item.item.id} />
         </div>

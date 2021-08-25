@@ -7,8 +7,8 @@ export interface Post {
   genre: string[]
   created_at: string
   updated_at: string
-  image_url: string | null
-  likes: string[]
+  image_url: string
+  likes: []
   avatar_url: string | null
   place: string
   spot_name: string
