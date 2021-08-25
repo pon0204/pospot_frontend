@@ -4,6 +4,7 @@ import { useMutatePost } from '../../../hooks/castomHook/useMutatePost'
 import { setApiLoading } from '../../../slices/apiSlice'
 import { selectPost } from '../../../slices/postSlice'
 import { selectSpot } from '../../../slices/spotSlice'
+import { EditPost } from '../../../types/types'
 
 const FormButton: VFC = () => {
   const editedPost = useAppSelector(selectPost)
@@ -16,7 +17,7 @@ const FormButton: VFC = () => {
     const titleLengthOver = editedPost.title.length >= 101
     const captionLengthOver = editedPost.caption.length >= 401
     const genreLengthOver = editedPost.genre.split(',').length >= 4
-    const eyeCatchNull = editedPost.eyecatch == ''
+    const eyeCatchNull = editedPost.eyecatch.name == ''
 
     if (
       titleLengthOver ||
@@ -31,7 +32,8 @@ const FormButton: VFC = () => {
       ${eyeCatchNull ? 'アイキャッチ画像を登録してください' : ''}
       `)
     } else {
-      const data: any = new FormData()
+      // アイキャッチがFormDataの型エラーになるため、any指定
+      const data :any = new FormData()
       data.append('title', editedPost.title)
       data.append('caption', editedPost.caption)
       data.append('with', editedPost.with)

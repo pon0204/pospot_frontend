@@ -5,7 +5,11 @@ import ProfileShowPostsCurrent from './ProfileShowPostsCurrent'
 import ProfileShowPostsLike from './ProfileShowPostsLike'
 import ProfileTabs from './ProfileTabs'
 
-const ProfileShowPosts = (id: any) => {
+interface Props {
+  id: string
+}
+
+const ProfileShowPosts = (id: Props) => {
   const [query, setQuery] = useState(0)
   const followsCount = useAppSelector(selectFollowsCount)
 

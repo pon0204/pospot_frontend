@@ -9,7 +9,7 @@ export const FormAutoComp: VFC = () => {
   const editedPost = useAppSelector(selectPost)
   const dispatch = useAppDispatch()
 
-  const handleChange = (e: any, v: string[]) => {
+  const handleChange = (e: React.ChangeEvent<{}>, v: string[]) => {
     const genres = v.map((genre: string) => genre)
     const genre = genres.join(',')
     dispatch(setEditedPost({ ...editedPost, genre: genre }))

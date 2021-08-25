@@ -22,7 +22,7 @@ const PostsFollow = () => {
   const { status, data, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useQueryInfinitePostsFollow(currentUserId, queryGenre, queryPlace)
 
-  const loadMoreButtonRef = useRef<any>()
+  const loadMoreButtonRef = useRef<HTMLButtonElement | null>(null)
 
   useIntersectionObserver({
     target: loadMoreButtonRef,

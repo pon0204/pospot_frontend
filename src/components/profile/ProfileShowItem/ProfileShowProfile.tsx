@@ -8,15 +8,19 @@ import { useMutateFollow } from '../../../hooks/castomHook/useMutateFollow'
 import { useQueryProfileShow } from '../../../hooks/reactQuery/useQueryProfileShow'
 import defaultPhoto from '../../../image/profile_default.png'
 import { selectLoading, setApiLoading } from '../../../slices/apiSlice'
-import { FollowersId } from '../../../types/types'
+import { FollowData, FollowersId } from '../../../types/types'
 
-const ProfileShowProfile = (id: any) => {
+interface Props {
+  id: string
+}
+
+const ProfileShowProfile = (id: Props) => {
   const currentUserId = localStorage.getItem('currentUserId')
   const { status, data } = useQueryProfileShow(id.id)
   const { createFollowMutation, deleteFollowMutation } = useMutateFollow()
   const { loginWithPopup } = useAuth0()
   const queryClient = useQueryClient()
-  const followersIds = queryClient.getQueryData<any>('follows')
+  const followersIds = queryClient.getQueryData<FollowData>('follows')
   const dispatch = useAppDispatch()
   const loading = useAppSelector(selectLoading)
 

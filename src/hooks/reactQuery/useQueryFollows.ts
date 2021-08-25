@@ -3,13 +3,14 @@ import { useQuery } from 'react-query'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { setFollowsCount } from '../../slices/followSlice'
 import { selectHeaders } from '../../slices/headersSlice'
+import { FollowData } from '../../types/types'
 
 export const useQueryFollows = (profileId: number | string | null) => {
   const headers = useAppSelector(selectHeaders)
   const dispatch = useAppDispatch()
 
   const getFollows = async () => {
-    const { data } = await axios.get(
+    const { data } = await axios.get<FollowData>(
       `${process.env.REACT_APP_REST_URL}/profiles/${profileId}/follows`,
       headers
     )

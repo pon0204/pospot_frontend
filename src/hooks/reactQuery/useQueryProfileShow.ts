@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { selectHeaders } from '../../slices/headersSlice'
 import { setEditedProfile } from '../../slices/profileSlice'
 
-export const useQueryProfileShow = (id: number) => {
+export const useQueryProfileShow = (id: string) => {
   const headers = useAppSelector(selectHeaders)
   const dispatch = useAppDispatch()
 

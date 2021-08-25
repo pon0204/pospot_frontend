@@ -8,13 +8,17 @@ import { resetQueryPage } from '../../../slices/postSlice'
 import { Post } from '../../../types/types'
 import { PostCardMemo } from '../../posts/PostCards/PostCard'
 
-const ProfileShowPostsLike = (id: any) => {
+interface Props {
+  id: string
+}
+
+const ProfileShowPostsLike = (id: Props) => {
   const queryClient = useQueryClient()
   const dispatch = useAppDispatch()
   const { status, data, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useQueryInfinitePostsLike(id.id)
 
-  const loadMoreButtonRef = useRef<any>()
+  const loadMoreButtonRef = useRef<HTMLButtonElement | null>(null)
 
   useIntersectionObserver({
     target: loadMoreButtonRef,

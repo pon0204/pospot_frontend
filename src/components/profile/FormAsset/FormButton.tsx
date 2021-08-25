@@ -10,6 +10,7 @@ const FormButton: VFC = () => {
   const { profileUpdateMutation } = useMutateUser()
 
   const profileUpdateClick = () => {
+    // アバターがFormDataの型エラーになるため、any指定
     const data: any = new FormData()
     data.append('nickname', editedProfile.nickname)
     data.append('introduction', editedProfile.introduction)

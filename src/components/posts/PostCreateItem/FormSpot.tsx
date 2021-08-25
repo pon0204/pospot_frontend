@@ -137,7 +137,7 @@ export const FormSpot: VFC = () => {
         includeInputInList
         filterSelectedOptions
         value={value}
-        onChange={(event: any, newValue: any) => {
+        onChange={(event:React.ChangeEvent<{}> , newValue: any) => {
           setOptions(newValue ? [newValue, ...options] : options)
           setValue(newValue)
           if (newValue) {

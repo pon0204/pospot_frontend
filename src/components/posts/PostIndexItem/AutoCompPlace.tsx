@@ -6,15 +6,10 @@ import { useAppDispatch } from '../../../app/hooks'
 import { resetQueryPlace, setQueryPlace } from '../../../slices/postSlice'
 
 export const AutoCompPlace = () => {
-  interface places {
-    place: string
-  }
   const dispatch = useAppDispatch()
-  const handleChange = (e: any, places: places) => {
+  const handleChange = (e: React.ChangeEvent<{}>, places: string | null) => {
     places
-      ? typeof places === 'string'
-        ? dispatch(setQueryPlace(places))
-        : dispatch(setQueryPlace(places.place))
+      ? dispatch(setQueryPlace(places))
       : dispatch(resetQueryPlace())
   }
   return (
@@ -30,7 +25,7 @@ export const AutoCompPlace = () => {
           <Chip variant="outlined" label={option} {...getTagProps({ index })} />
         ))
       }
-      onChange={(e: any, v: any) => handleChange(e, v)}
+      onChange={(e,v) => handleChange(e,v)}
       renderInput={(params) => (
         <TextField
           {...params}

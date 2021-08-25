@@ -10,25 +10,10 @@ import defaultPhoto from '../image/profile_default.png'
 import { setHeaders } from '../slices/headersSlice'
 import { selectAvatar, setCurrentAvatar } from '../slices/profileSlice'
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  })
-)
-
 export default function Header() {
-  const classes = useStyles()
   const { isAuthenticated, logout, loginWithPopup } = useAuth0()
   const dispatch = useAppDispatch()
-  const { getAccessTokenSilently }: any = useAuth0()
+  const { getAccessTokenSilently } = useAuth0()
   const { userIdMutation } = useMutateUser()
   const currentUserId = localStorage.getItem('currentUserId')
   const avatar = useAppSelector(selectAvatar)
@@ -42,7 +27,6 @@ export default function Header() {
       try {
         const accessToken = await getAccessTokenSilently({})
         dispatch(setHeaders(accessToken))
-        // alert(accessToken)
         userIdMutation.mutate()
         axios
           .get(`${process.env.REACT_APP_REST_URL}/profiles/${currentUserId}`)

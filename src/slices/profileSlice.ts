@@ -13,7 +13,7 @@ const initialState: profileState = {
     introduction: '',
     gender: '',
     avatar_url: '',
-    avatar: '',
+    avatar: {name:'', lastModified: 0},
   },
   currentAvatar: '',
 }

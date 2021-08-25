@@ -4,10 +4,10 @@ export interface Post {
   title: string
   caption: string
   with: string
-  genre: []
+  genre: string[]
   created_at: string
   updated_at: string
-  image_url: string | null
+  image_url: string
   likes: []
   avatar_url: string | null
   place: string
@@ -23,7 +23,7 @@ export interface EditProfile {
   introduction: string
   gender: string
   avatar_url: string
-  avatar: any
+  avatar: {name: string, lastModified: number}
 }
 
 export interface SpotData {
@@ -44,7 +44,7 @@ export interface EditPost {
   caption: string
   with: string
   genre: string
-  eyecatch: any
+  eyecatch: {name: string, lastModified: number}
 }
 
 export interface EditSpot {
@@ -70,4 +70,9 @@ export interface FollowingsId {
 
 export interface FollowersId {
   id: number | null
+}
+
+export interface FollowData {
+  followers: [{id: number}],
+  followings: [{id: number}]
 }

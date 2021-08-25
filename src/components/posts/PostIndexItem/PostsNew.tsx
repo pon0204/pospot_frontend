@@ -21,7 +21,7 @@ const PostsNew = () => {
   const { status, data, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useQueryInfinitePostsNew(queryGenre, queryPlace)
 
-  const loadMoreButtonRef = useRef<any>()
+  const loadMoreButtonRef = useRef<HTMLButtonElement | null>(null)
 
   useIntersectionObserver({
     target: loadMoreButtonRef,
