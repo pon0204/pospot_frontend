@@ -16,7 +16,7 @@ const FormButton: VFC = () => {
     const titleLengthOver = editedPost.title.length >= 101
     const captionLengthOver = editedPost.caption.length >= 401
     const genreLengthOver = editedPost.genre.split(',').length >= 4
-    const eyeCatchNull = editedPost.eyecatch == ''
+    const eyeCatchNull = editedPost.eyecatch.name == ''
 
     if (
       titleLengthOver ||

@@ -15,7 +15,7 @@ const initialState: PostState = {
     caption: '',
     with: '誰でも',
     genre: '',
-    eyecatch: '',
+    eyecatch: {name: '', lastModified: 0},
   },
   queryGenre: null,
   queryPlace: null,
