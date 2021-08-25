@@ -71,3 +71,8 @@ export interface FollowingsId {
 export interface FollowersId {
   id: number | null
 }
+
+export interface FollowData {
+  followers: [{id: number}],
+  followings: [{id: number}]
+}

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { resetApiLoading } from '../../slices/apiSlice'
 import { setFollowsCount } from '../../slices/followSlice'
 import { selectHeaders } from '../../slices/headersSlice'
+import { FollowData } from '../../types/types'
 
 export const useMutateFollow = () => {
   const dispatch = useAppDispatch()
@@ -19,13 +20,14 @@ export const useMutateFollow = () => {
       ),
     {
       onSuccess: (res, variables) => {
+        // FollowDataで型定義時に、50行目にエラーが発生する為、暫定でany
         const previousFollows = queryClient.getQueryData<any>('follows')
         const newFollowerId = { id: res.data.follower_id }
         previousFollows.followers = [
           ...previousFollows.followers,
           newFollowerId,
         ]
-        queryClient.setQueryData<any>('follows', previousFollows)
+        queryClient.setQueryData<FollowData>('follows', previousFollows)
         dispatch(setFollowsCount(previousFollows))
         dispatch(resetApiLoading())
       },
@@ -40,13 +42,14 @@ export const useMutateFollow = () => {
       ),
     {
       onSuccess: (res) => {
+        // FollowDataで型定義時に、50行目にエラーが発生する為、暫定でany
         const previousFollows = queryClient.getQueryData<any>('follows')
         const deleteFollowerId = res.data.follower_id
         const newFollows = previousFollows.followers.filter(
-          (v: any) => v.id != deleteFollowerId
+          (v: {id:number}) => v.id !== deleteFollowerId
         )
         previousFollows.followers = newFollows
-        queryClient.setQueryData<any>('follows', previousFollows)
+        queryClient.setQueryData<FollowData>('follows', previousFollows)
         dispatch(setFollowsCount(previousFollows))
         dispatch(resetApiLoading())
       },
